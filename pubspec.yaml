@@ -1,0 +1,77 @@
+name: multivendor_store
+description: A new Flutter project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_screenutil: ^5.9.0
+  go_router: ^11.1.2
+  flutter_svg: ^2.0.7
+  flutter_keyboard_visibility: ^5.4.1
+  image_picker: ^1.0.4
+  carousel_slider: ^4.2.1
+  grouped_list: ^5.1.2
+  flutter_bloc: ^8.1.3
+  shared_preferences: ^2.2.2
+  flutter_localizations:
+    sdk: flutter
+  flutter_kurdish_localization: ^1.0.8
+  intl: ^0.18.0
+  hydrated_bloc: ^9.1.2
+  path_provider: ^2.1.1
+  device_preview: ^1.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+
+flutter:
+
+  uses-material-design: true
+
+
+  assets:
+    - assets/
+    - assets/icons/
+    - assets/vectors/
+    - assets/categories/
+    - assets/imgs/
+    - assets/lang/
+
+
+  fonts:
+    - family: Metropolis-Thin
+      fonts:
+        - asset: fonts/Metropolis-Thin.ttf
+    - family: Metropolis-Regular
+      fonts:
+        - asset: fonts/Metropolis-Regular.ttf
+    - family: Metropolis-Med
+      fonts:
+        - asset: fonts/Metropolis-Medium.ttf
+    - family: Metropolis-SemiBold
+      fonts:
+        - asset: fonts/Metropolis-SemiBold.ttf
+    - family: Metropolis-Bold
+      fonts:
+        - asset: fonts/Metropolis-Bold.ttf
+    - family: Metropolis-ExtraBold
+      fonts:
+        - asset: fonts/Metropolis-ExtraBold.ttf
+    - family: NRT-Reg
+      fonts:
+        - asset: fonts/NRT-Reg.ttf
+    - family: NRT-Bol
+      fonts:
+        - asset: fonts/NRT-Bd.ttf
+
