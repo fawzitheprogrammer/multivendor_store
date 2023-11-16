@@ -16,7 +16,7 @@ class OrdersProductsList extends StatelessWidget {
       itemCount: AppAssets.products.length,
       itemBuilder: (context, index) => Container(
         margin: const EdgeInsets.all(PaddingOrFont.size10),
-        height: 180.h,
+        height: 200.h,
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(PaddingOrFont.size20.r),
@@ -26,7 +26,7 @@ class OrdersProductsList extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(PaddingOrFont.size20.spMin),
           child: Column(
             children: [
               const OrderTile(header: 'OrderID', price: '07518070601'),
@@ -35,11 +35,12 @@ class OrdersProductsList extends StatelessWidget {
               const OrderTile(header: 'Quantity', price: '1x'),
               const OrderTile(header: 'Order Status', price: 'Pending'),
               const OrderTile(header: 'Payment', price: 'Pending'),
+              const Spacer(),
               ActionButton(
                 onPressed: () {
                   GoRouter.of(context).push(AppRoute.kEditProduct);
                 },
-                label: 'Edit',
+                label: 'View',
                 color: context.colorScheme!.inversePrimary.withAlpha(100),
               ),
             ],
@@ -88,9 +89,7 @@ class _ActionButtonState extends State<ActionButton> {
           fontSize: context.widthGreaterThan500
               ? PaddingOrFont.size12.spMin
               : PaddingOrFont.size12.spMin,
-          color: widget.label == 'Edit'
-              ? context.colorScheme!.inverseSurface
-              : widget.color!.withAlpha(220),
+          color: context.colorScheme!.inverseSurface,
         ),
       ),
     );
@@ -113,24 +112,21 @@ class OrderTile extends StatelessWidget {
       children: [
         Text(
           translate(key: header, context: context),
-          style: header != 'Total'
-              ? context.regular!.copyWith(
-                  fontSize: PaddingOrFont.size14.spMin,
-                  color: context.colorScheme!.onBackground.withAlpha(100))
-              : context.bold!.copyWith(
-                  fontSize: PaddingOrFont.size14.spMin,
-                ),
+          style: context.regular!.copyWith(
+            fontSize: PaddingOrFont.size14.spMin,
+            color: context.colorScheme!.onBackground.withAlpha(100),
+          ),
         ),
         const Text(' : '),
         Text(
           price,
-          style: header != 'Total'
-              ? context.regular!.copyWith(
-                  fontSize: PaddingOrFont.size14.spMin,
-                )
-              : context.bold!.copyWith(
-                  fontSize: PaddingOrFont.size14.spMin,
-                ),
+          style: context.semiBold!.copyWith(
+            fontSize: PaddingOrFont.size14.spMin,
+            color: header == translate(key: 'Order Status', context: context) ||
+                    header == translate(key: 'Payment', context: context)
+                ? Colors.red
+                : context.colorScheme!.onBackground,
+          ),
         ),
       ],
     );

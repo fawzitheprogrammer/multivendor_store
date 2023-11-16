@@ -13,6 +13,12 @@ class OrdersCategories extends StatefulWidget {
 class _OrdersCategoriesState extends State<OrdersCategories> {
   int currentIndex = 0;
 
+  List<String> ordersStatus = [
+    'Completed',
+    'Pending',
+    'Rejected',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -46,7 +52,7 @@ class _OrdersCategoriesState extends State<OrdersCategories> {
                     padding: EdgeInsets.zero,
                     scrollDirection: Axis.horizontal,
                     children: List.generate(
-                      AppAssets.categoriesMap.length,
+                      ordersStatus.length,
                       (index) => GestureDetector(
                         onTap: () {
                           setState(() {
@@ -55,10 +61,7 @@ class _OrdersCategoriesState extends State<OrdersCategories> {
                         },
                         child: WordBasedWidthContainer(
                           text: translate(
-                              key: AppAssets.categoriesMap.keys.elementAt(
-                                index,
-                              ),
-                              context: context),
+                              key: ordersStatus[index], context: context),
                           isActive: currentIndex == index,
                         ),
                       ),

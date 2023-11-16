@@ -92,6 +92,11 @@
     "Customer Name": "اسم العميل",
     "Amount": "المبلغ",
     "Order Status": "حالة الطلب",
-    "Payment": "حالة الدفع"
+    "Payment": "حالة الدفع",
+    "Completed":"مكتمل",
+    "Pending":"معلق",
+    "Rejected":"مرفوض",
+    "View":"منظر"
+
 
 }

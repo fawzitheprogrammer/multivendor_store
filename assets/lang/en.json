@@ -93,5 +93,9 @@
     "Customer Name": "Fawzi Gharib",
     "Amount": "Amount",
     "Order Status": "Order Status",
-    "Payment": "Payment"
+    "Payment": "Payment",
+    "Completed":"Completed",
+    "Pending":"Pending",
+    "Rejected":"Rejected",
+    "View":"View"
 }

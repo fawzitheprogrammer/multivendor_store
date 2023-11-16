@@ -215,7 +215,7 @@ class _EditProductFormState extends State<EditProductForm> {
                     style: roundedButtonStyle,
                     onPressed: () {},
                     child: Text(
-                      translate(key: 'Sign Up', context: context),
+                      translate(key: 'Post', context: context),
                       style: context.medium!.copyWith(color: Colors.white),
                     ),
                   ),

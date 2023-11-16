@@ -92,5 +92,9 @@
     "Customer Name": "ژمارەی موبایل",
     "Amount": "نرخ",
     "Order Status": "دۆخی داواكاری",
-    "Payment": "دۆخی پارەدان"
+    "Payment": "دۆخی پارەدان",
+    "Completed":"تەواو بوو",
+    "Pending":"تەواو نەكراو",
+    "Rejected":"ڕەتكراوەكان",
+    "View":"پیشاندان"
 }
