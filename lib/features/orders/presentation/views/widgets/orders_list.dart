@@ -15,7 +15,7 @@ class OrdersProductsList extends StatelessWidget {
     return SliverList.builder(
       itemCount: AppAssets.products.length,
       itemBuilder: (context, index) => Container(
-        margin: const EdgeInsets.all(PaddingOrFont.size10),
+        margin: EdgeInsets.all(PaddingOrFont.size10.spMin - 4),
         height: 200.h,
         width: double.infinity,
         decoration: BoxDecoration(
@@ -26,7 +26,10 @@ class OrdersProductsList extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.all(PaddingOrFont.size20.spMin),
+          padding: EdgeInsets.symmetric(
+            horizontal: PaddingOrFont.size20.spMin,
+            vertical: PaddingOrFont.size20.spMin - 10,
+          ),
           child: Column(
             children: [
               const OrderTile(header: 'OrderID', price: '07518070601'),
@@ -108,27 +111,30 @@ class OrderTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          translate(key: header, context: context),
-          style: context.regular!.copyWith(
-            fontSize: PaddingOrFont.size14.spMin,
-            color: context.colorScheme!.onBackground.withAlpha(100),
+    return Flexible(
+      child: Row(
+        children: [
+          Text(
+            translate(key: header, context: context),
+            style: context.regular!.copyWith(
+              fontSize: PaddingOrFont.size14.spMin,
+              color: context.colorScheme!.onBackground.withAlpha(100),
+            ),
           ),
-        ),
-        const Text(' : '),
-        Text(
-          price,
-          style: context.semiBold!.copyWith(
-            fontSize: PaddingOrFont.size14.spMin,
-            color: header == translate(key: 'Order Status', context: context) ||
-                    header == translate(key: 'Payment', context: context)
-                ? Colors.red
-                : context.colorScheme!.onBackground,
+          const Text(' : '),
+          Text(
+            price,
+            style: context.semiBold!.copyWith(
+              fontSize: PaddingOrFont.size14.spMin,
+              color:
+                  header == translate(key: 'Order Status', context: context) ||
+                          header == translate(key: 'Payment', context: context)
+                      ? Colors.red
+                      : context.colorScheme!.onBackground,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

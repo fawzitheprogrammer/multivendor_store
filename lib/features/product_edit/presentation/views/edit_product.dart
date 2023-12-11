@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:multivendor_store/core/appbar.dart';
 import 'package:multivendor_store/core/build_context_extension.dart';
 import 'package:multivendor_store/features/product_edit/presentation/views/widgets/edit_product_body_view.dart';
-import 'package:multivendor_store/features/registration/presentation/views/widgets/registration_body_view.dart';
 import 'package:multivendor_store/localization/app_localization.dart';
 import '../../../../core/padding_and_margin.dart';
 

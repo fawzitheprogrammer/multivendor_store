@@ -30,7 +30,7 @@ void main() async {
     ),
   );
   runApp(
-    DevicePreview(builder: (context) => const AppRoot()),
+    DevicePreview(builder: (ctx) => const AppRoot()),
   );
 }
 

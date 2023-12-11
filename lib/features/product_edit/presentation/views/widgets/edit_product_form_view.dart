@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:multivendor_store/core/build_context_extension.dart';
 import 'package:multivendor_store/core/constants.dart';
 import 'package:multivendor_store/core/pick_image.dart';
@@ -11,7 +9,6 @@ import 'package:multivendor_store/features/registration/presentation/views/regis
 import 'package:multivendor_store/localization/app_localization.dart';
 
 import '../../../../../core/buttons/rounded_button_style.dart';
-import '../../../../../core/input_decoration.dart';
 import '../../../../../core/padding_and_margin.dart';
 
 class EditProductForm extends StatefulWidget {
