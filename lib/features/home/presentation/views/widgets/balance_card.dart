@@ -8,7 +8,7 @@ class BalanceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: context.widthGreaterThan500 ? 100.h : 200.h,
+      height: context.isWidthLessThan500 ? 100.h : 200.h,
       padding: const EdgeInsets.symmetric(
         horizontal: PaddingOrFont.size20,
       ),
@@ -21,7 +21,7 @@ class BalanceCard extends StatelessWidget {
         children: [
           SvgPicture.asset(
             AppAssets.totalProfit,
-            width: context.widthGreaterThan500
+            width: context.isWidthLessThan500
                 ? PaddingOrFont.size30.w
                 : PaddingOrFont.size30 * 1.75,
           ),
@@ -37,7 +37,7 @@ class BalanceCard extends StatelessWidget {
                   translate(key: 'Total Profit', context: context),
                   style: context.regular!.copyWith(
                       color: Colors.white,
-                      fontSize: context.widthGreaterThan500
+                      fontSize: context.isWidthLessThan500
                           ? PaddingOrFont.size14.spMin
                           : PaddingOrFont.size30.spMin),
                 ),
@@ -45,7 +45,7 @@ class BalanceCard extends StatelessWidget {
                   '280,000 IQD',
                   style: context.semiBold!.copyWith(
                     color: Colors.white,
-                    fontSize: context.widthGreaterThan500
+                    fontSize: context.isWidthLessThan500
                         ? PaddingOrFont.size24.spMin
                         : PaddingOrFont.size30.spMin + 20,
                   ),

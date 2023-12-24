@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "873515213534",
+    "project_id": "wavemall",
+    "storage_bucket": "wavemall.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873515213534:android:ae211d6f4d65b3f8a4984f",
+        "android_client_info": {
+          "package_name": "com.wavemall.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873515213534-o9al171a5440tgveb9d0hs4850n6d4fk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wavemall.admin",
+            "certificate_hash": "088fe470556e922782dc239388f272b3eb11a0e5"
+          }
+        },
+        {
+          "client_id": "873515213534-udrba8ut9u1u92s9r0n08lucu3fb1s18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_29KaBWqPBsN1_f_Lorg4qzTcuua0Erw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873515213534-udrba8ut9u1u92s9r0n08lucu3fb1s18.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "873515213534-d650feqtl2ar1njj62unkk223bf4ve1u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wavemall.admin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873515213534:android:09c9b88700f6ee3ea4984f",
+        "android_client_info": {
+          "package_name": "com.wavemall.store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873515213534-m27mh97gse8uqdaiq6qokgfob4nbd7is.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wavemall.store",
+            "certificate_hash": "088fe470556e922782dc239388f272b3eb11a0e5"
+          }
+        },
+        {
+          "client_id": "873515213534-udrba8ut9u1u92s9r0n08lucu3fb1s18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_29KaBWqPBsN1_f_Lorg4qzTcuua0Erw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873515213534-udrba8ut9u1u92s9r0n08lucu3fb1s18.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "873515213534-d650feqtl2ar1njj62unkk223bf4ve1u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wavemall.admin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

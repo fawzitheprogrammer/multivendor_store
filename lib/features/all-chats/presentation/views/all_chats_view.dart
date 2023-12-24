@@ -36,7 +36,7 @@ class AllChatsViewBody extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   CircleAvatar(
-                    radius: context.widthGreaterThan500 ? 25.r : 45.r,
+                    radius: context.isWidthLessThan500 ? 25.r : 45.r,
                     backgroundImage: const AssetImage(
                       AppAssets.user,
                     ),
@@ -51,7 +51,7 @@ class AllChatsViewBody extends StatelessWidget {
                         "Fawzi Gharib",
                         style: context.bold!.copyWith(
                           color: context.colorScheme!.onBackground,
-                          fontSize: context.widthGreaterThan500
+                          fontSize: context.isWidthLessThan500
                               ? PaddingOrFont.size14.spMin
                               : PaddingOrFont.size24.spMin,
                         ),
@@ -65,7 +65,7 @@ class AllChatsViewBody extends StatelessWidget {
                         "Not much, just relaxing.",
                         style: context.regular!.copyWith(
                           color: context.colorScheme!.onBackground,
-                          fontSize: context.widthGreaterThan500
+                          fontSize: context.isWidthLessThan500
                               ? PaddingOrFont.size12.spMin
                               : PaddingOrFont.size18.spMin,
                         ),
@@ -80,7 +80,7 @@ class AllChatsViewBody extends StatelessWidget {
                         style: context.regular!.copyWith(
                           color:
                               context.colorScheme!.onBackground.withAlpha(120),
-                          fontSize: context.widthGreaterThan500
+                          fontSize: context.isWidthLessThan500
                               ? PaddingOrFont.size10
                               : PaddingOrFont.size12,
                         ),

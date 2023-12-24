@@ -39,7 +39,7 @@ extension BuildContextExtensions<T> on BuildContext {
   Size get mediaQuery => MediaQuery.of(this).size;
 
   // screen width
-  bool get widthGreaterThan500 => MediaQuery.of(this).size.width <= 500;
+  bool get isWidthLessThan500 => MediaQuery.of(this).size.width <= 500;
 
   String get languageCode => sharedPreferences!.getString('lang')!;
 }

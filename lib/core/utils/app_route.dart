@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:multivendor_store/core/constants.dart';
 import 'package:multivendor_store/features/all-chats/presentation/views/all_chats_view.dart';
 import 'package:multivendor_store/features/home/presentation/views/home_view.dart';
-import 'package:multivendor_store/features/product_edit/presentation/views/edit_product.dart';
+import 'package:multivendor_store/features/product_edit/presentation/views/add_edit_product.dart';
+import 'package:multivendor_store/features/splash-screen/presentation/views/splash_screen_view.dart';
 import '../../features/chat/presentation/views/chat_view.dart';
 import '../../features/forget-password/presentation/views/forget_password.dart';
 import '../../features/login/presentation/views/login.dart';
@@ -19,19 +21,24 @@ abstract class AppRoute {
   static const kStoreMoreInfo = '/kStoreMoreInfo';
   static const kChatScreen = '/kChatScreen';
   static const kAllChatScreen = '/kAllChatScreen';
-  static const kEditProduct = '/kEditProduct';
+  static const kAddOrEditProduct = '/kAddOrEditProduct';
   static const kFavorites = '/kFavorites';
+  static const kHome = '/kHome';
 
   static final routes = GoRouter(
     routes: [
-      GoRoute(
+      CustomGoRouter(
         path: '/',
-        builder: (context, state) => const HomeView(),
-      ),
-      GoRoute(
+        page: const SplashScreenView(),
+      ).goRoute(),
+      CustomGoRouter(
         path: kLoginView,
-        builder: (context, state) => const LoginView(),
-      ),
+        page: const LoginView(),
+      ).goRoute(),
+      CustomGoRouter(
+        path: kHome,
+        page: const HomeView(),
+      ).goRoute(),
       CustomGoRouter(
         path: kRegistrationView,
         page: const RegistrationView(),
@@ -48,10 +55,15 @@ abstract class AppRoute {
         path: kAllChatScreen,
         page: const AllChatsView(),
       ).goRoute(),
-      CustomGoRouter(
-        path: kEditProduct,
-        page: const EditProductView(),
-      ).goRoute(),
+      GoRoute(
+        path: kAddOrEditProduct,
+        builder: (context, state) => const AddOrEditProductView(),
+        pageBuilder: (context, state) => pageTransition(
+          context: context,
+          state: state,
+          child: const AddOrEditProductView(),
+        ),
+      )
     ],
   );
 }

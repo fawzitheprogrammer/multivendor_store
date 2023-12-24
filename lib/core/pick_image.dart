@@ -3,17 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multivendor_store/main.dart';
 
-Future<List<XFile>?> pickImage({required BuildContext context}) async {
-  List<XFile>? image;
-  try {
-    final pickedImage = await ImagePicker().pickMultiImage();
-
-    image = pickedImage.cast<XFile>().toList();
-  } on Exception catch (e) {
-    print('[ Image Picker Exception ] --- $e');
-  }
+Future<XFile?> pickSingleImage() async {
+  final XFile? image =
+      await ImagePicker().pickImage(source: ImageSource.gallery);
   return image;
 }
+
+// Future<List<XFile>?> pickImage({required BuildContext context}) async {
+//   List<XFile>? image;
+//   try {
+//     final pickedImage = await ImagePicker().pickMultiImage();
+
+//     image = pickedImage.cast<XFile>().toList();
+//   } on Exception catch (e) {
+//     print('[ Image Picker Exception ] --- $e');
+//   }
+//   return image;
+// }
 
 Future<List<File>> pickMultiImage() async {
   final pickedFile = await ImagePicker().pickMultiImage(

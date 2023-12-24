@@ -1,7 +1,11 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:multivendor_store/features/home/presentation/views/widgets/home_view_body.dart';
 import 'package:multivendor_store/features/orders/presentation/views/orders_profile_view.dart';
+import 'package:multivendor_store/features/product_edit/presentation/views/add_edit_product.dart';
 import 'package:multivendor_store/features/store-profile/presentation/views/store_profile_view.dart';
 import 'package:multivendor_store/features/user-profile/presentation/views/user_profile_view.dart';
+import 'package:multivendor_store/manager/store-product/store_product_bloc.dart';
 
 import '../../../../core/exports/exports.dart';
 import '../../../../localization/app_localization.dart';
@@ -26,7 +30,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     TextStyle labelStyle = context.regular!.copyWith(
-      fontSize: context.widthGreaterThan500
+      fontSize: context.isWidthLessThan500
           ? PaddingOrFont.size10.spMax
           : PaddingOrFont.size16.spMax,
       inherit: true,
@@ -68,6 +72,20 @@ class _HomeViewState extends State<HomeView> {
               iconColor: context.colorScheme!.tertiary,
             ),
           ),
+          // BottomNavigationBarItem(
+          //   icon: Padding(
+          //     padding: EdgeInsets.all(PaddingOrFont.size10.spMin - 2),
+          //     child: Icon(
+          //       Ionicons.add_circle,
+          //       size: PaddingOrFont.size30.spMin * 1.5,
+          //     ),
+          //   ),
+          //   label: translate(context: context, key: 'Add Item'),
+          //   // activeIcon: Icon(
+          //   //   Ionicons.add_circle,
+          //   //   size: PaddingOrFont.size30.spMin * 1.5,
+          //   // ),
+          // ),
           BottomNavigationBarItem(
             icon: icon(icon: AppAssets.orders),
             label: translate(context: context, key: 'Orders'),
@@ -91,7 +109,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget icon({required String icon, Color? iconColor}) {
     // Icon Size
-    double iconSize = context.widthGreaterThan500
+    double iconSize = context.isWidthLessThan500
         ? PaddingOrFont.size22.spMin
         : PaddingOrFont.size30.spMin;
 

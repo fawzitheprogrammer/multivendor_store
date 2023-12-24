@@ -55,6 +55,9 @@ class AppAssets {
   static const String delete = 'assets/icons/delete.svg';
   static const String totalProfit = 'assets/icons/total_profit.svg';
   static const String messenger = 'assets/icons/messenger.svg';
+  static const String appLogo = 'assets/icons/messenger.svg';
+  static const String businessLicense = 'assets/icons/business.svg';
+  static const String id = 'assets/icons/id.svg';
 
   static Map<String, String> categoriesMap = {
     'Men Wear': 'assets/categories/men_wear.svg',
@@ -63,11 +66,9 @@ class AppAssets {
     'Bags and Luggage': 'assets/categories/bags.svg',
     'Footwear': 'assets/categories/footwear.svg',
     'Accessories': 'assets/categories/accessories.svg',
-    'Seasonal Collections': 'assets/categories/seasonal.svg',
     'Electronics': 'assets/categories/electronics.svg',
-    'Brands': 'assets/categories/brand.svg',
     'Gaming': 'assets/categories/gaming.svg',
-    'Wearable Technology':   'assets/categories/wearable_tech.svg',
+    'Wearable Technology': 'assets/categories/wearable_tech.svg',
   };
 
   static Map<String, String> dashBoardOrderInfo = {
@@ -88,6 +89,47 @@ class AppAssets {
     'assets/imgs/image6.png',
     'assets/imgs/image7.png',
     'assets/imgs/image8.png',
+  ];
+
+  static List<String> shopTypes = [
+    'Clothing and Apparel',
+    'Electronics',
+    'Home and Living',
+    'Beauty and Personal Care',
+    'Sports and Outdoors',
+    'Toys and Games',
+    'Books and Stationery',
+    'Health and Wellness',
+    'Food and Grocery',
+    'Jewelry and Accessories',
+    'Pet Supplies',
+    'Automotive',
+    'Arts and Crafts',
+    'Music and Entertainment',
+    'Travel and Luggage',
+    'Baby Products',
+    'Sustainable and Eco-friendly Products',
+    'Collectibles and Memorabilia',
+    'Furniture and Home Improvement',
+    'Gifts and Special Occasions',
+  ];
+
+  static List<String> clothingSizes = [
+    'XS', // Extra Small
+    'S', // Small
+    'M', // Medium
+    'L', // Large
+    'XL', // Extra Large
+    'XXL', // Double Extra Large
+    'XXXL', // Triple Extra Large
+  ];
+
+  static List<String> locations = [
+    'Hawler',
+    'Sulaymania',
+    'Duhok',
+    'Kirkuk',
+    'Zakho',
   ];
 
   // Shared Key

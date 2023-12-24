@@ -23,7 +23,7 @@ class OrdersCard extends StatelessWidget {
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         childAspectRatio: getCardSize(),
-        maxCrossAxisExtent: context.widthGreaterThan500 ? 200.h : 400.h,
+        maxCrossAxisExtent: context.isWidthLessThan500 ? 200.h : 400.h,
       ),
       itemBuilder: (context, index) => Padding(
         padding: EdgeInsets.all(4.w),
@@ -40,13 +40,13 @@ class OrdersCard extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 AppAssets.dashBoardOrderInfo.values.elementAt(index),
-                width: context.widthGreaterThan500
+                width: context.isWidthLessThan500
                     ? PaddingOrFont.size30.w * 1.25
                     : PaddingOrFont.size30.w * 1.95.spMin,
                 color: context.colorScheme!.tertiary,
               ),
               SizedBox(
-                height: context.widthGreaterThan500
+                height: context.isWidthLessThan500
                     ? PaddingOrFont.size14.h
                     : PaddingOrFont.size16.h,
               ),
@@ -57,13 +57,13 @@ class OrdersCard extends StatelessWidget {
                 ),
                 style: context.regular!.copyWith(
                   color: context.colorScheme!.onBackground.withAlpha(120),
-                  fontSize: context.widthGreaterThan500
+                  fontSize: context.isWidthLessThan500
                       ? PaddingOrFont.size12.spMin
                       : PaddingOrFont.size24.spMin,
                 ),
               ),
               SizedBox(
-                height: context.widthGreaterThan500
+                height: context.isWidthLessThan500
                     ? PaddingOrFont.size14.h
                     : PaddingOrFont.size16.h,
               ),
@@ -71,7 +71,7 @@ class OrdersCard extends StatelessWidget {
                 '$index',
                 style: context.bold!.copyWith(
                   color: context.colorScheme!.onBackground,
-                  fontSize: context.widthGreaterThan500
+                  fontSize: context.isWidthLessThan500
                       ? PaddingOrFont.size16.spMin
                       : PaddingOrFont.size24.spMin,
                 ),

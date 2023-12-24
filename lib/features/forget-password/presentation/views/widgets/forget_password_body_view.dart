@@ -23,7 +23,7 @@ class ForgetPasswordBodyView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedVector(
-                imagePath: AppAssets.otpVerify,
+                child: AppAssets.otpVerify,
                 isKeyboardOpen: isKeyboardOpen,
               ),
               const ForgetPasswordTexts(),

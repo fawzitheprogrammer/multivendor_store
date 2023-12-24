@@ -3,16 +3,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:multivendor_store/core/build_context_extension.dart';
 import 'package:multivendor_store/core/padding_and_margin.dart';
 
-class WordBasedWidthContainer extends StatelessWidget {
+class WordBasedWidthContainer extends StatefulWidget {
+  const WordBasedWidthContainer(
+      {super.key, required this.text, required this.isActive, this.onTap});
+
   final String text;
   final bool isActive;
+  final void Function()? onTap;
 
-  const WordBasedWidthContainer({
-    super.key,
-    required this.text,
-    required this.isActive,
-  });
+  @override
+  State<WordBasedWidthContainer> createState() =>
+      _WordBasedWidthContainerState();
+}
 
+class _WordBasedWidthContainerState extends State<WordBasedWidthContainer> {
   @override
   Widget build(BuildContext context) {
     TextStyle textStyle = const TextStyle(
@@ -20,7 +24,7 @@ class WordBasedWidthContainer extends StatelessWidget {
     ); // Customize the style as needed
 
     // Measure the text width
-    double textWidth = measureTextWidth(text, textStyle, context);
+    double textWidth = measureTextWidth(widget.text, textStyle, context);
 
     return Row(
       children: [
@@ -33,7 +37,7 @@ class WordBasedWidthContainer extends StatelessWidget {
             alignment: Alignment.center,
             width: textWidth + 16.0, // Add some padding
             decoration: BoxDecoration(
-              color: isActive
+              color: widget.isActive
                   ? context.colorScheme!.primary
                   : context.colorScheme!.onBackground.withAlpha(10),
               borderRadius: BorderRadius.circular(
@@ -41,10 +45,10 @@ class WordBasedWidthContainer extends StatelessWidget {
               ),
             ),
             child: Text(
-              text,
+              widget.text,
               style: context.semiBold!.copyWith(
                 fontSize: PaddingOrFont.size14.sp,
-                color: isActive
+                color: widget.isActive
                     ? Colors.white
                     : context.colorScheme!.onBackground.withAlpha(120),
               ),

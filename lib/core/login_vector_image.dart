@@ -15,7 +15,7 @@ class VectorImage extends StatelessWidget {
       child: SizedBox(
         child: SvgPicture.asset(
           imagePath,
-          width: context.widthGreaterThan500
+          width: context.isWidthLessThan500
               ? imagePath != AppAssets.otpVerify
                   ? 250.w
                   : 350.w

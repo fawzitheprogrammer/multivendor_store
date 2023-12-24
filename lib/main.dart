@@ -1,10 +1,18 @@
-import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_kurdish_localization/flutter_kurdish_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:multivendor_store/core/firebase/get_device_token.dart';
+import 'package:multivendor_store/firebase_options.dart';
+import 'package:multivendor_store/manager/connection-bloc/connection_bloc.dart';
+import 'package:multivendor_store/manager/get-all-products/get_all_products_bloc.dart';
+import 'package:multivendor_store/manager/google-auth-bloc/google_auth_bloc.dart';
+import 'package:multivendor_store/manager/register-store/register_store_bloc.dart';
+import 'package:multivendor_store/manager/route-cubit/route_cubit.dart';
+import 'package:multivendor_store/manager/store-product/store_product_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/constants.dart';
@@ -22,6 +30,11 @@ void main() async {
   sharedPreferences = await SharedPreferences.getInstance();
   HydratedBloc.storage = await HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  await NotificationService.requestPermission();
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -29,8 +42,9 @@ void main() async {
       systemNavigationBarColor: Color(0xFF006685),
     ),
   );
+
   runApp(
-    DevicePreview(builder: (ctx) => const AppRoot()),
+    const AppRoot(),
   );
 }
 
@@ -52,7 +66,27 @@ class AppRoot extends StatelessWidget {
                 IntialLanguage(),
               ),
           ),
-          BlocProvider(create: (context) => ThemeModeCubit())
+          BlocProvider(
+            create: (context) => ThemeModeCubit(),
+          ),
+          BlocProvider(
+            create: (context) => RouteCubit(),
+          ),
+          BlocProvider(
+            create: (context) => GoogleAuthBloc(),
+          ),
+          BlocProvider(
+            create: (context) => ConnectionBloc(),
+          ),
+          BlocProvider(
+            create: (context) => RegisterStoreBloc(),
+          ),
+          BlocProvider(
+            create: (context) => StoreProductBloc(),
+          ),
+          BlocProvider(
+            create: (context) => GetAllProductsBloc(),
+          ),
         ],
         child: BlocBuilder<ThemeModeCubit, bool>(
           builder: (context, themeModeCubit) =>

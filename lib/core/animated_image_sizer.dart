@@ -1,15 +1,13 @@
-import 'package:flutter/material.dart';
-
-import 'login_vector_image.dart';
+import 'package:multivendor_store/core/exports/exports.dart';
 
 class AnimatedVector extends StatelessWidget {
   const AnimatedVector({
     super.key,
-    required this.imagePath,
+    required this.child,
     required this.isKeyboardOpen,
   });
 
-  final String imagePath;
+  final dynamic child;
   final bool isKeyboardOpen;
 
   @override
@@ -26,9 +24,9 @@ class AnimatedVector extends StatelessWidget {
       switchOutCurve: Curves.easeOut,
       child: isKeyboardOpen
           ? Container()
-          : VectorImage(
-              imagePath: imagePath,
-            ),
+          : child is String
+              ? Center(child: SvgPicture.asset(child))
+              : child,
     );
   }
 }

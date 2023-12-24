@@ -1,19 +1,25 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:multivendor_store/core/buttons/text_button_style.dart';
 import 'package:multivendor_store/core/utils/app_route.dart';
+import 'package:multivendor_store/features/store-profile/data/models/product_model.dart';
 import 'package:multivendor_store/localization/app_localization.dart';
+import 'package:multivendor_store/manager/store-product/store_product_bloc.dart';
 
 import '../../../../../core/exports/exports.dart';
 
 class StoreProductsList extends StatelessWidget {
   const StoreProductsList({
     super.key,
+    required this.product,
   });
+
+  final List<Product> product;
 
   @override
   Widget build(BuildContext context) {
     return SliverList.builder(
-      itemCount: AppAssets.products.length,
+      itemCount: product.length,
       itemBuilder: (context, index) => SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.all(PaddingOrFont.size10),
@@ -35,8 +41,15 @@ class StoreProductsList extends StatelessWidget {
                   padding: EdgeInsets.all(PaddingOrFont.size10.spMin),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(PaddingOrFont.size10.r),
-                    child: Image.asset(
-                      AppAssets.products[index],
+                    child: SizedBox(
+                      height:
+                          context.isWidthLessThan500 ? 100.spMin : 150.spMin,
+                      child: Image.network(
+                        product[index].productImages!.first,
+                        width:
+                            context.isWidthLessThan500 ? 100.spMin : 200.spMin,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -51,9 +64,9 @@ class StoreProductsList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Nike Free Metcon 3',
+                      product[index].productName!['ku'] ?? '',
                       style: context.bold!.copyWith(
-                        fontSize: context.widthGreaterThan500
+                        fontSize: context.isWidthLessThan500
                             ? PaddingOrFont.size18.spMin
                             : PaddingOrFont.size14.h,
                       ),
@@ -75,7 +88,13 @@ class StoreProductsList extends StatelessWidget {
                       children: [
                         ActionButton(
                           onPressed: () {
-                            GoRouter.of(context).push(AppRoute.kEditProduct);
+                            //
+                            BlocProvider.of<StoreProductBloc>(context).add(
+                              GetSingleProduct(product: product[index]),
+                            );
+                            GoRouter.of(context).push(
+                                AppRoute.kAddOrEditProduct,
+                                extra: product[index]);
                           },
                           label: 'Edit',
                           color:
@@ -85,7 +104,12 @@ class StoreProductsList extends StatelessWidget {
                           width: PaddingOrFont.size10.w - 6,
                         ),
                         ActionButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            BlocProvider.of<StoreProductBloc>(context).add(
+                              DeleteProduct(
+                                  productID: product[index].productId),
+                            );
+                          },
                           label: 'Delete',
                           color: context.colorScheme!.error.withAlpha(30),
                         )
@@ -122,7 +146,7 @@ class _ActionButtonState extends State<ActionButton> {
   @override
   Widget build(BuildContext context) {
     Size buttonSize =
-        context.widthGreaterThan500 ? Size(80.w, 30.h) : Size(80.w, 30.h);
+        context.isWidthLessThan500 ? Size(80.w, 30.h) : Size(80.w, 30.h);
     return TextButton(
       style: textButtonStyle.copyWith(
         backgroundColor: MaterialStatePropertyAll(widget.color),
@@ -137,7 +161,7 @@ class _ActionButtonState extends State<ActionButton> {
       child: Text(
         translate(key: widget.label, context: context),
         style: context.regular!.copyWith(
-          fontSize: context.widthGreaterThan500
+          fontSize: context.isWidthLessThan500
               ? PaddingOrFont.size12.spMin
               : PaddingOrFont.size12.spMin,
           color: widget.label == 'Edit'

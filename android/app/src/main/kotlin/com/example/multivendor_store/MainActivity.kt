@@ -1,4 +1,4 @@
-package com.example.multivendor_store
+package com.wavemall.store
 
 import io.flutter.embedding.android.FlutterActivity
 

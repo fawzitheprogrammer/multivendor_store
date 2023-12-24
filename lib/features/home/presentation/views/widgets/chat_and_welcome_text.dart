@@ -16,7 +16,7 @@ class ChatAndWelcomeText extends StatelessWidget {
             Text(
               '${translate(context: context, key: 'Welcome')}!🖐',
               style: context.semiBold!.copyWith(
-                fontSize: context.widthGreaterThan500
+                fontSize: context.isWidthLessThan500
                     ? PaddingOrFont.size14.spMin
                     : PaddingOrFont.size26.spMin,
               ),
@@ -24,7 +24,7 @@ class ChatAndWelcomeText extends StatelessWidget {
             Text(
               'Fawzi Gharib',
               style: context.semiBold!.copyWith(
-                fontSize: context.widthGreaterThan500
+                fontSize: context.isWidthLessThan500
                     ? PaddingOrFont.size20.spMin
                     : PaddingOrFont.size30.spMin + 10,
                 color: context.colorScheme!.tertiary,
@@ -46,26 +46,26 @@ class ChatAndWelcomeText extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor:
                       context.colorScheme!.onBackground.withAlpha(20),
-                  radius: context.widthGreaterThan500
+                  radius: context.isWidthLessThan500
                       ? PaddingOrFont.size20.spMin
                       : PaddingOrFont.size30.spMin + 5,
                   child: SvgPicture.asset(
                     AppAssets.messenger,
                     color: context.colorScheme!.onBackground,
-                    width: context.widthGreaterThan500
+                    width: context.isWidthLessThan500
                         ? PaddingOrFont.size26.spMin
                         : PaddingOrFont.size30.spMin + 20,
                   ),
                 ),
                 CircleAvatar(
                   backgroundColor: Colors.red,
-                  radius: context.widthGreaterThan500
+                  radius: context.isWidthLessThan500
                       ? PaddingOrFont.size10.spMin - 2
                       : PaddingOrFont.size12.spMin,
                   child: Text(
                     '2',
                     style: context.regular!.copyWith(
-                        fontSize: context.widthGreaterThan500
+                        fontSize: context.isWidthLessThan500
                             ? PaddingOrFont.size10.spMin
                             : PaddingOrFont.size12.spMin,
                         color: Colors.white),

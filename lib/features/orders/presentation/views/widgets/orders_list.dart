@@ -41,7 +41,7 @@ class OrdersProductsList extends StatelessWidget {
               const Spacer(),
               ActionButton(
                 onPressed: () {
-                  GoRouter.of(context).push(AppRoute.kEditProduct);
+                  GoRouter.of(context).push(AppRoute.kAddOrEditProduct);
                 },
                 label: 'View',
                 color: context.colorScheme!.inversePrimary.withAlpha(100),
@@ -74,7 +74,7 @@ class _ActionButtonState extends State<ActionButton> {
   @override
   Widget build(BuildContext context) {
     Size buttonSize =
-        context.widthGreaterThan500 ? Size(250.w, 40.h) : Size(80.w, 30.h);
+        context.isWidthLessThan500 ? Size(250.w, 40.h) : Size(80.w, 30.h);
     return TextButton(
       style: textButtonStyle.copyWith(
         backgroundColor: MaterialStatePropertyAll(widget.color),
@@ -89,7 +89,7 @@ class _ActionButtonState extends State<ActionButton> {
       child: Text(
         translate(key: widget.label, context: context),
         style: context.regular!.copyWith(
-          fontSize: context.widthGreaterThan500
+          fontSize: context.isWidthLessThan500
               ? PaddingOrFont.size12.spMin
               : PaddingOrFont.size12.spMin,
           color: context.colorScheme!.inverseSurface,
