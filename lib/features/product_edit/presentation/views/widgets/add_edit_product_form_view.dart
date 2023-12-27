@@ -9,6 +9,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:multivendor_store/core/animated_image_sizer.dart';
 import 'package:multivendor_store/core/build_context_extension.dart';
 import 'package:multivendor_store/core/buttons/text_button_style.dart';
+import 'package:multivendor_store/core/check_if_user_is_connected.dart';
 import 'package:multivendor_store/core/constants.dart';
 import 'package:multivendor_store/core/firebase/download_file.dart';
 import 'package:multivendor_store/core/firebase/logged_user.dart';
@@ -124,21 +125,22 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: PaddingOrFont.size10.h,
+                            height: PaddingOrFont.size24.h,
                           ),
                           AnimatedVector(
-                              isKeyboardOpen: isKeyboarOpen,
-                              child: ProductImage(
-                                onTap: () async {
-                                  if (mounted) {
-                                    imagePath = await pickMultiImage();
-                                    setState(() {});
-                                  }
-                                },
-                                imagePath: imagePath,
-                              )),
+                            isKeyboardOpen: isKeyboarOpen,
+                            child: ProductImage(
+                              onTap: () async {
+                                if (mounted) {
+                                  imagePath = await pickMultiImage();
+                                  setState(() {});
+                                }
+                              },
+                              imagePath: imagePath,
+                            ),
+                          ),
                           SizedBox(
-                            height: PaddingOrFont.size10.h - 4,
+                            height: PaddingOrFont.size24.spMin - 4,
                           ),
                           Row(
                             mainAxisSize: MainAxisSize.min,
@@ -157,7 +159,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                                 ),
                               ),
                               SizedBox(
-                                width: PaddingOrFont.size10.spMin - 5,
+                                width: PaddingOrFont.size24.spMin - 5,
                               ),
                               Expanded(
                                 child: CustomTextFieldWidget(
@@ -172,7 +174,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                                 ),
                               ),
                               SizedBox(
-                                width: PaddingOrFont.size10.spMin - 5,
+                                width: PaddingOrFont.size24.spMin - 5,
                               ),
                               Expanded(
                                 child: CustomTextFieldWidget(
@@ -186,26 +188,24 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                                   },
                                 ),
                               ),
-                              SizedBox(
-                                width: PaddingOrFont.size10.spMin - 5,
-                              ),
                             ],
                           ),
                           SizedBox(
-                            height: PaddingOrFont.size10.h,
+                            height: PaddingOrFont.size24.spMin,
                           ),
                           Container(
                             constraints: BoxConstraints(maxHeight: 50.h),
                             decoration: BoxDecoration(
-                                color: context.colorScheme!.onPrimary,
-                                border: Border.all(
-                                  width: 1.5.w,
-                                  color: context.colorScheme!.primary
-                                      .withAlpha(30),
-                                ),
-                                borderRadius: BorderRadius.circular(4.r)),
+                              color: context.colorScheme!.onPrimary,
+                              border: Border.all(
+                                width: 1.5.w,
+                                color:
+                                    context.colorScheme!.primary.withAlpha(30),
+                              ),
+                              borderRadius: BorderRadius.circular(4.r),
+                            ),
                             padding: EdgeInsets.symmetric(
-                                horizontal: PaddingOrFont.size10.w),
+                                horizontal: PaddingOrFont.size24.w),
                             child: Row(
                               children: [
                                 Expanded(
@@ -245,7 +245,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                             ),
                           ),
                           SizedBox(
-                            height: PaddingOrFont.size10.h,
+                            height: PaddingOrFont.size24.h,
                           ),
                           if (selectedOption ==
                                   AppAssets.categoriesMap.keys.elementAt(0) ||
@@ -281,10 +281,13 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                             )
                           else
                             const SizedBox(),
+                          // SizedBox(
+                          //   height: PaddingOrFont.size18.spMin,
+                          // ),
                           if (selectedOption ==
                               AppAssets.categoriesMap.keys.elementAt(4))
                             SizedBox(
-                              height: 60,
+                              height: 60.spMin,
                               width: double.infinity,
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
@@ -318,32 +321,52 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                             )
                           else
                             const SizedBox(),
+                          selectedOption ==
+                                      AppAssets.categoriesMap.keys
+                                          .elementAt(4) ||
+                                  selectedOption ==
+                                      AppAssets.categoriesMap.keys
+                                          .elementAt(0) ||
+                                  selectedOption ==
+                                      AppAssets.categoriesMap.keys
+                                          .elementAt(1) ||
+                                  selectedOption ==
+                                      AppAssets.categoriesMap.keys.elementAt(2)
+                              ? SizedBox(
+                                  height: PaddingOrFont.size18.spMin,
+                                )
+                              : const SizedBox(),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: CustomTextFieldWidget(
+                                  controller: price,
+                                  label: 'Price',
+                                  validator: (val) {
+                                    return checkFiledsWithDigitType(
+                                        controller: price, val: val!);
+                                  },
+                                  textInputType: TextInputType.number,
+                                ),
+                              ),
+                              SizedBox(
+                                width: PaddingOrFont.size24.h,
+                              ),
+                              Expanded(
+                                child: CustomTextFieldWidget(
+                                  controller: qty,
+                                  label: 'Quantity',
+                                  validator: (val) {
+                                    return checkFiledsWithDigitType(
+                                        controller: qty, val: val ?? '0');
+                                  },
+                                  textInputType: TextInputType.number,
+                                ),
+                              ),
+                            ],
+                          ),
                           SizedBox(
-                            height: PaddingOrFont.size10.h,
-                          ),
-                          CustomTextFieldWidget(
-                            controller: price,
-                            label: 'Price',
-                            validator: (val) {
-                              return checkFiledsWithDigitType(
-                                  controller: price, val: val!);
-                            },
-                            textInputType: TextInputType.number,
-                          ),
-                          SizedBox(
-                            height: PaddingOrFont.size10.h,
-                          ),
-                          CustomTextFieldWidget(
-                            controller: qty,
-                            label: 'Quantity',
-                            validator: (val) {
-                              return checkFiledsWithDigitType(
-                                  controller: qty, val: val ?? '0');
-                            },
-                            textInputType: TextInputType.number,
-                          ),
-                          SizedBox(
-                            height: PaddingOrFont.size10.h,
+                            height: PaddingOrFont.size24.h,
                           ),
                           Row(
                             children: [
@@ -363,7 +386,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                                 ),
                               ),
                               SizedBox(
-                                width: PaddingOrFont.size10.spMin - 5,
+                                width: PaddingOrFont.size24.spMin - 5,
                               ),
                               Expanded(
                                 child: CustomTextFieldWidget(
@@ -381,7 +404,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                                 ),
                               ),
                               SizedBox(
-                                width: PaddingOrFont.size10.spMin - 5,
+                                width: PaddingOrFont.size24.spMin - 5,
                               ),
                               Expanded(
                                 child: CustomTextFieldWidget(
@@ -401,7 +424,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                             ],
                           ),
                           SizedBox(
-                            height: PaddingOrFont.size10.h,
+                            height: PaddingOrFont.size24.h,
                           ),
                           CustomTextFieldWidget(
                             controller: discount,
@@ -422,56 +445,10 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                               ),
                             ),
                             onPressed: () {
-                              print(isCreateProduct);
-                              if (_formKey.currentState!.validate()) {
-                                Product product = Product(
-                                  productId: '',
-                                  productName: {
-                                    "ku": productNameKurdish.text,
-                                    "en": productNameEnglish.text,
-                                    "ar": productNameArabic.text,
-                                  },
-                                  productCategory:
-                                      selectedOption ?? 'Uncategorized',
-                                  productImages: [],
-                                  productPrice: price.text,
-                                  productQuantity: qty.text,
-                                  productShortDescription: {
-                                    "ku": shortKurdishDescripttion.text,
-                                    "en": shortEnglishDescripttion.text,
-                                    "ar": shortArabicDescripttion.text,
-                                  },
-                                  offerPrice: discount.text,
-                                  rating: '0.0',
-                                  brandName: '',
-                                  vendorName: firebaseUser!.uid,
-                                  tags: [],
-                                  clothingSize:
-                                      getClothesSize(selectedClothingSize),
-                                  shoeSize: selectedShoeSizes,
-                                );
-
-                                if (isCreateProduct == true) {
-                                  BlocProvider.of<StoreProductBloc>(context)
-                                      .add(
-                                    CreateProduct(
-                                      product: product,
-                                      file: imagePath,
-                                      context: context,
-                                    ),
-                                  );
-                                } else {
-                                  print(product.productId);
-                                  BlocProvider.of<StoreProductBloc>(context)
-                                      .add(
-                                    UpdateProduct(
-                                      productID: state.product!.productId,
-                                      product: product,
-                                      file: imagePath,
-                                      context: context,
-                                    ),
-                                  );
-                                }
+                              if (state.product != null) {
+                                storeData(productState: state.product);
+                              } else {
+                                storeData();
                               }
                             },
                             child: Text(
@@ -503,6 +480,63 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
         ],
       ),
     );
+  }
+
+  void storeData({Product? productState}) {
+    checkInternetAccess().then((value) {
+      if (value) {
+        if (_formKey.currentState!.validate()) {
+          Product product = Product(
+            productId: '',
+            productName: {
+              "ku": productNameKurdish.text,
+              "en": productNameEnglish.text,
+              "ar": productNameArabic.text,
+            },
+            productCategory: selectedOption ?? 'Uncategorized',
+            productImages: [],
+            productPrice: price.text,
+            productQuantity: qty.text,
+            productShortDescription: {
+              "ku": shortKurdishDescripttion.text,
+              "en": shortEnglishDescripttion.text,
+              "ar": shortArabicDescripttion.text,
+            },
+            offerPrice: discount.text,
+            rating: '0.0',
+            brandName: '',
+            vendorName: firebaseUser!.uid,
+            tags: [],
+            clothingSize: getClothesSize(selectedClothingSize),
+            shoeSize: selectedShoeSizes,
+          );
+
+          if (isCreateProduct == true) {
+            BlocProvider.of<StoreProductBloc>(context).add(
+              CreateProduct(
+                product: product,
+                file: imagePath,
+                context: context,
+              ),
+            );
+          } else {
+            BlocProvider.of<StoreProductBloc>(context).add(
+              UpdateProduct(
+                productID: productState!
+                
+                .productId,
+                product: product,
+                file: imagePath,
+                context: context,
+              ),
+            );
+          }
+        }
+      } else {
+        notification('Failure', translate(key: 'No internet', context: context),
+            context);
+      }
+    });
   }
 
   String? checkFiledsWithDigitType(

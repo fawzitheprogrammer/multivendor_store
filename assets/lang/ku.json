@@ -144,7 +144,10 @@
     "fieldValidationMessage": "ئەم خانەیە پێویستە و تەنها ژمارە دەتوانرێت تێدا بنووسرێت.",
     "fieldEmptyErrorMessage_en": ".This field cannot be empty",
     "fieldEmptyErrorMessage_ar": "لا يمكن أن يكون هذا الحقل فارغا.",
-    "fieldEmptyErrorMessage_ku": "نابێت ئەم خانەیە بەتاڵ بێت."
+    "fieldEmptyErrorMessage_ku": "نابێت ئەم خانەیە بەتاڵ بێت.",
+    "You have no items yet":"هیچ كاڵایێكت نیە",
+    "Tap + button to start adding item.": "گرتە لە دوگمەی + بکە بۆ دەستپێکردنی زیادکردنی بابەت",
+    "Confirm Password":"دووبارەكردنەوە وشەی نێھنی"
 
 
 }

@@ -7,9 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:multivendor_store/core/firebase/get_device_token.dart';
 import 'package:multivendor_store/firebase_options.dart';
+import 'package:multivendor_store/manager/authentication-bloc/authentication_bloc_bloc.dart';
 import 'package:multivendor_store/manager/connection-bloc/connection_bloc.dart';
 import 'package:multivendor_store/manager/get-all-products/get_all_products_bloc.dart';
-import 'package:multivendor_store/manager/google-auth-bloc/google_auth_bloc.dart';
 import 'package:multivendor_store/manager/register-store/register_store_bloc.dart';
 import 'package:multivendor_store/manager/route-cubit/route_cubit.dart';
 import 'package:multivendor_store/manager/store-product/store_product_bloc.dart';
@@ -73,7 +73,7 @@ class AppRoot extends StatelessWidget {
             create: (context) => RouteCubit(),
           ),
           BlocProvider(
-            create: (context) => GoogleAuthBloc(),
+            create: (context) => AuthenticationBlocBloc(),
           ),
           BlocProvider(
             create: (context) => ConnectionBloc(),

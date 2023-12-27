@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:multivendor_store/core/check_if_user_is_connected.dart';
 import 'package:multivendor_store/features/home/presentation/views/widgets/home_view_body.dart';
 import 'package:multivendor_store/features/orders/presentation/views/orders_profile_view.dart';
 import 'package:multivendor_store/features/product_edit/presentation/views/add_edit_product.dart';
 import 'package:multivendor_store/features/store-profile/presentation/views/store_profile_view.dart';
 import 'package:multivendor_store/features/user-profile/presentation/views/user_profile_view.dart';
+import 'package:multivendor_store/manager/get-all-products/get_all_products_bloc.dart';
 import 'package:multivendor_store/manager/store-product/store_product_bloc.dart';
 
 import '../../../../core/exports/exports.dart';
@@ -19,16 +23,27 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int _currentIndex = 0;
+  //
+  bool hasInternet = false;
 
   List<Widget> pages = [
     const HomeViewBody(),
     const StoreProfileView(),
     const OrdersProfileView(),
-    const UserProfileView()
+    //const UserProfileView()
   ];
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // Checking internet
+    print(hasInternet);
+    BlocProvider.of<GetAllProductsBloc>(context).add(GetProducts());
     TextStyle labelStyle = context.regular!.copyWith(
       fontSize: context.isWidthLessThan500
           ? PaddingOrFont.size10.spMax
@@ -94,14 +109,14 @@ class _HomeViewState extends State<HomeView> {
               iconColor: context.colorScheme!.tertiary,
             ),
           ),
-          BottomNavigationBarItem(
-            icon: icon(icon: AppAssets.accountCircleBold),
-            label: translate(context: context, key: 'Profile'),
-            activeIcon: icon(
-              icon: AppAssets.accountCircleBold,
-              iconColor: context.colorScheme!.tertiary,
-            ),
-          ),
+          // BottomNavigationBarItem(
+          //   icon: icon(icon: AppAssets.accountCircleBold),
+          //   label: translate(context: context, key: 'Profile'),
+          //   activeIcon: icon(
+          //     icon: AppAssets.accountCircleBold,
+          //     iconColor: context.colorScheme!.tertiary,
+          //   ),
+          // ),
         ],
       ),
     );

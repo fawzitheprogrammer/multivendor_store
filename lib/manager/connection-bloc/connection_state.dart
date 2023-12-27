@@ -8,7 +8,9 @@ class ConnectionInitial extends ConnectionDeviceState {}
 class ConnectionLoading extends ConnectionDeviceState {
   final bool isCheckComplete;
 
-  ConnectionLoading({required this.isCheckComplete});
+  ConnectionLoading({required this.isCheckComplete}) {
+    print(isCheckComplete);
+  }
 }
 
 class ConnectionSuccess extends ConnectionDeviceState {

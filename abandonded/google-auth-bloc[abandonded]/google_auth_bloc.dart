@@ -7,8 +7,8 @@ import 'package:multivendor_store/core/errors/failures.dart';
 import 'package:multivendor_store/core/exports/exports.dart';
 import 'package:multivendor_store/core/firebase/collections.dart';
 import 'package:multivendor_store/core/firebase_package_helper.dart';
+import 'package:multivendor_store/core/utils/app_route.dart';
 
-import '../../core/utils/app_route.dart';
 
 part 'google_auth_event.dart';
 part 'google_auth_state.dart';

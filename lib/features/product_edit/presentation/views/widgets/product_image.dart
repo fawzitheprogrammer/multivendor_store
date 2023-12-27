@@ -23,6 +23,7 @@ class ProductImageState extends State<ProductImage> {
       onTap: widget.onTap,
       child: Container(
         decoration: BoxDecoration(
+          color: context.colorScheme!.onPrimary,
           border: Border.all(
             color: context.colorScheme!.primary.withAlpha(30),
           ),

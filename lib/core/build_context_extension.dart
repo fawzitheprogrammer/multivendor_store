@@ -1,3 +1,5 @@
+import 'package:multivendor_store/core/check_if_user_is_connected.dart';
+
 import 'exports/exports.dart';
 
 extension BuildContextExtensions<T> on BuildContext {
@@ -42,4 +44,7 @@ extension BuildContextExtensions<T> on BuildContext {
   bool get isWidthLessThan500 => MediaQuery.of(this).size.width <= 500;
 
   String get languageCode => sharedPreferences!.getString('lang')!;
+
+  Future<bool> get hasInternet async =>
+      await checkInternetAccess().then((value) => value);
 }

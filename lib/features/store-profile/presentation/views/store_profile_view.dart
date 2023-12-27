@@ -19,9 +19,8 @@ class StoreProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<GetAllProductsBloc>(context).add(GetProducts());
 
-    Future<void> refresh() async{
+    Future<void> refresh() async {
       BlocProvider.of<GetAllProductsBloc>(context).add(GetProducts());
-
     }
 
     return Scaffold(

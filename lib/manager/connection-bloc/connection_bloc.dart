@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:multivendor_store/core/check_if_user_is_connected.dart';
 
 part 'connection_event.dart';
 part 'connection_state.dart';
@@ -11,27 +13,18 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionDeviceState> {
       try {
         if (event is CheckConnection) {
           emit(ConnectionLoading(isCheckComplete: false));
-          final connectivityResult = await (Connectivity().checkConnectivity());
-          if (connectivityResult == ConnectivityResult.mobile) {
-            //isConnected = true;
-            print('isConnected');
-            //notifyListeners();
-            emit(ConnectionSuccess(r: connectivityResult.name));
-          } else if (connectivityResult == ConnectivityResult.wifi) {
-            //isConnected = true;
-            print('isConnected');
-            //notifyListeners();
-            emit(ConnectionSuccess(r: connectivityResult.name));
-          } else {
-            // isConnected = false;
-            print('Not connected');
-            //notifyListeners();
-            emit(ConnectionLoading(isCheckComplete: true));
-          }
+          await checkInternetAccess().then((value) {
+            if (value == true) {
+              emit(ConnectionSuccess(r: value.toString()));
+            } else {
+              emit(ConnectionLoading(isCheckComplete: true));
+            }
+          });
         }
       } catch (e) {
         emit(ConnectionFailure(errorMessage: e.toString()));
       }
     });
   }
+
 }

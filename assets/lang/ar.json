@@ -144,6 +144,9 @@
     "fieldEmptyErrorMessage_ku": "نابێت ئەم خانەیە بەتاڵ بێت.",
     "ShortDescription_Kurdish": "کورتەی وەسف",
     "ShortDescription_Arabic": "وصف قصير",
-    "ShortDescription_English": "Short Description"
+    "ShortDescription_English": "Short Description",
+    "You have no items yet": "ليس لديك عناصر حتى الآن",
+    "Tap + button to start adding item.": "انقر على زر + لبدء إضافة عنصر.",
+    "Confirm Password":"تأكيد كلمة المرور "
 
 }

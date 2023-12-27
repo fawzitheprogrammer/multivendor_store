@@ -25,7 +25,9 @@ class AnimatedVector extends StatelessWidget {
       child: isKeyboardOpen
           ? Container()
           : child is String
-              ? Center(child: SvgPicture.asset(child))
+              ? Center(
+                  child: SvgPicture.asset(child),
+                )
               : child,
     );
   }

@@ -8,6 +8,7 @@ import 'package:multivendor_store/core/utils/app_route.dart';
 import 'package:multivendor_store/features/splash-screen/presentation/views/check_if_user_is_connected_to_internet.dart';
 import 'package:multivendor_store/localization/app_localization.dart';
 import 'package:multivendor_store/manager/connection-bloc/connection_bloc.dart';
+import 'package:http/http.dart' as http;
 
 class SplashScreenView extends StatelessWidget {
   const SplashScreenView({super.key});
@@ -73,16 +74,17 @@ class _AppLogoState extends State<AppLogo> with SingleTickerProviderStateMixin {
 
   void getRoute() {
     if (sharedPreferences!.get('route') != null) {
-      GoRouter.of(context).push(sharedPreferences!.get('route').toString());
+      GoRouter.of(context)
+          .pushReplacement(sharedPreferences!.get('route').toString());
     } else {
-      GoRouter.of(context).push(AppRoute.kLoginView);
+      GoRouter.of(context).pushReplacement(AppRoute.kLoginView);
     }
   }
 
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
+    super.dispose();
   }
 
   @override

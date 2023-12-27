@@ -58,6 +58,7 @@ class AppAssets {
   static const String appLogo = 'assets/icons/messenger.svg';
   static const String businessLicense = 'assets/icons/business.svg';
   static const String id = 'assets/icons/id.svg';
+  static const String shelf = 'assets/icons/shelf.png';
 
   static Map<String, String> categoriesMap = {
     'Men Wear': 'assets/categories/men_wear.svg',
@@ -69,6 +70,20 @@ class AppAssets {
     'Electronics': 'assets/categories/electronics.svg',
     'Gaming': 'assets/categories/gaming.svg',
     'Wearable Technology': 'assets/categories/wearable_tech.svg',
+  };
+
+  static Map<String, List<String>> categoriesWithSubcategories = {
+    'Men Wear': ['T-Shirts', 'Jeans', 'Jackets'],
+    'Women Wear': ['Dresses', 'Shoes', 'Handbags'],
+    'Kids Wear': ['Tops', 'Bottoms', 'Outerwear'],
+    'Bags and Luggage': ['Backpacks', 'Handbags', 'Travel Bags'],
+    'Footwear': ['Sneakers', 'Boots', 'Sandals'],
+    'Accessories': ['Hats', 'Sunglasses', 'Jewelry'],
+    'Electronics': ['Smartphones', 'Laptops', 'Headphones'],
+    'Gaming': ['Consoles', 'Games', 'Accessories'],
+    'Wearable Technology': ['Smartwatches', 'Fitness Trackers', 'Headsets'],
+    'Nutrition': ['Vitamins', 'Protein Powder', 'Healthy Snacks'],
+    'Supplement': ['Muscle Gain', 'Weight Loss', 'Energy Boost'],
   };
 
   static Map<String, String> dashBoardOrderInfo = {
@@ -135,4 +150,6 @@ class AppAssets {
   // Shared Key
   static const String countryCode = 'country_code';
   static const String languageCode = 'language_code';
+
+  
 }
