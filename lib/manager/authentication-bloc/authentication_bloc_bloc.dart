@@ -1,15 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meta/meta.dart';
+import 'package:multivendor_store/core/constants.dart';
 import 'package:multivendor_store/core/errors/failures.dart';
 import 'package:multivendor_store/core/firebase/collections.dart';
+import 'package:multivendor_store/core/firebase/logged_user.dart';
 import 'package:multivendor_store/core/firebase_package_helper.dart';
 import 'package:multivendor_store/core/utils/app_route.dart';
 import 'package:multivendor_store/features/user-profile/data/models/user_model.dart';
-import 'package:uuid/uuid.dart';
 
 part 'authentication_bloc_event.dart';
 part 'authentication_bloc_state.dart';
@@ -26,9 +25,21 @@ class AuthenticationBlocBloc
         try {
           emit(const AuthenticationBlocLoading(isCheckComplete: false));
 
+          // Get user data in the firebase
+          // Check if the username already exists in Firestore
+          DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+              .collection(FirebaseCollection.stores)
+              .doc(event.username)
+              .get();
+
           await checkIfUsernameTaken(event.username).then((value) {
             if (value == true) {
-              GoRouter.of(event.context).push(AppRoute.kRegistrationView);
+              sharedPreferences!.setString('firebaseUser', event.username);
+              if (userSnapshot.get('isRegistered') == true) {
+                GoRouter.of(event.context).push(AppRoute.kHome);
+              } else {
+                GoRouter.of(event.context).push(AppRoute.kRegistrationView);
+              }
             }
           });
 
@@ -73,9 +84,10 @@ class AuthenticationBlocBloc
         emit(const AuthenticationBlocLoading(isCheckComplete: true));
 
         try {
-          final User? firebaseUser = firebaseAuth.currentUser;
           if (firebaseUser != null) {
-            await firebaseAuth.signOut();
+            await firebaseAuth.signOut().then((value) {
+              GoRouter.of(event.context).pushReplacement(AppRoute.kLoginView);
+            });
           }
         } on FirebaseException catch (e) {
           emit(
@@ -85,6 +97,27 @@ class AuthenticationBlocBloc
           );
         }
         emit(const AuthenticationBlocLoading(isCheckComplete: false));
+      }
+
+      if (event is TriggerGetUserEvent) {
+        emit(const AuthenticationBlocLoading(isCheckComplete: true));
+        // Get user data in the firebase
+        // Check if the username already exists in Firestore
+        var userSnapshot = await firebaseFirestore
+            .collection(FirebaseCollection.stores)
+            .doc(firebaseUser.toString())
+            .get();
+
+        emit(
+          GetLoggedInUser(
+            storeModel: StoreModel(
+              fullNameOnId: userSnapshot.get('fullNameOnId'),
+              userId: userSnapshot.get('userId'),
+              profilePicture: userSnapshot.get('profilePicture'),
+            ),
+          ),
+        );
+        //emit(const AuthenticationBlocLoading(isCheckComplete: false));
       }
     });
   }

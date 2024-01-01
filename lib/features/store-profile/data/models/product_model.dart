@@ -1,7 +1,8 @@
 class Product {
   final String productId;
   final Map<String, dynamic>? productName;
-  final String productCategory;
+  final String? productCategory;
+  final String? productSubCategory;
   final List<String>? productImages;
   final String productPrice;
   final String productQuantity;
@@ -14,22 +15,22 @@ class Product {
   final List<String>? clothingSize;
   final List<String>? shoeSize;
 
-  Product({
-    required this.productId,
-    this.productName,
-    required this.productCategory,
-    this.productImages,
-    required this.productPrice,
-    required this.productQuantity,
-    this.productShortDescription,
-    this.offerPrice,
-    this.rating,
-    this.brandName,
-    required this.vendorName,
-    this.tags,
-    this.clothingSize,
-    this.shoeSize,
-  });
+  Product(
+      {required this.productId,
+      this.productName,
+      required this.productCategory,
+      this.productImages,
+      required this.productPrice,
+      required this.productQuantity,
+      this.productShortDescription,
+      this.offerPrice,
+      this.rating,
+      this.brandName,
+      required this.vendorName,
+      this.tags,
+      this.clothingSize,
+      this.shoeSize,
+      this.productSubCategory});
   Map<String, dynamic> toJson() {
     return {
       'productId': productId,
@@ -45,7 +46,8 @@ class Product {
       'vendorName': vendorName,
       'tags': tags,
       'clothingSize': clothingSize,
-      'shoeSize': shoeSize
+      'shoeSize': shoeSize,
+      'productSubCategory': productSubCategory
     };
   }
 
@@ -70,6 +72,7 @@ class Product {
       clothingSize: json['clothingSize'] != null
           ? List<String>.from(json['clothingSize'])
           : null,
+      productSubCategory: json['productSubCategory'],
     );
   }
 }

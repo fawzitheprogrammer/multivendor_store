@@ -8,7 +8,6 @@ import 'package:multivendor_store/core/utils/app_route.dart';
 import 'package:multivendor_store/features/splash-screen/presentation/views/check_if_user_is_connected_to_internet.dart';
 import 'package:multivendor_store/localization/app_localization.dart';
 import 'package:multivendor_store/manager/connection-bloc/connection_bloc.dart';
-import 'package:http/http.dart' as http;
 
 class SplashScreenView extends StatelessWidget {
   const SplashScreenView({super.key});

@@ -1,3 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:multivendor_store/core/constants.dart';
 
-final firebaseUser = FirebaseAuth.instance.currentUser;
+final firebaseUser = sharedPreferences?.get('firebaseUser');

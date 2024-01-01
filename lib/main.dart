@@ -20,7 +20,7 @@ import 'core/theme/my_custom_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/utils/app_route.dart';
 import 'localization/app_localization.dart';
-import 'manager/theme_bloc/theme_state.dart';
+import 'manager/theme-bloc/theme_state.dart';
 import 'manager/language_bloc/language_localization_bloc.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

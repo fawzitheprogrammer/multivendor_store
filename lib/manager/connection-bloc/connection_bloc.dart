@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:multivendor_store/core/check_if_user_is_connected.dart';
 
 part 'connection_event.dart';

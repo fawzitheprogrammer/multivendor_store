@@ -13,7 +13,7 @@ class GetProductsFromFirebase {
     /// Getting data from the firebase
     QuerySnapshot<Map<String, dynamic>> querySnapshot = await firebaseFirestore
         .collection(FirebaseCollection.stores)
-        .doc(firebaseUser!.uid)
+        .doc(firebaseUser!.toString())
         .collection(FirebaseCollection.storeProductCollection)
         .get();
 

@@ -11,21 +11,22 @@ class StoreModel {
   final String? businessLicenseId;
   final bool? isApproved;
   final String? deviceToken;
+  final bool? isRegistered;
 
-  StoreModel({
-    this.fullNameOnId,
-    this.profilePicture,
-    this.businessName,
-    this.shopType,
-    this.phoneNumber,
-    this.location,
-    this.idFrontSide,
-    this.idBackSide,
-    this.businessLicenseId,
-    this.isApproved,
-    this.deviceToken,
-    this.userId,
-  });
+  StoreModel(
+      {this.fullNameOnId,
+      this.profilePicture,
+      this.businessName,
+      this.shopType,
+      this.phoneNumber,
+      this.location,
+      this.idFrontSide,
+      this.idBackSide,
+      this.businessLicenseId,
+      this.isApproved,
+      this.deviceToken,
+      this.userId,
+      this.isRegistered});
 
   factory StoreModel.fromJson(Map<String, dynamic> json) {
     return StoreModel(
@@ -41,6 +42,7 @@ class StoreModel {
       isApproved: json['isApproved'] ?? '',
       deviceToken: json['deviceToken'] ?? '',
       userId: json['userId'] ?? '',
+      isRegistered: json['isRegistered'] ?? '',
     );
   }
 
@@ -57,7 +59,8 @@ class StoreModel {
       'licenseId': businessLicenseId,
       'isApproved': isApproved,
       'deviceToken': deviceToken,
-      'userId': userId
+      'userId': userId,
+      'isRegistered': isRegistered
     };
   }
 }

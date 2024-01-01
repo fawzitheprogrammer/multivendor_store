@@ -12,7 +12,8 @@ class SignInUser extends AuthenticationBlocEvent {
   final String password;
   final BuildContext context;
 
-  SignInUser({required this.context, required this.username, required this.password}) {
+  SignInUser(
+      {required this.context, required this.username, required this.password}) {
     print(' Password : $password , Email : $username');
   }
 
@@ -32,4 +33,10 @@ class SignUpUser extends AuthenticationBlocEvent {
   List<Object> get props => [username, password];
 }
 
-class SignOut extends AuthenticationBlocEvent {}
+class SignOut extends AuthenticationBlocEvent {
+  final BuildContext context;
+
+  const SignOut({required this.context});
+}
+
+class TriggerGetUserEvent extends AuthenticationBlocEvent {}

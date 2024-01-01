@@ -32,3 +32,9 @@ final class AuthenticationBlocFailure extends AuthenticationBlocState {
   @override
   List<Object> get props => [errorMessage];
 }
+
+final class GetLoggedInUser extends AuthenticationBlocState {
+  final StoreModel storeModel;
+
+  const GetLoggedInUser({required this.storeModel});
+}

@@ -1,20 +1,16 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meta/meta.dart';
 import 'package:multivendor_store/core/errors/failures.dart';
 import 'package:multivendor_store/core/exports/exports.dart';
 import 'package:multivendor_store/core/firebase/collections.dart';
 import 'package:multivendor_store/core/firebase/logged_user.dart';
 import 'package:multivendor_store/core/firebase_package_helper.dart';
 import 'package:multivendor_store/features/store-profile/data/models/product_model.dart';
-import 'package:firebase_storage/firebase_storage.dart' as storage_helper;
-import 'package:multivendor_store/manager/get-all-products/get_all_products_bloc.dart';
 import 'package:multivendor_store/manager/register-store/register_store_bloc.dart';
 import 'package:uuid/uuid.dart';
 part 'store_product_event.dart';
@@ -36,7 +32,7 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
           // Storing data into firebase
           await firebaseFirestore
               .collection(collection)
-              .doc(firebaseUser!.uid)
+              .doc(firebaseUser!.toString())
               .collection(FirebaseCollection.storeProductCollection)
               .doc(fileName)
               .set(
@@ -92,7 +88,7 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
           // Storing data into firebase
           await firebaseFirestore
               .collection(collection)
-              .doc(firebaseUser!.uid)
+              .doc(firebaseUser!.toString())
               .collection(FirebaseCollection.storeProductCollection)
               .doc(event.productID)
               .update(
@@ -112,6 +108,7 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
                   tags: event.product.tags,
                   clothingSize: event.product.clothingSize,
                   shoeSize: event.product.shoeSize,
+                  productSubCategory: event.product.productSubCategory,
                 ).toJson(),
               )
               .whenComplete(() {
@@ -147,7 +144,7 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
           emit(StoreProductLoading());
           await firebaseFirestore
               .collection(FirebaseCollection.stores)
-              .doc(firebaseUser!.uid)
+              .doc(firebaseUser!.toString())
               .collection(FirebaseCollection.storeProductCollection)
               .doc(event.productID)
               .delete();

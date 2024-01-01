@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:multivendor_store/core/constants.dart';
 import 'package:multivendor_store/features/all-chats/presentation/views/all_chats_view.dart';
 import 'package:multivendor_store/features/home/presentation/views/home_view.dart';
 import 'package:multivendor_store/features/product_edit/presentation/views/add_edit_product.dart';

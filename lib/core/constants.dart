@@ -72,18 +72,128 @@ class AppAssets {
     'Wearable Technology': 'assets/categories/wearable_tech.svg',
   };
 
-  static Map<String, List<String>> categoriesWithSubcategories = {
-    'Men Wear': ['T-Shirts', 'Jeans', 'Jackets'],
-    'Women Wear': ['Dresses', 'Shoes', 'Handbags'],
-    'Kids Wear': ['Tops', 'Bottoms', 'Outerwear'],
-    'Bags and Luggage': ['Backpacks', 'Handbags', 'Travel Bags'],
-    'Footwear': ['Sneakers', 'Boots', 'Sandals'],
-    'Accessories': ['Hats', 'Sunglasses', 'Jewelry'],
-    'Electronics': ['Smartphones', 'Laptops', 'Headphones'],
-    'Gaming': ['Consoles', 'Games', 'Accessories'],
-    'Wearable Technology': ['Smartwatches', 'Fitness Trackers', 'Headsets'],
-    'Nutrition': ['Vitamins', 'Protein Powder', 'Healthy Snacks'],
-    'Supplement': ['Muscle Gain', 'Weight Loss', 'Energy Boost'],
+  static Map<String, List<String>> categories = {
+    'Men Wear': [
+      'Casual T-Shirts',
+      'Formal T-Shirts',
+      'Sports T-Shirts',
+      'Straight Jeans',
+      'Skinny Jeans',
+      'Relaxed Fit Jeans',
+      'Casual Jackets',
+      'Formal Jackets',
+      'Outdoor Jackets'
+    ],
+    'Women Wear': [
+      'Casual Dresses',
+      'Formal Dresses',
+      'Cocktail Dresses',
+      'Casual Shoes',
+      'Formal Shoes',
+      'Sports Shoes',
+      'Tote Handbags',
+      'Clutch Handbags',
+      'Shoulder Handbags'
+    ],
+    'Kids Wear': [
+      'T-Shirts',
+      'Shirts',
+      'Sweatshirts',
+      'Shorts',
+      'Pants',
+      'Skirts',
+      'Jackets',
+      'Coats',
+      'Raincoats'
+    ],
+    'Bags and Luggage': [
+      'Casual Backpacks',
+      'Professional Backpacks',
+      'Sports Backpacks',
+      'Daytime Handbags',
+      'Evening Handbags',
+      'Work Handbags',
+      'Suitcases',
+      'Duffels',
+      'Garment Bags'
+    ],
+    'Footwear': [
+      'Casual Sneakers',
+      'Athletic Sneakers',
+      'High-Top Sneakers',
+      'Casual Boots',
+      'Work Boots',
+      'Winter Boots',
+      'Flat Sandals',
+      'Heeled Sandals',
+      'Sports Sandals'
+    ],
+    'Accessories': [
+      'Casual Hats',
+      'Sports Hats',
+      'Formal Hats',
+      'Casual Sunglasses',
+      'Sports Sunglasses',
+      'Designer Sunglasses',
+      'Necklaces',
+      'Bracelets',
+      'Rings'
+    ],
+    'Electronics': [
+      'Android Smartphones',
+      'iOS Smartphones',
+      'Budget Smartphones',
+      'Notebook Laptops',
+      'Ultrabook Laptops',
+      'Gaming Laptops',
+      'Wired Headphones',
+      'Wireless Headphones',
+      'Noise-Cancelling Headphones'
+    ],
+    'Gaming': [
+      'Home Consoles',
+      'Portable Consoles',
+      'Hybrid Consoles',
+      'Adventure Games',
+      'Strategy Games',
+      'Simulation Games',
+      'Controllers',
+      'Audio Accessories',
+      'Storage Accessories'
+    ],
+    'Wearable Technology': [
+      'Fitness Smartwatches',
+      'Luxury Smartwatches',
+      'Everyday Smartwatches',
+      'Basic Fitness Trackers',
+      'Advanced Fitness Trackers',
+      'Specialty Fitness Trackers',
+      'Audio Headsets',
+      'VR Headsets',
+      'Communication Headsets'
+    ],
+    'Nutrition': [
+      'Daily Vitamins',
+      'Specialized Vitamins',
+      'Kids Vitamins',
+      'Whey Protein Powder',
+      'Plant-Based Protein Powder',
+      'Casein Protein Powder',
+      'Protein Bars',
+      'Nuts',
+      'Fruit-Based Snacks'
+    ],
+    'Supplement': [
+      'Protein Supplements',
+      'Creatine Supplements',
+      'Amino Acids',
+      'Thermogenic Supplements',
+      'Appetite Suppressants',
+      'Fat Blockers',
+      'Caffeine Supplements',
+      'Herbal Supplements',
+      'Pre-Workout Supplements'
+    ]
   };
 
   static Map<String, String> dashBoardOrderInfo = {
@@ -150,6 +260,4 @@ class AppAssets {
   // Shared Key
   static const String countryCode = 'country_code';
   static const String languageCode = 'language_code';
-
-  
 }

@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:multivendor_store/core/buttons/text_button_style.dart';
 import 'package:multivendor_store/core/utils/app_route.dart';
 import 'package:multivendor_store/features/store-profile/data/models/product_model.dart';

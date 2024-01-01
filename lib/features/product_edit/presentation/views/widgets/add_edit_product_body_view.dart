@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:multivendor_store/features/product_edit/presentation/views/widgets/add_edit_product_form_view.dart';
 
 class AddOrEditProductViewBody extends StatelessWidget {

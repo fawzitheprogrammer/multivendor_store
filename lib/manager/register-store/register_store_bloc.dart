@@ -41,9 +41,9 @@ class RegisterStoreBloc extends Bloc<RegisterStoreEvent, RegisterStoreState> {
           // Storing data into firebase
           await firebaseFirestore
               .collection(collection)
-              .doc(firebaseUser?.uid)
-              .set(StoreModel(
-                userId: firebaseUser?.uid,
+              .doc(firebaseUser.toString())
+              .update(StoreModel(
+                userId: firebaseUser.toString(),
                 fullNameOnId: store.fullNameOnId,
                 profilePicture: profilePic,
                 businessName: store.businessName,
@@ -55,6 +55,7 @@ class RegisterStoreBloc extends Bloc<RegisterStoreEvent, RegisterStoreState> {
                 businessLicenseId: businessLicense,
                 isApproved: false,
                 deviceToken: deviceToken,
+                isRegistered: true,
               ).toJson())
               .then((val) {
             sharedPreferences!.setString('route', AppRoute.kHome);

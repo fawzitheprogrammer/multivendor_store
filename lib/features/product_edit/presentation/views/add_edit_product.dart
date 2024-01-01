@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multivendor_store/core/appbar.dart';
 import 'package:multivendor_store/features/product_edit/presentation/views/widgets/add_edit_product_body_view.dart';
-import 'package:multivendor_store/features/store-profile/data/models/product_model.dart';
 
 class AddOrEditProductView extends StatelessWidget {
   const AddOrEditProductView({super.key});

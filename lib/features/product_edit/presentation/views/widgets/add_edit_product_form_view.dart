@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:multivendor_store/core/animated_image_sizer.dart';
 import 'package:multivendor_store/core/build_context_extension.dart';
 import 'package:multivendor_store/core/buttons/text_button_style.dart';
@@ -505,7 +503,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
             offerPrice: discount.text,
             rating: '0.0',
             brandName: '',
-            vendorName: firebaseUser!.uid,
+            vendorName: firebaseUser!.toString(),
             tags: [],
             clothingSize: getClothesSize(selectedClothingSize),
             shoeSize: selectedShoeSizes,
@@ -522,9 +520,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
           } else {
             BlocProvider.of<StoreProductBloc>(context).add(
               UpdateProduct(
-                productID: productState!
-                
-                .productId,
+                productID: productState!.productId,
                 product: product,
                 file: imagePath,
                 context: context,
