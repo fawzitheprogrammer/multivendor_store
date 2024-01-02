@@ -289,19 +289,20 @@ class _LoginViewFormState extends State<LoginViewForm> {
   void showFailureNotification() {
     notification(
       'Failure',
-      translate(key: 'Fill data', context: context),
+      translate(key: 'required fields', context: context),
       context,
     );
   }
 }
 
 class CustomPasswordField extends StatefulWidget {
-  const CustomPasswordField(
-      {super.key,
-      required this.passwordController,
-      required this.onTap,
-      required this.isObscure,
-      required this.label});
+  const CustomPasswordField({
+    super.key,
+    required this.passwordController,
+    required this.onTap,
+    required this.isObscure,
+    required this.label,
+  });
 
   final String label;
   final TextEditingController passwordController;

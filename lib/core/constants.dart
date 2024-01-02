@@ -72,7 +72,7 @@ class AppAssets {
     'Wearable Technology': 'assets/categories/wearable_tech.svg',
   };
 
-  static Map<String, List<String>> categories = {
+  static Map<String, List<String>> categoriesAndSubcategory = {
     'Men Wear': [
       'Casual T-Shirts',
       'Formal T-Shirts',
@@ -195,6 +195,50 @@ class AppAssets {
       'Pre-Workout Supplements'
     ]
   };
+
+  static List<String> allBrands = [
+    // Men's and Women's Wear
+    'Nike', 'Adidas', 'Under Armour', 'Levi\'s', 'Ralph Lauren',
+    'Tommy Hilfiger',
+    'Gucci', 'Chanel', 'Prada', 'Versace', 'Armani',
+    'Dolce & Gabbana', 'Burberry', 'Hermès', 'Calvin Klein', 'Valentino',
+
+    // Kids' Wear
+    'Carter\'s', 'OshKosh B\'gosh', 'Gap Kids', 'Janie and Jack', 'Gymboree',
+    'Mini Boden', 'Zara Kids', 'H&M Kids', 'Uniqlo Kids', 'Old Navy Kids',
+
+    // Bags and Luggage
+    'Samsonite', 'American Tourister', 'Tumi', 'Herschel', 'Victorinox',
+    'Travelpro', 'Briggs & Riley', 'Delsey', 'Eagle Creek', 'Osprey',
+
+    // Footwear
+    'Puma', 'Skechers', 'Clarks', 'Dr. Martens', 'New Balance',
+    'Vans', 'Converse', 'Timberland', 'Merrell', 'Brooks',
+
+    // Accessories
+    'Ray-Ban', 'Rolex', 'Casio', 'Seiko', 'Fossil',
+    'Omega', 'Tag Heuer', 'Swatch', 'Montblanc', 'Tissot',
+
+    // Electronics
+    'Apple', 'Samsung', 'Sony', 'Dell', 'Lenovo',
+    'HP', 'Asus', 'Acer', 'Panasonic', 'LG',
+
+    // Gaming
+    'Nintendo', 'Sony PlayStation', 'Microsoft Xbox', 'Razer', 'Logitech',
+    'Corsair', 'Alienware', 'Asus ROG', 'SteelSeries', 'HyperX',
+
+    // Wearable Technology
+    'Fitbit', 'Garmin', 'Huawei', 'Polar', 'Suunto',
+    'Samsung', 'Apple Watch', 'Xiaomi', 'Fossil', 'TicWatch',
+
+    // Nutrition and Supplements
+    'Optimum Nutrition', 'Garden of Life', 'Nature\'s Bounty', 'Centrum',
+    'MuscleTech',
+    'Cellucor', 'BSN', 'Nature Made', 'GNC', 'Vitamin Shoppe',
+    'MyProtein', 'Quest Nutrition', 'Universal Nutrition', 'NOW Foods',
+    'MusclePharm',
+    'Red Rex', 'Olimp' // Newly added
+  ];
 
   static Map<String, String> dashBoardOrderInfo = {
     'Completed Orders': 'assets/icons/completed_order.svg',

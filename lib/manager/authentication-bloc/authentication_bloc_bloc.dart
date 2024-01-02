@@ -36,8 +36,11 @@ class AuthenticationBlocBloc
             if (value == true) {
               sharedPreferences!.setString('firebaseUser', event.username);
               if (userSnapshot.get('isRegistered') == true) {
+                sharedPreferences!.setString('route', AppRoute.kHome);
                 GoRouter.of(event.context).push(AppRoute.kHome);
               } else {
+                sharedPreferences!
+                    .setString('route', AppRoute.kRegistrationView);
                 GoRouter.of(event.context).push(AppRoute.kRegistrationView);
               }
             }

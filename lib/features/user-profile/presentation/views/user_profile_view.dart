@@ -1,7 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multivendor_store/core/buttons/rounded_button_style.dart';
+import 'package:multivendor_store/core/check_if_user_is_connected.dart';
 import 'package:multivendor_store/core/exports/exports.dart';
 import 'package:multivendor_store/core/loading_widget.dart';
+import 'package:multivendor_store/core/notification.dart';
+import 'package:multivendor_store/core/utils/app_route.dart';
 import 'package:multivendor_store/localization/app_localization.dart';
 import 'package:multivendor_store/manager/authentication-bloc/authentication_bloc_bloc.dart';
 import 'package:multivendor_store/manager/theme-bloc/theme_state.dart';
@@ -167,11 +170,21 @@ class _UserProfileViewBodyState extends State<UserProfileViewBody> {
                   icon: AppAssets.logOut,
                   label: 'Log out',
                   onTap: () {
-                    if (mounted) {
-                      BlocProvider.of<AuthenticationBlocBloc>(context).add(
-                        SignOut(context: context),
-                      );
-                    }
+                    checkInternetAccess().then((value) {
+                      if (value) {
+                        sharedPreferences!
+                            .setString('route', AppRoute.kLoginView);
+                        BlocProvider.of<AuthenticationBlocBloc>(context).add(
+                          SignOut(context: context),
+                        );
+                      } else {
+                        notification(
+                          'Failure',
+                          translate(key: 'No internet', context: context),
+                          context,
+                        );
+                      }
+                    });
                   },
                 )
               ],

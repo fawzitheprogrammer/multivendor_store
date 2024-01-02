@@ -52,6 +52,7 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
                   tags: event.product.tags,
                   clothingSize: event.product.clothingSize,
                   shoeSize: event.product.shoeSize,
+                  productSubCategory: event.product.productSubCategory,
                 ).toJson(),
               )
               .whenComplete(() {

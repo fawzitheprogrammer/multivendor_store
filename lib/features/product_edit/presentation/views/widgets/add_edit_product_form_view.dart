@@ -46,7 +46,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
   TextEditingController discount = TextEditingController();
   TextEditingController brandName = TextEditingController();
   TextEditingController tags = TextEditingController();
-  String? selectedOption;
+  String? selectedCategory, selectedSubcategory, brand;
   List<File> imagePath = [];
   bool isCreateProduct = true;
 
@@ -81,6 +81,15 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
 
   // Regular Expression to accept only numbrers
   RegExp regExp = RegExp(r'^\d+$');
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    selectedCategory = AppAssets.categoriesAndSubcategory.keys.first;
+    selectedSubcategory =
+        AppAssets.categoriesAndSubcategory[selectedCategory]!.first;
+  }
 
   @override
   void dispose() {
@@ -210,13 +219,20 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                                   child: DropdownButton(
                                     underline: Container(),
                                     isExpanded: true,
-                                    hint: Text(translate(
-                                        key: 'Category', context: context)),
-                                    value: selectedOption,
+                                    hint: Text(
+                                      translate(
+                                        key: 'Category',
+                                        context: context,
+                                      ),
+                                    ),
+                                    value: selectedCategory,
                                     onChanged: (newValue) {
                                       if (mounted) {
                                         setState(() {
-                                          selectedOption = newValue!;
+                                          selectedCategory = newValue!;
+                                          selectedSubcategory = AppAssets
+                                                  .categoriesAndSubcategory[
+                                              selectedCategory]![0];
                                         });
                                       } else {
                                         return;
@@ -243,13 +259,60 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                             ),
                           ),
                           SizedBox(
+                            height: PaddingOrFont.size24.spMin,
+                          ),
+                          Container(
+                            constraints: BoxConstraints(maxHeight: 50.h),
+                            decoration: BoxDecoration(
+                              color: context.colorScheme!.onPrimary,
+                              border: Border.all(
+                                width: 1.5.w,
+                                color:
+                                    context.colorScheme!.primary.withAlpha(30),
+                              ),
+                              borderRadius: BorderRadius.circular(4.r),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: PaddingOrFont.size24.w),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: DropdownButton(
+                                    underline: Container(),
+                                    isExpanded: true,
+                                    hint: const Text('Sub Category'),
+                                    value: selectedSubcategory,
+                                    onChanged: (newValue) {
+                                      if (mounted) {
+                                        setState(() {
+                                          selectedSubcategory = newValue!;
+                                        });
+                                      } else {
+                                        return;
+                                      }
+                                    },
+                                    items: AppAssets.categoriesAndSubcategory[
+                                            selectedCategory]!
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
                             height: PaddingOrFont.size24.h,
                           ),
-                          if (selectedOption ==
+                          if (selectedCategory ==
                                   AppAssets.categoriesMap.keys.elementAt(0) ||
-                              selectedOption ==
+                              selectedCategory ==
                                   AppAssets.categoriesMap.keys.elementAt(1) ||
-                              selectedOption ==
+                              selectedCategory ==
                                   AppAssets.categoriesMap.keys.elementAt(2))
                             Row(
                               children:
@@ -282,7 +345,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                           // SizedBox(
                           //   height: PaddingOrFont.size18.spMin,
                           // ),
-                          if (selectedOption ==
+                          if (selectedCategory ==
                               AppAssets.categoriesMap.keys.elementAt(4))
                             SizedBox(
                               height: 60.spMin,
@@ -319,21 +382,80 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                             )
                           else
                             const SizedBox(),
-                          selectedOption ==
+                          selectedCategory ==
                                       AppAssets.categoriesMap.keys
                                           .elementAt(4) ||
-                                  selectedOption ==
+                                  selectedCategory ==
                                       AppAssets.categoriesMap.keys
                                           .elementAt(0) ||
-                                  selectedOption ==
+                                  selectedCategory ==
                                       AppAssets.categoriesMap.keys
                                           .elementAt(1) ||
-                                  selectedOption ==
+                                  selectedCategory ==
                                       AppAssets.categoriesMap.keys.elementAt(2)
                               ? SizedBox(
                                   height: PaddingOrFont.size18.spMin,
                                 )
                               : const SizedBox(),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: context.colorScheme!.onPrimary,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: Autocomplete<String>(
+                                optionsBuilder:
+                                    (TextEditingValue textEditingValue) {
+                                  if (textEditingValue.text.isEmpty) {
+                                    return const Iterable<String>.empty();
+                                  } else {
+                                    return AppAssets.allBrands
+                                        .where((String option) {
+                                      return option.toLowerCase().contains(
+                                          textEditingValue.text.toLowerCase());
+                                    });
+                                  }
+                                },
+                                optionsViewBuilder:
+                                    (context, onSelected, options) {
+                                  return Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Material(
+                                      elevation: 4.0,
+                                      child: SizedBox(
+                                        width: 300,
+                                        child: ListView.builder(
+                                          padding: const EdgeInsets.all(10.0),
+                                          itemCount: options.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            final String option =
+                                                options.elementAt(index);
+
+                                            return GestureDetector(
+                                              onTap: () {
+                                                if (mounted) {
+                                                  onSelected(option);
+                                                  brand = option;
+                                                  setState(() {});
+                                                }
+                                              },
+                                              child: ListTile(
+                                                title: Text(option),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: PaddingOrFont.size18.spMin,
+                          ),
                           Row(
                             children: [
                               Expanded(
@@ -429,7 +551,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                             label: 'Offer Price',
                             validator: (val) {
                               return checkFiledsWithDigitType(
-                                  controller: price, val: val!);
+                                  controller: discount, val: val!);
                             },
                             textInputType: TextInputType.number,
                           ),
@@ -443,6 +565,12 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                               ),
                             ),
                             onPressed: () {
+                              // print(selectedSubcategory);
+                              // print(selectedSubcategory);
+                              // print(selectedSubcategory);
+                              // print(selectedSubcategory);
+                              // print(selectedSubcategory);
+                              // print(selectedSubcategory);
                               if (state.product != null) {
                                 storeData(productState: state.product);
                               } else {
@@ -483,7 +611,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
   void storeData({Product? productState}) {
     checkInternetAccess().then((value) {
       if (value) {
-        if (_formKey.currentState!.validate()) {
+        if (_formKey.currentState!.validate() && imagePath.isNotEmpty) {
           Product product = Product(
             productId: '',
             productName: {
@@ -491,7 +619,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
               "en": productNameEnglish.text,
               "ar": productNameArabic.text,
             },
-            productCategory: selectedOption ?? 'Uncategorized',
+            productCategory: selectedCategory ?? 'Uncategorized',
             productImages: [],
             productPrice: price.text,
             productQuantity: qty.text,
@@ -502,11 +630,12 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
             },
             offerPrice: discount.text,
             rating: '0.0',
-            brandName: '',
+            brandName: brand ?? 'None',
             vendorName: firebaseUser!.toString(),
             tags: [],
             clothingSize: getClothesSize(selectedClothingSize),
             shoeSize: selectedShoeSizes,
+            productSubCategory: selectedSubcategory,
           );
 
           if (isCreateProduct == true) {
@@ -527,6 +656,9 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
               ),
             );
           }
+        } else {
+          notification('Failure',
+              translate(key: 'required fields', context: context), context);
         }
       } else {
         notification('Failure', translate(key: 'No internet', context: context),
@@ -572,7 +704,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
     translateValue(productNameKurdish, 'ku', product);
     translateValue(productNameArabic, 'ar', product);
     translateValue(productNameEnglish, 'en', product);
-    selectedOption = product.productCategory;
+    selectedCategory = product.productCategory;
     selectedShoeSizes = product.shoeSize!;
     for (int i = 0; i < product.clothingSize!.length; i++) {
       selectedClothingSize
