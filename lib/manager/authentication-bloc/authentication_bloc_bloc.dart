@@ -68,8 +68,13 @@ class AuthenticationBlocBloc
               await firebaseFirestore
                   .collection(FirebaseCollection.stores)
                   .doc(event.username)
-                  .set(
-                      {'username': event.username, 'password': event.password});
+                  .set({
+                'username': event.username,
+                'password': event.password,
+                'isRegistered': false
+              }).whenComplete(() {
+                GoRouter.of(event.context).pushReplacement(AppRoute.kLoginView);
+              });
             }
           });
 

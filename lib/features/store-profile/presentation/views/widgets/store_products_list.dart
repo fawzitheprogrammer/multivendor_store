@@ -89,23 +89,23 @@ class StoreProductsList extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          ActionButton(
-                            onPressed: () {
-                              //
-                              BlocProvider.of<StoreProductBloc>(context).add(
-                                GetSingleProduct(product: product[index]),
-                              );
-                              GoRouter.of(context).push(
-                                  AppRoute.kAddOrEditProduct,
-                                  extra: product[index]);
-                            },
-                            label: 'Edit',
-                            color: context.colorScheme!.inversePrimary
-                                .withAlpha(30),
-                          ),
-                          SizedBox(
-                            width: PaddingOrFont.size10.w - 6,
-                          ),
+                          // ActionButton(
+                          //   onPressed: () {
+                          //     //
+                          //     BlocProvider.of<StoreProductBloc>(context).add(
+                          //       GetSingleProduct(product: product[index]),
+                          //     );
+                          //     GoRouter.of(context).push(
+                          //         AppRoute.kAddOrEditProduct,
+                          //         extra: product[index]);
+                          //   },
+                          //   label: 'Edit',
+                          //   color: context.colorScheme!.inversePrimary
+                          //       .withAlpha(30),
+                          // ),
+                          // SizedBox(
+                          //   width: PaddingOrFont.size10.w - 6,
+                          // ),
                           ActionButton(
                             onPressed: () {
                               BlocProvider.of<StoreProductBloc>(context).add(

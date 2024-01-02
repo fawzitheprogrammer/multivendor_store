@@ -186,7 +186,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           if (val!.isEmpty) {
                             return 'This field is required';
                           } else {
-                            lastName.text = val;
+                            phoneNumber.text = val;
                           }
                           return null;
                         },

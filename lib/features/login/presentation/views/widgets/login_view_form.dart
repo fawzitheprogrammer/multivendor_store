@@ -217,9 +217,7 @@ class _LoginViewFormState extends State<LoginViewForm> {
           if (state.userIsTaken) {
             notification('Failure', 'Username is taken', context);
           }
-          {
-            GoRouter.of(context).push(AppRoute.kRegistrationView);
-          }
+          
         } else if (state is AuthenticationBlocFailure) {
           notification(
             'Failure',
@@ -263,6 +261,7 @@ class _LoginViewFormState extends State<LoginViewForm> {
         SignUpUser(
           username: emailController.text.trim(),
           password: passwordController.text.trim(),
+          context: context,
         ),
       );
     } else {

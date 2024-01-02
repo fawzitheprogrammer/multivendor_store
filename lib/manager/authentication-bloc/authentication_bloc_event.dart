@@ -24,11 +24,10 @@ class SignInUser extends AuthenticationBlocEvent {
 class SignUpUser extends AuthenticationBlocEvent {
   final String username;
   final String password;
+  final BuildContext context;
 
-  SignUpUser({required this.username, required this.password}) {
-    print(' Password : $password , Email : $username');
-  }
-
+  const SignUpUser(
+      {required this.username, required this.password, required this.context});
   @override
   List<Object> get props => [username, password];
 }
