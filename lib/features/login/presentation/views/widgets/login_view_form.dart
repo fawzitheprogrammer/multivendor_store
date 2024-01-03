@@ -1,9 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:multivendor_store/core/buttons/text_button_style.dart';
 import 'package:multivendor_store/core/exports/exports.dart';
 import 'package:multivendor_store/core/notification.dart';
-import 'package:multivendor_store/core/utils/app_route.dart';
 import 'package:multivendor_store/localization/app_localization.dart';
 import 'package:multivendor_store/manager/authentication-bloc/authentication_bloc_bloc.dart';
 
