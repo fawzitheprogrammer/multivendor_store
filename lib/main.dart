@@ -9,6 +9,7 @@ import 'package:multivendor_store/core/firebase/get_device_token.dart';
 import 'package:multivendor_store/firebase_options.dart';
 import 'package:multivendor_store/manager/authentication-bloc/authentication_bloc_bloc.dart';
 import 'package:multivendor_store/manager/connection-bloc/connection_bloc.dart';
+import 'package:multivendor_store/manager/cubit/category_drop_down_cubit.dart';
 import 'package:multivendor_store/manager/get-all-products/get_all_products_bloc.dart';
 import 'package:multivendor_store/manager/register-store/register_store_bloc.dart';
 import 'package:multivendor_store/manager/route-cubit/route_cubit.dart';
@@ -86,6 +87,9 @@ class AppRoot extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => GetAllProductsBloc(),
+          ),
+          BlocProvider(
+            create: (context) => CategoryDropDownCubit(),
           ),
         ],
         child: BlocBuilder<ThemeModeCubit, bool>(
