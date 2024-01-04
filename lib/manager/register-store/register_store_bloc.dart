@@ -58,6 +58,7 @@ class RegisterStoreBloc extends Bloc<RegisterStoreEvent, RegisterStoreState> {
                 isRegistered: true,
               ).toJson())
               .then((val) {
+            
             sharedPreferences!.setString('route', AppRoute.kHome);
             GoRouter.of(event.context).pushReplacement(AppRoute.kHome);
             emit(

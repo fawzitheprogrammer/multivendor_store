@@ -117,7 +117,15 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
               if (state is SingleProductState) {
                 if (state.product != null) {
                   isCreateProduct = false;
-                  // getProductData(state.product!);
+
+                  getImages(state.product!.productImages!).whenComplete(() {
+                    if (mounted) {
+                      setState(() {});
+                    }
+                  });
+
+                  productNameEnglish.value =
+                      TextEditingValue(text: state.product!.productName!['en']);
                 }
 
                 return Padding(
@@ -701,9 +709,9 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
   }
 
   void getProductData(Product product) {
-    translateValue(productNameKurdish, 'ku', product);
-    translateValue(productNameArabic, 'ar', product);
-    translateValue(productNameEnglish, 'en', product);
+    // translateValue(productNameKurdish, 'ku', product);
+    // translateValue(productNameArabic, 'ar', product);
+    // translateValue(productNameEnglish, 'en', product);
     selectedCategory = product.productCategory;
     selectedShoeSizes = product.shoeSize!;
     for (int i = 0; i < product.clothingSize!.length; i++) {

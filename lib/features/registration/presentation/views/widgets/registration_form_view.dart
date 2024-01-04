@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:multivendor_store/core/animated_image_sizer.dart';
 import 'package:multivendor_store/core/buttons/text_button_style.dart';
+import 'package:multivendor_store/core/check_if_user_is_connected.dart';
 import 'package:multivendor_store/core/exports/exports.dart';
 import 'package:multivendor_store/core/loading_widget.dart';
 import 'package:multivendor_store/core/notification.dart';
@@ -31,9 +32,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
   TextEditingController phoneNumber = TextEditingController();
   XFile? businessLicense, idFrontSide, idBackSide, profilePic;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   String? requiredFields;
-
   String? location;
   String? shopType;
 
@@ -45,6 +44,12 @@ class _RegistrationFormState extends State<RegistrationForm> {
       isBackIdSelected = false,
       isProfilePic = false,
       isBusinessIdSelected = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   void dispose() {

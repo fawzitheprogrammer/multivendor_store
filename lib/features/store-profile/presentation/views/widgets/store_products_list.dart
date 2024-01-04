@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:multivendor_store/core/buttons/text_button_style.dart';
+import 'package:multivendor_store/core/utils/app_route.dart';
 import 'package:multivendor_store/features/store-profile/data/models/product_model.dart';
 import 'package:multivendor_store/localization/app_localization.dart';
 import 'package:multivendor_store/manager/store-product/store_product_bloc.dart';
@@ -87,23 +89,23 @@ class StoreProductsList extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          // ActionButton(
-                          //   onPressed: () {
-                          //     //
-                          //     BlocProvider.of<StoreProductBloc>(context).add(
-                          //       GetSingleProduct(product: product[index]),
-                          //     );
-                          //     GoRouter.of(context).push(
-                          //         AppRoute.kAddOrEditProduct,
-                          //         extra: product[index]);
-                          //   },
-                          //   label: 'Edit',
-                          //   color: context.colorScheme!.inversePrimary
-                          //       .withAlpha(30),
-                          // ),
-                          // SizedBox(
-                          //   width: PaddingOrFont.size10.w - 6,
-                          // ),
+                          ActionButton(
+                            onPressed: () {
+                              //
+                              BlocProvider.of<StoreProductBloc>(context).add(
+                                GetSingleProduct(product: product[index]),
+                              );
+                              GoRouter.of(context).push(
+                                AppRoute.kAddOrEditProduct,
+                              );
+                            },
+                            label: 'Edit',
+                            color: context.colorScheme!.inversePrimary
+                                .withAlpha(30),
+                          ),
+                          SizedBox(
+                            width: PaddingOrFont.size10.w - 6,
+                          ),
                           ActionButton(
                             onPressed: () {
                               BlocProvider.of<StoreProductBloc>(context).add(
@@ -136,12 +138,15 @@ class StoreProductsList extends StatelessWidget {
             ),
             Text(
               translate(key: 'You have no items yet', context: context),
-              style: context.bold,
+              style:
+                  context.bold!.copyWith(fontSize: PaddingOrFont.size22.spMin),
             ),
             Text(
               translate(
                   key: 'Tap + button to start adding item.', context: context),
-              style: context.medium,
+              style: context.medium!.copyWith(
+                fontSize: PaddingOrFont.size14.spMin,
+              ),
             ),
           ],
         ),

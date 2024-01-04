@@ -63,7 +63,7 @@ class StoreProfileViewBody extends StatelessWidget {
           return CustomScrollView(
             slivers: [
               //StoreProfileInformation(),
-              const StoreCategories(),
+              //const StoreCategories(),
               StoreProductsList(
                 product: state.products,
               ),
