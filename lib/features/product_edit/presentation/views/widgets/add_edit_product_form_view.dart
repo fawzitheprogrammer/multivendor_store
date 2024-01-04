@@ -207,6 +207,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                           height: PaddingOrFont.size24.spMin,
                         ),
                         CategoryDropDown(selectedCategory: selectedCategory),
+                        CategoryDropDown(selectedCategory: selectedCategory),
                         // SizedBox(
                         //   height: PaddingOrFont.size24.spMin,
                         // ),
