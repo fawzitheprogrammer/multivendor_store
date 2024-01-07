@@ -2,16 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:multivendor_store/core/animated_image_sizer.dart';
 import 'package:multivendor_store/core/build_context_extension.dart';
 import 'package:multivendor_store/core/buttons/text_button_style.dart';
 import 'package:multivendor_store/core/check_if_user_is_connected.dart';
 import 'package:multivendor_store/core/constants.dart';
-import 'package:multivendor_store/core/firebase/download_file.dart';
 import 'package:multivendor_store/core/firebase/logged_user.dart';
-import 'package:multivendor_store/core/firebase/translate_incoming_data.dart';
 import 'package:multivendor_store/core/loading_widget.dart';
 import 'package:multivendor_store/core/notification.dart';
 import 'package:multivendor_store/core/pick_image.dart';
@@ -22,8 +18,9 @@ import 'package:multivendor_store/features/product_edit/presentation/views/widge
 import 'package:multivendor_store/features/product_edit/presentation/views/widgets/product_image.dart';
 import 'package:multivendor_store/features/store-profile/data/models/product_model.dart';
 import 'package:multivendor_store/localization/app_localization.dart';
-import 'package:multivendor_store/manager/cubit/category_drop_down_cubit.dart';
+import 'package:multivendor_store/manager/category-dropdown-bloc/category_drop_down_cubit.dart';
 import 'package:multivendor_store/manager/store-product/store_product_bloc.dart';
+import 'package:multivendor_store/manager/sub-cateogory-dropdown-bloc/sub_category_drop_down_cubit.dart';
 
 import '../../../../../core/padding_and_margin.dart';
 
@@ -51,6 +48,9 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
   String? selectedCategory, selectedSubcategory, brand;
   List<File> imagePath = [];
   bool isCreateProduct = true;
+  bool hasSize = false;
+  bool isClothes = false;
+  bool isShoe = false;
 
   // Clothing size
   List<ClothingSize> selectedClothingSize = [];
@@ -59,14 +59,6 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
     (index) =>
         ClothingSize(title: AppAssets.clothingSizes[index], isActive: false),
   );
-
-  Future<List<File>> getImages(List<String> urls) async {
-    if (imagePath.isEmpty) {
-      imagePath = await downloadFiles(urls);
-    }
-
-    return imagePath;
-  }
 
   // Shoe size
   List<String> selectedShoeSizes = [];
@@ -91,6 +83,28 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
     selectedCategory = AppAssets.categoriesAndSubcategory.keys.first;
     selectedSubcategory =
         AppAssets.categoriesAndSubcategory[selectedCategory]!.first;
+  }
+
+  void hasSizeEvent() {
+    setState(() {
+      if (BlocProvider.of<CategoryDropDownCubit>(context).state == 'Men Wear' ||
+          BlocProvider.of<CategoryDropDownCubit>(context).state ==
+              'Women Wear' ||
+          BlocProvider.of<CategoryDropDownCubit>(context).state ==
+              'Kids Wear') {
+        isShoe = false;
+        isClothes = true;
+      } else if (BlocProvider.of<CategoryDropDownCubit>(context).state ==
+          'Footwear') {
+        isClothes = false;
+        isShoe = true;
+      } else {
+        isClothes = false;
+        isShoe = false;
+        notification(
+            'Failure', 'Size cannot be set for this category', context);
+      }
+    });
   }
 
   @override
@@ -118,13 +132,6 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
             if (state is SingleProductState) {
               if (state.product != null) {
                 isCreateProduct = false;
-
-                // getImages(state.product!.productImages!).whenComplete(() {
-                //   if (mounted) {
-                //     setState(() {});
-                //   }
-                // });
-
                 productNameEnglish.text = state.product!.productName!['en'];
               }
 
@@ -206,206 +213,161 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                         SizedBox(
                           height: PaddingOrFont.size24.spMin,
                         ),
-                        CategoryDropDown(selectedCategory: selectedCategory),
-                        CategoryDropDown(selectedCategory: selectedCategory),
-                        // SizedBox(
-                        //   height: PaddingOrFont.size24.spMin,
-                        // ),
-                        // Container(
-                        //   constraints: BoxConstraints(maxHeight: 50.h),
-                        //   decoration: BoxDecoration(
-                        //     color: context.colorScheme!.onPrimary,
-                        //     border: Border.all(
-                        //       width: 1.5.w,
-                        //       color:
-                        //           context.colorScheme!.primary.withAlpha(30),
-                        //     ),
-                        //     borderRadius: BorderRadius.circular(4.r),
-                        //   ),
-                        //   padding: EdgeInsets.symmetric(
-                        //       horizontal: PaddingOrFont.size24.w),
-                        //   child: Row(
-                        //     children: [
-                        //       Expanded(
-                        //         child: DropdownButton(
-                        //           underline: Container(),
-                        //           isExpanded: true,
-                        //           hint: const Text('Sub Category'),
-                        //           value: selectedSubcategory,
-                        //           onChanged: (newValue) {
-                        //             if (mounted) {
-                        //               setState(() {
-                        //                 selectedSubcategory = newValue!;
-                        //               });
-                        //             } else {
-                        //               return;
-                        //             }
-                        //           },
-                        //           items: AppAssets.categoriesAndSubcategory[
-                        //                   selectedCategory]!
-                        //               .map<DropdownMenuItem<String>>(
-                        //                   (String value) {
-                        //             return DropdownMenuItem<String>(
-                        //               value: value,
-                        //               child: Text(value),
-                        //             );
-                        //           }).toList(),
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                        // SizedBox(
-                        //   height: PaddingOrFont.size24.h,
-                        // ),
-                        // if (selectedCategory ==
-                        //         AppAssets.categoriesMap.keys.elementAt(0) ||
-                        //     selectedCategory ==
-                        //         AppAssets.categoriesMap.keys.elementAt(1) ||
-                        //     selectedCategory ==
-                        //         AppAssets.categoriesMap.keys.elementAt(2))
-                        //   Row(
-                        //     children:
-                        //         List.generate(clothingSize.length, (index) {
-                        //       return GestureDetector(
-                        //         onTap: () {
-                        //           if (mounted) {
-                        //             setState(() {
-                        //               if (selectedClothingSize
-                        //                   .contains(clothingSize[index])) {
-                        //                 selectedClothingSize
-                        //                     .remove(clothingSize[index]);
-                        //               } else {
-                        //                 selectedClothingSize
-                        //                     .add(clothingSize[index]);
-                        //               }
-                        //             });
-                        //           }
-                        //         },
-                        //         child: WordBasedWidthContainer(
-                        //           text: clothingSize[index].title,
-                        //           isActive: selectedClothingSize
-                        //               .contains(clothingSize[index]),
-                        //         ),
-                        //       );
-                        //     }),
-                        //   )
-                        // else
-                        //   const SizedBox(),
-                        // // SizedBox(
-                        // //   height: PaddingOrFont.size18.spMin,
-                        // // ),
-                        // if (selectedCategory ==
-                        //     AppAssets.categoriesMap.keys.elementAt(4))
-                        //   SizedBox(
-                        //     height: 60.spMin,
-                        //     width: double.infinity,
-                        //     child: ListView(
-                        //       scrollDirection: Axis.horizontal,
-                        //       children:
-                        //           List.generate(shoeSizes().length, (index) {
-                        //         return GestureDetector(
-                        //           onTap: () {
-                        //             if (mounted) {
-                        //               setState(() {
-                        //                 if (selectedShoeSizes.contains(
-                        //                     shoeSizes()[index].toString())) {
-                        //                   selectedShoeSizes.remove(
-                        //                       shoeSizes()[index].toString());
-                        //                 } else {
-                        //                   selectedShoeSizes.add(
-                        //                       shoeSizes()[index].toString());
-                        //                 }
-                        //               });
-                        //             }
-                        //           },
-                        //           child: WordBasedWidthContainer(
-                        //             text: shoeSizes()
-                        //                 .elementAt(index)
-                        //                 .toString(),
-                        //             isActive: selectedShoeSizes
-                        //                 .contains(shoeSizes()[index]),
-                        //           ),
-                        //         );
-                        //       }),
-                        //     ),
-                        //   )
-                        // else
-                        //   const SizedBox(),
-                        // selectedCategory ==
-                        //             AppAssets.categoriesMap.keys
-                        //                 .elementAt(4) ||
-                        //         selectedCategory ==
-                        //             AppAssets.categoriesMap.keys
-                        //                 .elementAt(0) ||
-                        //         selectedCategory ==
-                        //             AppAssets.categoriesMap.keys
-                        //                 .elementAt(1) ||
-                        //         selectedCategory ==
-                        //             AppAssets.categoriesMap.keys.elementAt(2)
-                        //     ? SizedBox(
-                        //         height: PaddingOrFont.size18.spMin,
-                        //       )
-                        //     : const SizedBox(),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     color: context.colorScheme!.onPrimary,
-                        //   ),
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.all(6.0),
-                        //     child: Autocomplete<String>(
-                        //       optionsBuilder:
-                        //           (TextEditingValue textEditingValue) {
-                        //         if (textEditingValue.text.isEmpty) {
-                        //           return const Iterable<String>.empty();
-                        //         } else {
-                        //           return AppAssets.allBrands
-                        //               .where((String option) {
-                        //             return option.toLowerCase().contains(
-                        //                 textEditingValue.text.toLowerCase());
-                        //           });
-                        //         }
-                        //       },
-                        //       optionsViewBuilder:
-                        //           (context, onSelected, options) {
-                        //         return Align(
-                        //           alignment: Alignment.topLeft,
-                        //           child: Material(
-                        //             elevation: 4.0,
-                        //             child: SizedBox(
-                        //               width: 300,
-                        //               child: ListView.builder(
-                        //                 padding: const EdgeInsets.all(10.0),
-                        //                 itemCount: options.length,
-                        //                 itemBuilder: (BuildContext context,
-                        //                     int index) {
-                        //                   final String option =
-                        //                       options.elementAt(index);
+                        const CategoryDropDown(),
 
-                        //                   return GestureDetector(
-                        //                     onTap: () {
-                        //                       if (mounted) {
-                        //                         onSelected(option);
-                        //                         brand = option;
-                        //                         setState(() {});
-                        //                       }
-                        //                     },
-                        //                     child: ListTile(
-                        //                       title: Text(option),
-                        //                     ),
-                        //                   );
-                        //                 },
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         );
-                        //       },
-                        //     ),
-                        //   ),
-                        // ),
-                        // SizedBox(
-                        //   height: PaddingOrFont.size18.spMin,
-                        // ),
+                        SizedBox(
+                          height: PaddingOrFont.size24.h,
+                        ),
+                        CheckboxListTile(
+                          title: Text(
+                            translate(key: 'Has Size', context: context),
+                            style: context.medium,
+                          ),
+                          subtitle: Text(
+                            translate(
+                                key: 'Size Instruction', context: context),
+                            style: context.regular!
+                                .copyWith(fontSize: PaddingOrFont.size12.spMin),
+                          ),
+                          value: hasSize,
+                          onChanged: (val) {
+                            if (mounted) {
+                              setState(() {
+                                hasSizeEvent();
+                                hasSize = val!;
+                              });
+                            }
+                          },
+                        ),
+
+                        if (hasSize && isClothes)
+                          Row(
+                            children:
+                                List.generate(clothingSize.length, (index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  if (mounted) {
+                                    setState(() {
+                                      if (selectedClothingSize
+                                          .contains(clothingSize[index])) {
+                                        selectedClothingSize
+                                            .remove(clothingSize[index]);
+                                      } else {
+                                        selectedClothingSize
+                                            .add(clothingSize[index]);
+                                      }
+                                    });
+                                  }
+                                },
+                                child: WordBasedWidthContainer(
+                                  text: clothingSize[index].title,
+                                  isActive: selectedClothingSize
+                                      .contains(clothingSize[index]),
+                                ),
+                              );
+                            }),
+                          ),
+
+                        if (hasSize && isShoe)
+                          SizedBox(
+                            height: 60.spMin,
+                            width: double.infinity,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children:
+                                  List.generate(shoeSizes().length, (index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    if (mounted) {
+                                      setState(() {
+                                        if (selectedShoeSizes.contains(
+                                            shoeSizes()[index].toString())) {
+                                          selectedShoeSizes.remove(
+                                              shoeSizes()[index].toString());
+                                        } else {
+                                          selectedShoeSizes.add(
+                                              shoeSizes()[index].toString());
+                                        }
+                                      });
+                                    }
+                                  },
+                                  child: WordBasedWidthContainer(
+                                    text:
+                                        shoeSizes().elementAt(index).toString(),
+                                    isActive: selectedShoeSizes
+                                        .contains(shoeSizes()[index]),
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                        SizedBox(
+                          height: PaddingOrFont.size18.spMin,
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Autocomplete<String>(
+                            initialValue: const TextEditingValue(text: 'Brand'),
+                            optionsBuilder:
+                                (TextEditingValue textEditingValue) {
+                              if (textEditingValue.text.isEmpty) {
+                                return const Iterable<String>.empty();
+                              } else {
+                                return AppAssets.allBrands
+                                    .where((String option) {
+                                  return option.toLowerCase().contains(
+                                      textEditingValue.text.toLowerCase());
+                                });
+                              }
+                            },
+                            fieldViewBuilder: (context, textEditingController,
+                                focusNode, onFieldSubmitted) {
+                              return CustomTextFieldWidget(
+                                controller: textEditingController,
+                                label: 'Brands',
+                                onFieldSubmitted: onFieldSubmitted,
+                                focusNode: focusNode,
+                              );
+                            },
+                            optionsViewBuilder: (context, onSelected, options) {
+                              return Align(
+                                alignment: Alignment.topLeft,
+                                child: Material(
+                                  elevation: 4.0,
+                                  child: SizedBox(
+                                    width: 300,
+                                    child: ListView.builder(
+                                      padding: const EdgeInsets.all(10.0),
+                                      itemCount: options.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        final String option =
+                                            options.elementAt(index);
+
+                                        return GestureDetector(
+                                          onTap: () {
+                                            if (mounted) {
+                                              onSelected(option);
+                                              brand = option;
+                                              setState(() {});
+                                            }
+                                          },
+                                          child: ListTile(
+                                            title: Text(option),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: PaddingOrFont.size18.spMin,
+                        ),
                         // Row(
                         //   children: [
                         //     Expanded(
@@ -515,7 +477,12 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                             ),
                           ),
                           onPressed: () {
-                            print(productNameEnglish.text);
+                            print(
+                                BlocProvider.of<CategoryDropDownCubit>(context)
+                                    .state);
+                            print(BlocProvider.of<SubCategoryDropDownCubit>(
+                                    context)
+                                .state);
                             // print(selectedSubcategory);
                             // print(selectedSubcategory);
                             // print(selectedSubcategory);

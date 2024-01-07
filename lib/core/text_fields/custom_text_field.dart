@@ -3,7 +3,7 @@ import 'package:multivendor_store/localization/app_localization.dart';
 import '../exports/exports.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
-  const CustomTextFieldWidget({
+  CustomTextFieldWidget({
     super.key,
     required this.label,
     this.onChanged,
@@ -13,6 +13,8 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.errorMessage,
     this.textInputType,
     this.onSubmitted,
+    this.onFieldSubmitted,
+    this.focusNode,
   });
 
   final TextEditingController? controller;
@@ -23,6 +25,8 @@ class CustomTextFieldWidget extends StatelessWidget {
   final String? errorMessage;
   final TextInputType? textInputType;
   final void Function(String)? onSubmitted;
+  void Function()? onFieldSubmitted;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +35,8 @@ class CustomTextFieldWidget extends StatelessWidget {
       controller: controller,
       maxLines: isMultiLine ? 5 : 1,
       decoration: InputDecoration(
+        hintText:
+            label == 'Brands' ? translate(key: label, context: context) : '',
         errorText: errorMessage,
         errorStyle: context.regular!
             .copyWith(fontSize: PaddingOrFont.size12.spMin, color: Colors.red),
@@ -67,6 +73,8 @@ class CustomTextFieldWidget extends StatelessWidget {
       ),
       onChanged: onChanged,
       validator: validator,
+      onEditingComplete: onFieldSubmitted,
+      focusNode: focusNode,
     );
   }
 }

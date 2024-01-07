@@ -86,32 +86,35 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
           /// Uploading selected image to the firebase storge
           List<String> imagesLink = await uploadAllImages(event.file, fileName);
 
+          Map<String, dynamic> product = Product(
+            productId: event.productID,
+            productName: event.product.productName,
+            productCategory: event.product.productCategory,
+            productImages: imagesLink,
+            productPrice: event.product.productPrice,
+            productQuantity: event.product.productQuantity,
+            productShortDescription: event.product.productShortDescription,
+            offerPrice: event.product.offerPrice,
+            rating: event.product.rating,
+            brandName: event.product.brandName,
+            vendorName: event.product.vendorName,
+            tags: event.product.tags,
+            clothingSize: event.product.clothingSize,
+            shoeSize: event.product.shoeSize,
+            productSubCategory: event.product.productSubCategory,
+          ).toJson();
+
+          if (imagesLink.isNotEmpty) {
+            product['productImages'] = imagesLink;
+          }
+
           // Storing data into firebase
           await firebaseFirestore
               .collection(collection)
               .doc(firebaseUser!.toString())
               .collection(FirebaseCollection.storeProductCollection)
               .doc(event.productID)
-              .update(
-                Product(
-                  productId: event.productID,
-                  productName: event.product.productName,
-                  productCategory: event.product.productCategory,
-                  productImages: imagesLink,
-                  productPrice: event.product.productPrice,
-                  productQuantity: event.product.productQuantity,
-                  productShortDescription:
-                      event.product.productShortDescription,
-                  offerPrice: event.product.offerPrice,
-                  rating: event.product.rating,
-                  brandName: event.product.brandName,
-                  vendorName: event.product.vendorName,
-                  tags: event.product.tags,
-                  clothingSize: event.product.clothingSize,
-                  shoeSize: event.product.shoeSize,
-                  productSubCategory: event.product.productSubCategory,
-                ).toJson(),
-              )
+              .update(product)
               .whenComplete(() {
             // When category is stored into database, it should return to main screen of category table
             if (GoRouter.of(event.context).canPop()) {

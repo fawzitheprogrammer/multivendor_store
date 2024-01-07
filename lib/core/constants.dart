@@ -172,7 +172,7 @@ class AppAssets {
       'VR Headsets',
       'Communication Headsets'
     ],
-    'Nutrition': [
+    'Nutrition & Supplement': [
       'Daily Vitamins',
       'Specialized Vitamins',
       'Kids Vitamins',
@@ -181,9 +181,7 @@ class AppAssets {
       'Casein Protein Powder',
       'Protein Bars',
       'Nuts',
-      'Fruit-Based Snacks'
-    ],
-    'Supplement': [
+      'Fruit-Based Snacks',
       'Protein Supplements',
       'Creatine Supplements',
       'Amino Acids',
@@ -193,7 +191,7 @@ class AppAssets {
       'Caffeine Supplements',
       'Herbal Supplements',
       'Pre-Workout Supplements'
-    ]
+    ],
   };
 
   static List<String> allBrands = [
