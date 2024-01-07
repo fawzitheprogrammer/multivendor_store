@@ -9,11 +9,13 @@ import 'package:multivendor_store/core/firebase/get_device_token.dart';
 import 'package:multivendor_store/firebase_options.dart';
 import 'package:multivendor_store/manager/authentication-bloc/authentication_bloc_bloc.dart';
 import 'package:multivendor_store/manager/connection-bloc/connection_bloc.dart';
-import 'package:multivendor_store/manager/cubit/category_drop_down_cubit.dart';
+import 'package:multivendor_store/manager/category-dropdown-bloc/category_drop_down_cubit.dart';
 import 'package:multivendor_store/manager/get-all-products/get_all_products_bloc.dart';
+import 'package:multivendor_store/manager/get-image-from-firebase-to-update/get-image-from-firebase-to-update.dart';
 import 'package:multivendor_store/manager/register-store/register_store_bloc.dart';
 import 'package:multivendor_store/manager/route-cubit/route_cubit.dart';
 import 'package:multivendor_store/manager/store-product/store_product_bloc.dart';
+import 'package:multivendor_store/manager/sub-cateogory-dropdown-bloc/sub_category_drop_down_cubit.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/constants.dart';
@@ -90,6 +92,12 @@ class AppRoot extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => CategoryDropDownCubit(),
+          ),
+          BlocProvider(
+            create: (context) => SubCategoryDropDownCubit(),
+          ),
+          BlocProvider(
+            create: (context) => GetImageFromFirebaseToUpdateCubit(),
           ),
         ],
         child: BlocBuilder<ThemeModeCubit, bool>(

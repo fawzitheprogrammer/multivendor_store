@@ -147,6 +147,10 @@
     "ShortDescription_English": "Short Description",
     "You have no items yet": "ليس لديك عناصر حتى الآن",
     "Tap + button to start adding item.": "انقر على زر + لبدء إضافة عنصر.",
-    "Confirm Password":"تأكيد كلمة المرور "
+    "Confirm Password":"تأكيد كلمة المرور ",
+    "Nutrition & Supplement": "مكمل غذائي",
+    "Size Instruction": "إذا كان منتجك يحتوي على مقاس مثل قميص تي شيرت أو أحذية، فانقر على خانة الاختيار",
+    "Has Size": "يحتوي على مقاس",
+    "Sub Category": "الفئة الفرعية"
 
 }

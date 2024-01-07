@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:multivendor_store/manager/get-image-from-firebase-to-update/get-image-from-firebase-to-update.dart';
 
 import '../../../../../core/exports/exports.dart';
 
@@ -19,46 +21,56 @@ class ProductImageState extends State<ProductImage> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: context.colorScheme!.onPrimary,
-          border: Border.all(
-            color: context.colorScheme!.primary.withAlpha(30),
+    var downloadedImage =
+        BlocProvider.of<GetImageFromFirebaseToUpdateCubit>(context).imagePath;
+
+    return BlocBuilder<GetImageFromFirebaseToUpdateCubit, List<File>?>(
+        builder: (context, state) {
+      return GestureDetector(
+        onTap: widget.onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: context.colorScheme!.onPrimary,
+            border: Border.all(
+              color: context.colorScheme!.primary.withAlpha(30),
+            ),
+            borderRadius: BorderRadius.circular(14.r),
           ),
-          borderRadius: BorderRadius.circular(14.r),
-        ),
-        height: context.isWidthLessThan500 ? 150.h : 250.h,
-        width: double.infinity,
-        child: widget.imagePath.isNotEmpty
-            ? GridView.builder(
-                itemCount: widget.imagePath.length,
-                itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.all(4.w),
-                  child: SizedBox(
-                    height: 20.h,
-                    width: 20.w,
-                    child: Image.file(
-                      widget.imagePath[index]!,
-                      fit: BoxFit.cover,
+          height: context.isWidthLessThan500 ? 150.h : 250.h,
+          width: double.infinity,
+          child: widget.imagePath.isNotEmpty
+              ? GridView.builder(
+                  itemCount: widget.imagePath.isEmpty
+                      ? downloadedImage.length
+                      : widget.imagePath.length,
+                  itemBuilder: (context, index) => Padding(
+                    padding: EdgeInsets.all(4.w),
+                    child: SizedBox(
                       height: 20.h,
                       width: 20.w,
+                      child: Image.file(
+                        widget.imagePath.isEmpty
+                            ? downloadedImage[index]
+                            : widget.imagePath[index]!,
+                        fit: BoxFit.cover,
+                        height: 20.h,
+                        width: 20.w,
+                      ),
                     ),
                   ),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 5),
+                )
+              : Center(
+                  child: Icon(
+                    Ionicons.image,
+                    color: context.colorScheme!.onBackground,
+                    size: PaddingOrFont.size30.spMin * 2.5,
+                  ),
                 ),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5),
-              )
-            : Center(
-                child: Icon(
-                  Ionicons.image,
-                  color: context.colorScheme!.onBackground,
-                  size: PaddingOrFont.size30.spMin * 2.5,
-                ),
-              ),
-      ),
-    );
+        ),
+      );
+    });
   }
 
   Widget addIcon() {
