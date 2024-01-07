@@ -33,7 +33,6 @@ class AutoCompleteBrands extends StatelessWidget {
           label: 'Brands',
           onSubmitted: (va) {
             var k = BlocProvider.of<BrandCubit>(context).state;
-            print(k);
             onFieldSubmitted;
           },
           focusNode: focusNode,
@@ -50,7 +49,7 @@ class AutoCompleteBrands extends StatelessWidget {
                   itemCount: options.length,
                   itemBuilder: (BuildContext context, int index) {
                     final String option = options.elementAt(index);
-    
+
                     return GestureDetector(
                       onTap: () {
                         onSelected(option);
