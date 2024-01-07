@@ -219,7 +219,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                           height: PaddingOrFont.size18.spMin,
                         ),
 
-                        const AutoCompleteBrands(),
+                        AutoCompleteBrands(),
                         SizedBox(
                           height: PaddingOrFont.size18.spMin,
                         ),
@@ -424,7 +424,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                                     .state);
                             print(BlocProvider.of<BrandCubit>(context).state);
 
-                            print(brand);
+                           
                             // print(selectedSubcategory);
                             // print(selectedSubcategory);
                             // print(selectedSubcategory);
