@@ -42,8 +42,7 @@ class CategoryDropDown extends StatelessWidget {
                       onChanged: (newValue) {
                         BlocProvider.of<CategoryDropDownCubit>(context)
                             .selectCategory(newValue ?? 'Men Wear');
-                        BlocProvider.of<SubCategoryDropDownCubit>(context)
-                            .emit(null);
+                        BlocProvider.of<SubCategoryDropDownCubit>(context).emit(null);
                       },
                       items: List.generate(
                         AppAssets.categoriesAndSubcategory.keys.length,
@@ -95,7 +94,7 @@ class CategoryDropDown extends StatelessWidget {
                         value: subCategory,
                         onChanged: (newValue) {
                           BlocProvider.of<SubCategoryDropDownCubit>(context)
-                              .selectSubCategory(newValue);
+                              .selectCategory(newValue);
                         },
                         items: AppAssets.categoriesAndSubcategory[category]!
                             .map<DropdownMenuItem<String>>((String value) {

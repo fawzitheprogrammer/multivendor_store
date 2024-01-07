@@ -14,13 +14,14 @@ import 'package:multivendor_store/core/pick_image.dart';
 import 'package:multivendor_store/core/text_fields/custom_text_field.dart';
 import 'package:multivendor_store/core/text_responsive.dart';
 import 'package:multivendor_store/features/product_edit/presentation/view_models/clothing_size.dart';
+import 'package:multivendor_store/features/product_edit/presentation/views/widgets/auto_complete_brands.dart';
 import 'package:multivendor_store/features/product_edit/presentation/views/widgets/category_drop_down.dart';
 import 'package:multivendor_store/features/product_edit/presentation/views/widgets/product_image.dart';
 import 'package:multivendor_store/features/store-profile/data/models/product_model.dart';
 import 'package:multivendor_store/localization/app_localization.dart';
 import 'package:multivendor_store/manager/category-dropdown-bloc/category_drop_down_cubit.dart';
 import 'package:multivendor_store/manager/store-product/store_product_bloc.dart';
-import 'package:multivendor_store/manager/sub-cateogory-dropdown-bloc/sub_category_drop_down_cubit.dart';
+import 'package:multivendor_store/manager/brand-cubit/brand_cubit.dart';
 
 import '../../../../../core/padding_and_margin.dart';
 
@@ -214,7 +215,14 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                           height: PaddingOrFont.size24.spMin,
                         ),
                         const CategoryDropDown(),
+                        SizedBox(
+                          height: PaddingOrFont.size18.spMin,
+                        ),
 
+                        const AutoCompleteBrands(),
+                        SizedBox(
+                          height: PaddingOrFont.size18.spMin,
+                        ),
                         SizedBox(
                           height: PaddingOrFont.size24.h,
                         ),
@@ -301,73 +309,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                               }),
                             ),
                           ),
-                        SizedBox(
-                          height: PaddingOrFont.size18.spMin,
-                        ),
 
-                        Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: Autocomplete<String>(
-                            initialValue: const TextEditingValue(text: 'Brand'),
-                            optionsBuilder:
-                                (TextEditingValue textEditingValue) {
-                              if (textEditingValue.text.isEmpty) {
-                                return const Iterable<String>.empty();
-                              } else {
-                                return AppAssets.allBrands
-                                    .where((String option) {
-                                  return option.toLowerCase().contains(
-                                      textEditingValue.text.toLowerCase());
-                                });
-                              }
-                            },
-                            fieldViewBuilder: (context, textEditingController,
-                                focusNode, onFieldSubmitted) {
-                              return CustomTextFieldWidget(
-                                controller: textEditingController,
-                                label: 'Brands',
-                                onFieldSubmitted: onFieldSubmitted,
-                                focusNode: focusNode,
-                              );
-                            },
-                            optionsViewBuilder: (context, onSelected, options) {
-                              return Align(
-                                alignment: Alignment.topLeft,
-                                child: Material(
-                                  elevation: 4.0,
-                                  child: SizedBox(
-                                    width: 300,
-                                    child: ListView.builder(
-                                      padding: const EdgeInsets.all(10.0),
-                                      itemCount: options.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        final String option =
-                                            options.elementAt(index);
-
-                                        return GestureDetector(
-                                          onTap: () {
-                                            if (mounted) {
-                                              onSelected(option);
-                                              brand = option;
-                                              setState(() {});
-                                            }
-                                          },
-                                          child: ListTile(
-                                            title: Text(option),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          height: PaddingOrFont.size18.spMin,
-                        ),
                         // Row(
                         //   children: [
                         //     Expanded(
@@ -480,9 +422,9 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                             print(
                                 BlocProvider.of<CategoryDropDownCubit>(context)
                                     .state);
-                            print(BlocProvider.of<SubCategoryDropDownCubit>(
-                                    context)
-                                .state);
+                            print(BlocProvider.of<BrandCubit>(context).state);
+
+                            print(brand);
                             // print(selectedSubcategory);
                             // print(selectedSubcategory);
                             // print(selectedSubcategory);
