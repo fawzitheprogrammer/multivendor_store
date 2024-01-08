@@ -84,7 +84,13 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
           final String fileName = const Uuid().v7();
 
           /// Uploading selected image to the firebase storge
-          List<String> imagesLink = await uploadAllImages(event.file, fileName);
+          List<String> imagesLink = [];
+
+          if (event.file != null) {
+            imagesLink = await uploadAllImages(event.file ?? [], fileName);
+          } else {
+            imagesLink = event.product.productImages ?? [];
+          }
 
           Map<String, dynamic> product = Product(
             productId: event.productID,
@@ -103,10 +109,6 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
             shoeSize: event.product.shoeSize,
             productSubCategory: event.product.productSubCategory,
           ).toJson();
-
-          if (imagesLink.isNotEmpty) {
-            product['productImages'] = imagesLink;
-          }
 
           // Storing data into firebase
           await firebaseFirestore

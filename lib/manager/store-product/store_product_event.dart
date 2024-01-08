@@ -21,7 +21,7 @@ class DeleteProduct extends StoreProductEvent {
 class UpdateProduct extends StoreProductEvent {
   final Product product;
   final String productID;
-  final List<File> file;
+  final List<File>? file;
   final BuildContext context;
 
   UpdateProduct({
