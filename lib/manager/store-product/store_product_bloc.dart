@@ -78,7 +78,7 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
         }
       }
       // --------------------------- End Create event -------------------------
-      // --------------------------- Start Update event -----------------------
+      // --------------------------- Start Update event -------------------------
       if (event is UpdateProduct) {
         try {
           emit(StoreProductLoading());
@@ -138,7 +138,7 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
           );
         }
       }
-      // --------------------------- End Update event ------------------------
+      // --------------------------- End Update event -------------------------
 
       if (event is GetSingleProduct) {
         emit(StoreProductLoading());
