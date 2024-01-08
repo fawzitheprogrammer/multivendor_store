@@ -10,7 +10,9 @@ import 'package:multivendor_store/core/exports/exports.dart';
 import 'package:multivendor_store/core/firebase/collections.dart';
 import 'package:multivendor_store/core/firebase/logged_user.dart';
 import 'package:multivendor_store/core/firebase_package_helper.dart';
+import 'package:multivendor_store/core/notification.dart';
 import 'package:multivendor_store/features/store-profile/data/models/product_model.dart';
+import 'package:multivendor_store/manager/get-all-products/get_all_products_bloc.dart';
 import 'package:multivendor_store/manager/register-store/register_store_bloc.dart';
 import 'package:uuid/uuid.dart';
 part 'store_product_event.dart';
@@ -57,9 +59,10 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
               )
               .whenComplete(() {
             // When category is stored into database, it should return to main screen of category table
-            if (GoRouter.of(event.context).canPop()) {
-              GoRouter.of(event.context).pop();
-            }
+            BlocProvider.of<GetAllProductsBloc>(event.context)
+                .add(GetProducts());
+
+            notification('Success', 'It is working', event.context);
           });
           emit(StoreProductSuccess());
         } on PlatformException catch (e) {
@@ -88,15 +91,16 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
 
           if (event.file != null) {
             imagesLink = await uploadAllImages(event.file ?? [], fileName);
-          } else {
-            imagesLink = event.product.productImages ?? [];
+            debugPrint('INSIDE IF : ${imagesLink.toString()}');
           }
 
           Map<String, dynamic> product = Product(
             productId: event.productID,
             productName: event.product.productName,
             productCategory: event.product.productCategory,
-            productImages: imagesLink,
+            productImages: imagesLink.isNotEmpty
+                ? imagesLink
+                : event.product.productImages,
             productPrice: event.product.productPrice,
             productQuantity: event.product.productQuantity,
             productShortDescription: event.product.productShortDescription,
@@ -118,10 +122,8 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
               .doc(event.productID)
               .update(product)
               .whenComplete(() {
+            notification('Success', 'It is working', event.context);
             // When category is stored into database, it should return to main screen of category table
-            if (GoRouter.of(event.context).canPop()) {
-              GoRouter.of(event.context).pop();
-            }
           });
           emit(StoreProductSuccess());
         } on PlatformException catch (e) {
@@ -148,20 +150,26 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
       if (event is DeleteProduct) {
         try {
           emit(StoreProductLoading());
+
+          // // Deleting attached picture from the firebase storage
+          // await firebaseStorage
+          //     .ref()
+          //     .child(
+          //         '${FirebaseCollection.stores}/${FirebaseCollection.storeProductCollection}/${event.productID}/')
+          //     .delete();
+
           await firebaseFirestore
               .collection(FirebaseCollection.stores)
               .doc(firebaseUser!.toString())
               .collection(FirebaseCollection.storeProductCollection)
               .doc(event.productID)
-              .delete();
+              .delete()
+              .whenComplete(() {
+            // When category is stored into database, it should return to main screen of category table
+            BlocProvider.of<GetAllProductsBloc>(event.context)
+                .add(GetProducts());
+          });
           emit(StoreProductSuccess());
-
-          // Deleting attached picture from the firebase storage
-          await firebaseStorage
-              .ref()
-              .child(
-                  '${FirebaseCollection.stores}/${FirebaseCollection.storeProductCollection}/${event.productID}/')
-              .delete();
         } on PlatformException catch (e) {
           emit(
             StoreProductFailure(
