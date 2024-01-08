@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
@@ -16,8 +15,6 @@ class StoreProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<GetAllProductsBloc>(context).add(GetProducts());
-
     Future<void> refresh() async {
       BlocProvider.of<GetAllProductsBloc>(context).add(GetProducts());
     }

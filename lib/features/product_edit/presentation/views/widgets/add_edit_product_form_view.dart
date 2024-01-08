@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:multivendor_store/core/build_context_extension.dart';
 import 'package:multivendor_store/core/buttons/text_button_style.dart';
 import 'package:multivendor_store/core/check_if_user_is_connected.dart';
@@ -238,7 +240,27 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                         SizedBox(
                           height: PaddingOrFont.size16.h,
                         ),
-                        HasSize(hasSize: hasSize),
+                        CheckboxListTile(
+                          title: Text(
+                            translate(key: 'Has Size', context: context),
+                            style: context.medium,
+                          ),
+                          subtitle: Text(
+                            translate(
+                                key: 'Size Instruction', context: context),
+                            style: context.regular?.copyWith(
+                                fontSize: PaddingOrFont.size12.spMin),
+                          ),
+                          value: hasSize,
+                          onChanged: (val) {
+                            if (mounted) {
+                              setState(() {
+                                hasSizeCategories();
+                                hasSize = val ?? false;
+                              });
+                            }
+                          },
+                        ),
                         SizedBox(
                           height: PaddingOrFont.size8.h,
                         ),
@@ -456,6 +478,15 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
             }
           },
           listener: (context, state) {
+            if (state is StoreProductLoading) {
+              GoRouter.of(context).pop();
+              notification(
+                  'Success',
+                  translate(
+                      key: isCreateProduct ? 'Item Uploaded' : 'Item Updated',
+                      context: context),
+                  context);
+            }
             if (state is StoreProductFailure) {
               notification('Failure', state.errorMessage, context);
             }
@@ -558,33 +589,5 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
     }
 
     return allSizes;
-  }
-}
-
-class HasSize extends StatelessWidget {
-  const HasSize({
-    super.key,
-    required this.hasSize,
-  });
-
-  final bool hasSize;
-
-  @override
-  Widget build(BuildContext context) {
-    return CheckboxListTile(
-      title: Text(
-        translate(key: 'Has Size', context: context),
-        style: context.medium,
-      ),
-      subtitle: Text(
-        translate(key: 'Size Instruction', context: context),
-        style: context.regular?.copyWith(fontSize: PaddingOrFont.size12.spMin),
-      ),
-      value: hasSize,
-      onChanged: (val) {
-        // hasSizeCategories();
-        // hasSize = val ?? false;
-      },
-    );
   }
 }

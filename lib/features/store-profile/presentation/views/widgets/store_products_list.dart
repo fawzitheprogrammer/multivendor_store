@@ -78,7 +78,7 @@ class StoreProductsList extends StatelessWidget {
                         height: PaddingOrFont.size10.h - 2,
                       ),
                       Text(
-                        r'$160.00',
+                        '\$${product[index].productPrice}',
                         style: context.semiBold!.copyWith(
                           fontSize: PaddingOrFont.size16.spMax,
                           color: context.colorScheme!.error,
@@ -109,7 +109,7 @@ class StoreProductsList extends StatelessWidget {
                           ActionButton(
                             onPressed: () {
                               BlocProvider.of<StoreProductBloc>(context).add(
-                                DeleteProduct(
+                                DeleteProduct(context,
                                     productID: product[index].productId),
                               );
                             },

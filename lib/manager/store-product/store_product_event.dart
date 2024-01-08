@@ -14,8 +14,9 @@ class CreateProduct extends StoreProductEvent {
 
 class DeleteProduct extends StoreProductEvent {
   final String productID;
+  final BuildContext context;
 
-  DeleteProduct({required this.productID});
+  DeleteProduct(this.context, {required this.productID});
 }
 
 class UpdateProduct extends StoreProductEvent {
