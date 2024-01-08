@@ -17,16 +17,11 @@ class HasSize extends StatelessWidget {
         style: context.medium,
       ),
       subtitle: Text(
-        translate(
-            key: 'Size Instruction', context: context),
-        style: context.regular?.copyWith(
-            fontSize: PaddingOrFont.size12.spMin),
+        translate(key: 'Size Instruction', context: context),
+        style: context.regular?.copyWith(fontSize: PaddingOrFont.size12.spMin),
       ),
       value: hasSize,
-      onChanged: (val) {
-        // hasSizeCategories();
-        // hasSize = val ?? false;
-      },
+      onChanged: (val) {},
     );
   }
 }
