@@ -11,6 +11,7 @@ import 'package:multivendor_store/manager/authentication-bloc/authentication_blo
 import 'package:multivendor_store/manager/connection-bloc/connection_bloc.dart';
 import 'package:multivendor_store/manager/category-dropdown-bloc/category_drop_down_cubit.dart';
 import 'package:multivendor_store/manager/get-all-products/get_all_products_bloc.dart';
+import 'package:multivendor_store/manager/has-size-cubit/has_size_cubit.dart';
 import 'package:multivendor_store/manager/register-store/register_store_bloc.dart';
 import 'package:multivendor_store/manager/route-cubit/route_cubit.dart';
 import 'package:multivendor_store/manager/store-product/store_product_bloc.dart';
@@ -98,6 +99,9 @@ class AppRoot extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => BrandCubit(),
+          ),
+          BlocProvider(
+            create: (context) => HasSizeCubit(),
           ),
         ],
         child: BlocBuilder<ThemeModeCubit, bool>(

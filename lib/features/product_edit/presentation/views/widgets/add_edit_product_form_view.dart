@@ -238,27 +238,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                         SizedBox(
                           height: PaddingOrFont.size16.h,
                         ),
-                        CheckboxListTile(
-                          title: Text(
-                            translate(key: 'Has Size', context: context),
-                            style: context.medium,
-                          ),
-                          subtitle: Text(
-                            translate(
-                                key: 'Size Instruction', context: context),
-                            style: context.regular?.copyWith(
-                                fontSize: PaddingOrFont.size12.spMin),
-                          ),
-                          value: hasSize,
-                          onChanged: (val) {
-                            if (mounted) {
-                              setState(() {
-                                hasSizeCategories();
-                                hasSize = val ?? false;
-                              });
-                            }
-                          },
-                        ),
+                        HasSize(hasSize: hasSize),
                         SizedBox(
                           height: PaddingOrFont.size8.h,
                         ),
@@ -578,5 +558,33 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
     }
 
     return allSizes;
+  }
+}
+
+class HasSize extends StatelessWidget {
+  const HasSize({
+    super.key,
+    required this.hasSize,
+  });
+
+  final bool hasSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile(
+      title: Text(
+        translate(key: 'Has Size', context: context),
+        style: context.medium,
+      ),
+      subtitle: Text(
+        translate(key: 'Size Instruction', context: context),
+        style: context.regular?.copyWith(fontSize: PaddingOrFont.size12.spMin),
+      ),
+      value: hasSize,
+      onChanged: (val) {
+        // hasSizeCategories();
+        // hasSize = val ?? false;
+      },
+    );
   }
 }

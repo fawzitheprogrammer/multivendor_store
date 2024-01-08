@@ -88,15 +88,16 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
 
           if (event.file != null) {
             imagesLink = await uploadAllImages(event.file ?? [], fileName);
-          } else {
-            imagesLink = event.product.productImages ?? [];
+            debugPrint('INSIDE IF : ${imagesLink.toString()}');
           }
 
           Map<String, dynamic> product = Product(
             productId: event.productID,
             productName: event.product.productName,
             productCategory: event.product.productCategory,
-            productImages: imagesLink,
+            productImages: imagesLink.isNotEmpty
+                ? imagesLink
+                : event.product.productImages,
             productPrice: event.product.productPrice,
             productQuantity: event.product.productQuantity,
             productShortDescription: event.product.productShortDescription,
