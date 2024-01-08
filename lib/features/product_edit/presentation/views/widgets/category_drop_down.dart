@@ -13,63 +13,10 @@ class CategoryDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CategoryDropDownCubit, String?>(
       builder: (context, category) {
-        return Column(
+        return Row(
           children: [
-            Container(
-              constraints: BoxConstraints(maxHeight: 50.h),
-              decoration: BoxDecoration(
-                color: context.colorScheme!.onPrimary,
-                border: Border.all(
-                  width: 1.5.w,
-                  color: context.colorScheme!.primary.withAlpha(30),
-                ),
-                borderRadius: BorderRadius.circular(4.r),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: PaddingOrFont.size24.w),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: DropdownButton(
-                      underline: Container(),
-                      isExpanded: true,
-                      hint: Text(
-                        translate(
-                          key: 'Category',
-                          context: context,
-                        ),
-                      ),
-                      value: category,
-                      onChanged: (newValue) {
-                        BlocProvider.of<CategoryDropDownCubit>(context)
-                            .selectCategory(newValue ?? 'Men Wear');
-                        BlocProvider.of<SubCategoryDropDownCubit>(context).emit(null);
-                      },
-                      items: List.generate(
-                        AppAssets.categoriesAndSubcategory.keys.length,
-                        (index) => DropdownMenuItem(
-                          value: AppAssets.categoriesAndSubcategory.keys
-                              .elementAt(index),
-                          child: Text(
-                            translate(
-                              key: AppAssets.categoriesAndSubcategory.keys
-                                  .elementAt(index),
-                              context: context,
-                            ),
-                            style: context.regular!.copyWith(),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: PaddingOrFont.size18.spMin,
-            ),
-            BlocBuilder<SubCategoryDropDownCubit, String?>(
-                builder: (context, subCategory) {
-              return Container(
+            Expanded(
+              child: Container(
                 constraints: BoxConstraints(maxHeight: 50.h),
                 decoration: BoxDecoration(
                   color: context.colorScheme!.onPrimary,
@@ -88,30 +35,89 @@ class CategoryDropDown extends StatelessWidget {
                         underline: Container(),
                         isExpanded: true,
                         hint: Text(
-                          translate(key: 'Sub Category', context: context),
-                          style: context.regular,
+                          translate(
+                            key: 'Category',
+                            context: context,
+                          ),
                         ),
-                        value: subCategory,
+                        value: category,
                         onChanged: (newValue) {
-                          BlocProvider.of<SubCategoryDropDownCubit>(context)
+                          BlocProvider.of<CategoryDropDownCubit>(context)
                               .selectCategory(newValue);
+                          BlocProvider.of<SubCategoryDropDownCubit>(context)
+                              .emit(null);
                         },
-                        items: AppAssets.categoriesAndSubcategory[category]!
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
+                        items: List.generate(
+                          AppAssets.categoriesAndSubcategory.keys.length,
+                          (index) => DropdownMenuItem(
+                            value: AppAssets.categoriesAndSubcategory.keys
+                                .elementAt(index),
                             child: Text(
-                              value,
-                              style: context.regular,
+                              translate(
+                                key: AppAssets.categoriesAndSubcategory.keys
+                                    .elementAt(index),
+                                context: context,
+                              ),
+                              style: context.regular!.copyWith(),
                             ),
-                          );
-                        }).toList(),
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
-              );
-            })
+              ),
+            ),
+            SizedBox(
+              width: PaddingOrFont.size8.spMin,
+            ),
+            Expanded(
+              child: BlocBuilder<SubCategoryDropDownCubit, String?>(
+                  builder: (context, subCategory) {
+                return Container(
+                  constraints: BoxConstraints(maxHeight: 50.h),
+                  decoration: BoxDecoration(
+                    color: context.colorScheme!.onPrimary,
+                    border: Border.all(
+                      width: 1.5.w,
+                      color: context.colorScheme!.primary.withAlpha(30),
+                    ),
+                    borderRadius: BorderRadius.circular(4.r),
+                  ),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: PaddingOrFont.size24.w),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: DropdownButton(
+                          underline: Container(),
+                          isExpanded: true,
+                          hint: Text(
+                            translate(key: 'Sub Category', context: context),
+                            style: context.regular,
+                          ),
+                          value: subCategory,
+                          onChanged: (newValue) {
+                            BlocProvider.of<SubCategoryDropDownCubit>(context)
+                                .selectCategory(newValue);
+                          },
+                          items: AppAssets.categoriesAndSubcategory[category]
+                              ?.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: context.regular,
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            )
           ],
         );
       },

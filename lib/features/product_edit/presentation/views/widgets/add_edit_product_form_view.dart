@@ -7,6 +7,7 @@ import 'package:multivendor_store/core/build_context_extension.dart';
 import 'package:multivendor_store/core/buttons/text_button_style.dart';
 import 'package:multivendor_store/core/check_if_user_is_connected.dart';
 import 'package:multivendor_store/core/constants.dart';
+import 'package:multivendor_store/core/firebase/download_file.dart';
 import 'package:multivendor_store/core/firebase/logged_user.dart';
 import 'package:multivendor_store/core/loading_widget.dart';
 import 'package:multivendor_store/core/notification.dart';
@@ -22,6 +23,7 @@ import 'package:multivendor_store/localization/app_localization.dart';
 import 'package:multivendor_store/manager/category-dropdown-bloc/category_drop_down_cubit.dart';
 import 'package:multivendor_store/manager/store-product/store_product_bloc.dart';
 import 'package:multivendor_store/manager/brand-cubit/brand_cubit.dart';
+import 'package:multivendor_store/manager/sub-cateogory-dropdown-bloc/sub_category_drop_down_cubit.dart';
 
 import '../../../../../core/padding_and_margin.dart';
 
@@ -83,29 +85,24 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
     super.initState();
     selectedCategory = AppAssets.categoriesAndSubcategory.keys.first;
     selectedSubcategory =
-        AppAssets.categoriesAndSubcategory[selectedCategory]!.first;
+        AppAssets.categoriesAndSubcategory[selectedCategory]?.first;
   }
 
-  void hasSizeEvent() {
-    setState(() {
-      if (BlocProvider.of<CategoryDropDownCubit>(context).state == 'Men Wear' ||
-          BlocProvider.of<CategoryDropDownCubit>(context).state ==
-              'Women Wear' ||
-          BlocProvider.of<CategoryDropDownCubit>(context).state ==
-              'Kids Wear') {
-        isShoe = false;
-        isClothes = true;
-      } else if (BlocProvider.of<CategoryDropDownCubit>(context).state ==
-          'Footwear') {
-        isClothes = false;
-        isShoe = true;
-      } else {
-        isClothes = false;
-        isShoe = false;
-        notification(
-            'Failure', 'Size cannot be set for this category', context);
-      }
-    });
+  void hasSizeCategories() {
+    if (BlocProvider.of<CategoryDropDownCubit>(context).state == 'Men Wear' ||
+        BlocProvider.of<CategoryDropDownCubit>(context).state == 'Women Wear' ||
+        BlocProvider.of<CategoryDropDownCubit>(context).state == 'Kids Wear') {
+      isShoe = false;
+      isClothes = true;
+    } else if (BlocProvider.of<CategoryDropDownCubit>(context).state ==
+        'Footwear') {
+      isClothes = false;
+      isShoe = true;
+    } else {
+      isClothes = false;
+      isShoe = false;
+      notification('Failure', 'Size cannot be set for this category', context);
+    }
   }
 
   @override
@@ -133,7 +130,24 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
             if (state is SingleProductState) {
               if (state.product != null) {
                 isCreateProduct = false;
-                productNameEnglish.text = state.product!.productName!['en'];
+                productNameEnglish.text = state.product?.productName?['en'];
+                productNameKurdish.text = state.product?.productName?['ku'];
+                productNameArabic.text = state.product?.productName?['ar'];
+                BlocProvider.of<CategoryDropDownCubit>(context)
+                    .selectCategory(state.product?.productCategory);
+                BlocProvider.of<SubCategoryDropDownCubit>(context)
+                    .selectCategory(state.product?.productSubCategory);
+                BlocProvider.of<BrandCubit>(context)
+                    .setBrand(state.product?.brandName);
+                price.text = state.product?.productPrice ?? '';
+                qty.text = state.product?.productQuantity ?? '0';
+                shortEnglishDescripttion.text =
+                    state.product?.productShortDescription?['en'];
+                shortKurdishDescripttion.text =
+                    state.product?.productShortDescription?['ku'];
+                shortArabicDescripttion.text =
+                    state.product?.productShortDescription?['ar'];
+                discount.text = state.product?.offerPrice ?? '0';
               }
 
               return Padding(
@@ -172,7 +186,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                                 validator: (val) {
                                   return checkEmptyFields(
                                     controller: productNameKurdish,
-                                    val: val!,
+                                    val: val ?? '',
                                     locale: 'ku',
                                   );
                                 },
@@ -188,7 +202,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                                 validator: (val) {
                                   return checkEmptyFields(
                                     controller: productNameArabic,
-                                    val: val!,
+                                    val: val ?? '',
                                     locale: 'ar',
                                   );
                                 },
@@ -204,7 +218,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                                 validator: (val) {
                                   return checkEmptyFields(
                                       controller: productNameEnglish,
-                                      val: val!,
+                                      val: val ?? '',
                                       locale: 'en');
                                 },
                               ),
@@ -218,13 +232,11 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                         SizedBox(
                           height: PaddingOrFont.size18.spMin,
                         ),
-
-                        AutoCompleteBrands(),
-                        SizedBox(
-                          height: PaddingOrFont.size18.spMin,
+                        AutoCompleteBrands(
+                          isUpdate: state.product != null ? true : false,
                         ),
                         SizedBox(
-                          height: PaddingOrFont.size24.h,
+                          height: PaddingOrFont.size16.h,
                         ),
                         CheckboxListTile(
                           title: Text(
@@ -234,50 +246,59 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                           subtitle: Text(
                             translate(
                                 key: 'Size Instruction', context: context),
-                            style: context.regular!
-                                .copyWith(fontSize: PaddingOrFont.size12.spMin),
+                            style: context.regular?.copyWith(
+                                fontSize: PaddingOrFont.size12.spMin),
                           ),
                           value: hasSize,
                           onChanged: (val) {
                             if (mounted) {
                               setState(() {
-                                hasSizeEvent();
-                                hasSize = val!;
+                                hasSizeCategories();
+                                hasSize = val ?? false;
                               });
                             }
                           },
                         ),
-
+                        SizedBox(
+                          height: PaddingOrFont.size8.h,
+                        ),
                         if (hasSize && isClothes)
-                          Row(
-                            children:
-                                List.generate(clothingSize.length, (index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  if (mounted) {
-                                    setState(() {
-                                      if (selectedClothingSize
-                                          .contains(clothingSize[index])) {
-                                        selectedClothingSize
-                                            .remove(clothingSize[index]);
-                                      } else {
-                                        selectedClothingSize
-                                            .add(clothingSize[index]);
-                                      }
-                                    });
-                                  }
-                                },
-                                child: WordBasedWidthContainer(
-                                  text: clothingSize[index].title,
-                                  isActive: selectedClothingSize
-                                      .contains(clothingSize[index]),
-                                ),
-                              );
-                            }),
+                          Container(
+                            margin: EdgeInsets.only(
+                              bottom: PaddingOrFont.size24.h,
+                            ),
+                            child: Row(
+                              children:
+                                  List.generate(clothingSize.length, (index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    if (mounted) {
+                                      setState(() {
+                                        if (selectedClothingSize
+                                            .contains(clothingSize[index])) {
+                                          selectedClothingSize
+                                              .remove(clothingSize[index]);
+                                        } else {
+                                          selectedClothingSize
+                                              .add(clothingSize[index]);
+                                        }
+                                      });
+                                    }
+                                  },
+                                  child: WordBasedWidthContainer(
+                                    text: clothingSize[index].title,
+                                    isActive: selectedClothingSize
+                                        .contains(clothingSize[index]),
+                                  ),
+                                );
+                              }),
+                            ),
                           ),
-
                         if (hasSize && isShoe)
-                          SizedBox(
+                          Container(
+                            margin: EdgeInsets.only(
+                              bottom: PaddingOrFont.size24.h,
+                            ),
                             height: 60.spMin,
                             width: double.infinity,
                             child: ListView(
@@ -309,139 +330,137 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
                               }),
                             ),
                           ),
-
-                        // Row(
-                        //   children: [
-                        //     Expanded(
-                        //       child: CustomTextFieldWidget(
-                        //         controller: price,
-                        //         label: 'Price',
-                        //         validator: (val) {
-                        //           return checkFiledsWithDigitType(
-                        //               controller: price, val: val!);
-                        //         },
-                        //         textInputType: TextInputType.number,
-                        //       ),
-                        //     ),
-                        //     SizedBox(
-                        //       width: PaddingOrFont.size24.h,
-                        //     ),
-                        //     Expanded(
-                        //       child: CustomTextFieldWidget(
-                        //         controller: qty,
-                        //         label: 'Quantity',
-                        //         validator: (val) {
-                        //           return checkFiledsWithDigitType(
-                        //               controller: qty, val: val ?? '0');
-                        //         },
-                        //         textInputType: TextInputType.number,
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                        // SizedBox(
-                        //   height: PaddingOrFont.size24.h,
-                        // ),
-                        // Row(
-                        //   children: [
-                        //     Expanded(
-                        //       child: CustomTextFieldWidget(
-                        //         controller: shortKurdishDescripttion,
-                        //         isMultiLine: true,
-                        //         label: 'ShortDescription_Kurdish',
-                        //         validator: (val) {
-                        //           return checkEmptyFields(
-                        //             val: val ?? '',
-                        //             controller: shortKurdishDescripttion,
-                        //             locale: 'ku',
-                        //           );
-                        //         },
-                        //         textInputType: TextInputType.text,
-                        //       ),
-                        //     ),
-                        //     SizedBox(
-                        //       width: PaddingOrFont.size24.spMin - 5,
-                        //     ),
-                        //     Expanded(
-                        //       child: CustomTextFieldWidget(
-                        //         controller: shortArabicDescripttion,
-                        //         isMultiLine: true,
-                        //         label: 'ShortDescription_Arabic',
-                        //         validator: (val) {
-                        //           return checkEmptyFields(
-                        //             val: val ?? '',
-                        //             controller: shortArabicDescripttion,
-                        //             locale: 'ar',
-                        //           );
-                        //         },
-                        //         textInputType: TextInputType.text,
-                        //       ),
-                        //     ),
-                        //     SizedBox(
-                        //       width: PaddingOrFont.size24.spMin - 5,
-                        //     ),
-                        //     Expanded(
-                        //       child: CustomTextFieldWidget(
-                        //         controller: shortEnglishDescripttion,
-                        //         isMultiLine: true,
-                        //         label: 'ShortDescription_English',
-                        //         validator: (val) {
-                        //           return checkEmptyFields(
-                        //             val: val ?? '',
-                        //             controller: shortEnglishDescripttion,
-                        //             locale: 'en',
-                        //           );
-                        //         },
-                        //         textInputType: TextInputType.text,
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                        // SizedBox(
-                        //   height: PaddingOrFont.size24.h,
-                        // ),
-                        // CustomTextFieldWidget(
-                        //   controller: discount,
-                        //   label: 'Offer Price',
-                        //   validator: (val) {
-                        //     return checkFiledsWithDigitType(
-                        //         controller: discount, val: val!);
-                        //   },
-                        //   textInputType: TextInputType.number,
-                        // ),
-                        // SizedBox(
-                        //   height: PaddingOrFont.size16.h,
-                        // ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomTextFieldWidget(
+                                controller: price,
+                                label: 'Price',
+                                validator: (val) {
+                                  return checkFiledsWithDigitType(
+                                      controller: price, val: val ?? '');
+                                },
+                                textInputType: TextInputType.number,
+                              ),
+                            ),
+                            SizedBox(
+                              width: PaddingOrFont.size24.h,
+                            ),
+                            Expanded(
+                              child: CustomTextFieldWidget(
+                                controller: qty,
+                                label: 'Quantity',
+                                validator: (val) {
+                                  return checkFiledsWithDigitType(
+                                      controller: qty, val: val ?? '0');
+                                },
+                                textInputType: TextInputType.number,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: PaddingOrFont.size24.h,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomTextFieldWidget(
+                                controller: shortKurdishDescripttion,
+                                isMultiLine: true,
+                                label: 'ShortDescription_Kurdish',
+                                validator: (val) {
+                                  return checkEmptyFields(
+                                    val: val ?? '',
+                                    controller: shortKurdishDescripttion,
+                                    locale: 'ku',
+                                  );
+                                },
+                                textInputType: TextInputType.text,
+                              ),
+                            ),
+                            SizedBox(
+                              width: PaddingOrFont.size24.spMin - 5,
+                            ),
+                            Expanded(
+                              child: CustomTextFieldWidget(
+                                controller: shortArabicDescripttion,
+                                isMultiLine: true,
+                                label: 'ShortDescription_Arabic',
+                                validator: (val) {
+                                  return checkEmptyFields(
+                                    val: val ?? '',
+                                    controller: shortArabicDescripttion,
+                                    locale: 'ar',
+                                  );
+                                },
+                                textInputType: TextInputType.text,
+                              ),
+                            ),
+                            SizedBox(
+                              width: PaddingOrFont.size24.spMin - 5,
+                            ),
+                            Expanded(
+                              child: CustomTextFieldWidget(
+                                controller: shortEnglishDescripttion,
+                                isMultiLine: true,
+                                label: 'ShortDescription_English',
+                                validator: (val) {
+                                  return checkEmptyFields(
+                                    val: val ?? '',
+                                    controller: shortEnglishDescripttion,
+                                    locale: 'en',
+                                  );
+                                },
+                                textInputType: TextInputType.text,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: PaddingOrFont.size24.h,
+                        ),
+                        CustomTextFieldWidget(
+                          controller: discount,
+                          label: 'Offer Price',
+                          validator: (val) {
+                            return checkFiledsWithDigitType(
+                                controller: discount, val: val ?? '');
+                          },
+                          textInputType: TextInputType.number,
+                        ),
+                        SizedBox(
+                          height: PaddingOrFont.size16.h,
+                        ),
                         TextButton(
                           style: textButtonStyle.copyWith(
                             backgroundColor: MaterialStatePropertyAll(
-                              context.colorScheme!.onBackground,
+                              context.colorScheme?.onBackground,
                             ),
                           ),
                           onPressed: () {
-                            print(
-                                BlocProvider.of<CategoryDropDownCubit>(context)
-                                    .state);
-                            print(BlocProvider.of<BrandCubit>(context).state);
+                            // print(
+                            //     BlocProvider.of<CategoryDropDownCubit>(context)
+                            //         .state);
+                            // print(BlocProvider.of<BrandCubit>(context).state);
 
-                           
                             // print(selectedSubcategory);
                             // print(selectedSubcategory);
                             // print(selectedSubcategory);
                             // print(selectedSubcategory);
                             // print(selectedSubcategory);
-                            // if (state.product != null) {
-                            //   storeData(productState: state.product);
-                            // } else {
-                            //   storeData();
-                            // }
+                            if (state.product != null) {
+                              storeData(productState: state.product);
+                            } else {
+                              storeData();
+                            }
                           },
                           child: Text(
                             translate(
                                 key: isCreateProduct ? 'Post' : 'Update',
                                 context: context),
-                            style: context.medium!.copyWith(
-                                color: context.colorScheme!.background),
+                            style: context.medium?.copyWith(
+                                color: context.colorScheme?.background),
                           ),
                         ),
                       ],
@@ -469,7 +488,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
   void storeData({Product? productState}) {
     checkInternetAccess().then((value) {
       if (value) {
-        if (_formKey.currentState!.validate() && imagePath.isNotEmpty) {
+        if (_formKey.currentState?.validate() ?? true && imagePath.isNotEmpty) {
           Product product = Product(
             productId: '',
             productName: {
@@ -477,8 +496,10 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
               "en": productNameEnglish.text,
               "ar": productNameArabic.text,
             },
-            productCategory: selectedCategory ?? 'Uncategorized',
-            productImages: [],
+            productCategory:
+                BlocProvider.of<CategoryDropDownCubit>(context).state ??
+                    'Uncategorized',
+            productImages: productState?.productImages,
             productPrice: price.text,
             productQuantity: qty.text,
             productShortDescription: {
@@ -488,12 +509,13 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
             },
             offerPrice: discount.text,
             rating: '0.0',
-            brandName: brand ?? 'None',
-            vendorName: firebaseUser!.toString(),
+            brandName: BlocProvider.of<BrandCubit>(context).state ?? 'None',
+            vendorName: firebaseUser.toString(),
             tags: [],
             clothingSize: getClothesSize(selectedClothingSize),
             shoeSize: selectedShoeSizes,
-            productSubCategory: selectedSubcategory,
+            productSubCategory:
+                BlocProvider.of<SubCategoryDropDownCubit>(context).state,
           );
 
           if (isCreateProduct == true) {
@@ -507,7 +529,7 @@ class _AddOrEditProductFormState extends State<AddOrEditProductForm> {
           } else {
             BlocProvider.of<StoreProductBloc>(context).add(
               UpdateProduct(
-                productID: productState!.productId,
+                productID: productState?.productId ?? '',
                 product: product,
                 file: imagePath,
                 context: context,

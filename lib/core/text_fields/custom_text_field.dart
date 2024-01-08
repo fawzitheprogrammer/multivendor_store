@@ -35,6 +35,7 @@ class CustomTextFieldWidget extends StatelessWidget {
       controller: controller,
       maxLines: isMultiLine ? 5 : 1,
       decoration: InputDecoration(
+        hintStyle: context.regular,
         hintText:
             label == 'Brands' ? translate(key: label, context: context) : '',
         errorText: errorMessage,

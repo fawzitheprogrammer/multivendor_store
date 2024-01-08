@@ -4,9 +4,9 @@ import 'package:multivendor_store/core/text_fields/custom_text_field.dart';
 import 'package:multivendor_store/manager/brand-cubit/brand_cubit.dart';
 
 class AutoCompleteBrands extends StatelessWidget {
-  AutoCompleteBrands({
-    super.key,
-  });
+  AutoCompleteBrands({super.key, required this.isUpdate});
+
+  final bool isUpdate;
 
   TextEditingController textEditingController = TextEditingController();
 
@@ -27,16 +27,21 @@ class AutoCompleteBrands extends StatelessWidget {
           }
         },
         fieldViewBuilder:
-            (context, textEditingController, focusNode, onFieldSubmitted) =>
-                CustomTextFieldWidget(
-          controller: textEditingController,
-          label: 'Brands',
-          onSubmitted: (va) {
-            var k = BlocProvider.of<BrandCubit>(context).state;
-            onFieldSubmitted;
-          },
-          focusNode: focusNode,
-        ),
+            (context, textEditingController, focusNode, onFieldSubmitted) {
+          if (isUpdate) {
+            textEditingController.text =
+                BlocProvider.of<BrandCubit>(context).state ?? 'Nike';
+          }
+          return CustomTextFieldWidget(
+            controller: textEditingController,
+            label: 'Brands',
+            onSubmitted: (va) {
+              onFieldSubmitted;
+            },
+            focusNode: focusNode,
+          );
+        },
+
         optionsViewBuilder: (context, onSelected, options) {
           return Align(
             alignment: Alignment.topLeft,
