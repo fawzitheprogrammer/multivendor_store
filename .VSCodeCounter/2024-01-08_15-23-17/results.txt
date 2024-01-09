@@ -1,0 +1,202 @@
+Date : 2024-01-08 15:23:17
+Directory : g:\SwiftProjects\multivendor_store\lib
+Total : 100 files,  6244 codes, 410 comments, 633 blanks, all 7287 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |        100 |      6,244 |        410 |        633 |      7,287 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                         | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                            |        100 |      6,244 |        410 |        633 |      7,287 |
+| . (Files)                                                                                                                    |          2 |        243 |         12 |         16 |        271 |
+| core                                                                                                                         |         29 |      1,033 |         62 |        130 |      1,225 |
+| core (Files)                                                                                                                 |         15 |        624 |         35 |         80 |        739 |
+| core\buttons                                                                                                                 |          2 |         23 |          0 |          4 |         27 |
+| core\dummy                                                                                                                   |          1 |         10 |          0 |          2 |         12 |
+| core\errors                                                                                                                  |          1 |         72 |          2 |          6 |         80 |
+| core\exports                                                                                                                 |          1 |          6 |          0 |          1 |          7 |
+| core\firebase                                                                                                                |          5 |         59 |         10 |         19 |         88 |
+| core\text_fields                                                                                                             |          2 |         77 |         12 |          8 |         97 |
+| core\theme                                                                                                                   |          1 |         76 |          3 |          3 |         82 |
+| core\utils                                                                                                                   |          1 |         86 |          0 |          7 |         93 |
+| features                                                                                                                     |         42 |      4,152 |        289 |        292 |      4,733 |
+| features\all-chats                                                                                                           |          1 |         93 |          1 |          5 |         99 |
+| features\all-chats\presentation                                                                                              |          1 |         93 |          1 |          5 |         99 |
+| features\all-chats\presentation\views                                                                                        |          1 |         93 |          1 |          5 |         99 |
+| features\chat                                                                                                                |          1 |        224 |          8 |         11 |        243 |
+| features\chat\presentation                                                                                                   |          1 |        224 |          8 |         11 |        243 |
+| features\chat\presentation\views                                                                                             |          1 |        224 |          8 |         11 |        243 |
+| features\forget-password                                                                                                     |          4 |        182 |          4 |         16 |        202 |
+| features\forget-password\presentation                                                                                        |          4 |        182 |          4 |         16 |        202 |
+| features\forget-password\presentation\views                                                                                  |          4 |        182 |          4 |         16 |        202 |
+| features\forget-password\presentation\views (Files)                                                                          |          1 |         15 |          0 |          3 |         18 |
+| features\forget-password\presentation\views\widgets                                                                          |          3 |        167 |          4 |         13 |        184 |
+| features\home                                                                                                                |          6 |        370 |         18 |         29 |        417 |
+| features\home\presentation                                                                                                   |          6 |        370 |         18 |         29 |        417 |
+| features\home\presentation\views                                                                                             |          6 |        370 |         18 |         29 |        417 |
+| features\home\presentation\views (Files)                                                                                     |          1 |        106 |         18 |         12 |        136 |
+| features\home\presentation\views\widgets                                                                                     |          5 |        264 |          0 |         17 |        281 |
+| features\login                                                                                                               |          3 |        370 |         32 |         28 |        430 |
+| features\login\presentation                                                                                                  |          3 |        370 |         32 |         28 |        430 |
+| features\login\presentation\views                                                                                            |          3 |        370 |         32 |         28 |        430 |
+| features\login\presentation\views (Files)                                                                                    |          1 |         15 |          0 |          4 |         19 |
+| features\login\presentation\views\widgets                                                                                    |          2 |        355 |         32 |         24 |        411 |
+| features\orders                                                                                                              |          3 |        220 |         13 |         23 |        256 |
+| features\orders\presentation                                                                                                 |          3 |        220 |         13 |         23 |        256 |
+| features\orders\presentation\views                                                                                           |          3 |        220 |         13 |         23 |        256 |
+| features\orders\presentation\views (Files)                                                                                   |          1 |         28 |          3 |          5 |         36 |
+| features\orders\presentation\views\widgets                                                                                   |          2 |        192 |         10 |         18 |        220 |
+| features\product_edit                                                                                                        |          9 |        884 |        124 |         65 |      1,073 |
+| features\product_edit\presentation                                                                                           |          9 |        884 |        124 |         65 |      1,073 |
+| features\product_edit\presentation\view_models                                                                               |          1 |          5 |          0 |          2 |          7 |
+| features\product_edit\presentation\views                                                                                     |          8 |        879 |        124 |         63 |      1,066 |
+| features\product_edit\presentation\views (Files)                                                                             |          1 |         15 |         88 |          9 |        112 |
+| features\product_edit\presentation\views\widgets                                                                             |          7 |        864 |         36 |         54 |        954 |
+| features\registration                                                                                                        |          5 |        525 |         55 |         36 |        616 |
+| features\registration\presentation                                                                                           |          5 |        525 |         55 |         36 |        616 |
+| features\registration\presentation\views                                                                                     |          5 |        525 |         55 |         36 |        616 |
+| features\registration\presentation\views (Files)                                                                             |          1 |         13 |         48 |          7 |         68 |
+| features\registration\presentation\views\widgets                                                                             |          4 |        512 |          7 |         29 |        548 |
+| features\splash-screen                                                                                                       |          2 |        214 |          2 |         24 |        240 |
+| features\splash-screen\presentation                                                                                          |          2 |        214 |          2 |         24 |        240 |
+| features\splash-screen\presentation\views                                                                                    |          2 |        214 |          2 |         24 |        240 |
+| features\store-profile                                                                                                       |          6 |        674 |         21 |         36 |        731 |
+| features\store-profile\data                                                                                                  |          1 |         76 |          0 |          3 |         79 |
+| features\store-profile\data\models                                                                                           |          1 |         76 |          0 |          3 |         79 |
+| features\store-profile\presentation                                                                                          |          5 |        598 |         21 |         33 |        652 |
+| features\store-profile\presentation\views                                                                                    |          5 |        598 |         21 |         33 |        652 |
+| features\store-profile\presentation\views (Files)                                                                            |          1 |         71 |          4 |          6 |         81 |
+| features\store-profile\presentation\views\widgets                                                                            |          4 |        527 |         17 |         27 |        571 |
+| features\user-profile                                                                                                        |          2 |        396 |         11 |         19 |        426 |
+| features\user-profile\data                                                                                                   |          1 |         63 |          0 |          4 |         67 |
+| features\user-profile\data\models                                                                                            |          1 |         63 |          0 |          4 |         67 |
+| features\user-profile\presentation                                                                                           |          1 |        333 |         11 |         15 |        359 |
+| features\user-profile\presentation\views                                                                                     |          1 |        333 |         11 |         15 |        359 |
+| localization                                                                                                                 |          1 |         43 |          0 |         15 |         58 |
+| manager                                                                                                                      |         26 |        773 |         47 |        180 |      1,000 |
+| manager\authentication-bloc                                                                                                  |          3 |        178 |         14 |         38 |        230 |
+| manager\brand-cubit                                                                                                          |          1 |          9 |          0 |          4 |         13 |
+| manager\category-dropdown-bloc                                                                                               |          2 |          8 |          4 |          6 |         18 |
+| manager\connection-bloc                                                                                                      |          3 |         49 |          0 |         16 |         65 |
+| manager\get-all-products                                                                                                     |          4 |         85 |          7 |         21 |        113 |
+| manager\has-size-cubit                                                                                                       |          1 |          8 |          0 |          3 |         11 |
+| manager\language_bloc                                                                                                        |          3 |         58 |          0 |         13 |         71 |
+| manager\register-store                                                                                                       |          3 |        119 |          3 |         26 |        148 |
+| manager\route-cubit                                                                                                          |          1 |         15 |          0 |          5 |         20 |
+| manager\store-product                                                                                                        |          3 |        221 |         19 |         40 |        280 |
+| manager\sub-cateogory-dropdown-bloc                                                                                          |          1 |          8 |          0 |          3 |         11 |
+| manager\theme-bloc                                                                                                           |          1 |         15 |          0 |          5 |         20 |
++------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                     | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| g:\SwiftProjects\multivendor_store\lib\core\animated_image_sizer.dart                                                        | Dart     |         31 |          0 |          4 |         35 |
+| g:\SwiftProjects\multivendor_store\lib\core\appbar.dart                                                                      | Dart     |          4 |          0 |          2 |          6 |
+| g:\SwiftProjects\multivendor_store\lib\core\build_context_extension.dart                                                     | Dart     |         33 |          5 |         13 |         51 |
+| g:\SwiftProjects\multivendor_store\lib\core\buttons\rounded_button_style.dart                                                | Dart     |         13 |          0 |          2 |         15 |
+| g:\SwiftProjects\multivendor_store\lib\core\buttons\text_button_style.dart                                                   | Dart     |         10 |          0 |          2 |         12 |
+| g:\SwiftProjects\multivendor_store\lib\core\check_if_user_is_connected.dart                                                  | Dart     |          9 |          0 |          2 |         11 |
+| g:\SwiftProjects\multivendor_store\lib\core\constants.dart                                                                   | Dart     |        270 |         14 |         22 |        306 |
+| g:\SwiftProjects\multivendor_store\lib\core\custom_transition_page.dart                                                      | Dart     |         26 |          0 |          4 |         30 |
+| g:\SwiftProjects\multivendor_store\lib\core\dummy\messages.dart                                                              | Dart     |         10 |          0 |          2 |         12 |
+| g:\SwiftProjects\multivendor_store\lib\core\errors\failures.dart                                                             | Dart     |         72 |          2 |          6 |         80 |
+| g:\SwiftProjects\multivendor_store\lib\core\exports\exports.dart                                                             | Dart     |          6 |          0 |          1 |          7 |
+| g:\SwiftProjects\multivendor_store\lib\core\firebase\collections.dart                                                        | Dart     |          7 |          0 |          1 |          8 |
+| g:\SwiftProjects\multivendor_store\lib\core\firebase\download_file.dart                                                      | Dart     |         29 |          5 |         10 |         44 |
+| g:\SwiftProjects\multivendor_store\lib\core\firebase\get_device_token.dart                                                   | Dart     |         20 |          2 |          4 |         26 |
+| g:\SwiftProjects\multivendor_store\lib\core\firebase\logged_user.dart                                                        | Dart     |          2 |          0 |          2 |          4 |
+| g:\SwiftProjects\multivendor_store\lib\core\firebase\translate_incoming_data.dart                                            | Dart     |          1 |          3 |          2 |          6 |
+| g:\SwiftProjects\multivendor_store\lib\core\firebase_package_helper.dart                                                     | Dart     |          6 |          0 |          2 |          8 |
+| g:\SwiftProjects\multivendor_store\lib\core\input_decoration.dart                                                            | Dart     |         24 |          0 |          2 |         26 |
+| g:\SwiftProjects\multivendor_store\lib\core\loading_widget.dart                                                              | Dart     |         33 |          0 |          3 |         36 |
+| g:\SwiftProjects\multivendor_store\lib\core\login_and_registration_label.dart                                                | Dart     |         21 |          0 |          2 |         23 |
+| g:\SwiftProjects\multivendor_store\lib\core\login_vector_image.dart                                                          | Dart     |         27 |          0 |          4 |         31 |
+| g:\SwiftProjects\multivendor_store\lib\core\notification.dart                                                                | Dart     |         34 |          0 |          3 |         37 |
+| g:\SwiftProjects\multivendor_store\lib\core\padding_and_margin.dart                                                          | Dart     |         14 |          0 |          1 |         15 |
+| g:\SwiftProjects\multivendor_store\lib\core\pick_image.dart                                                                  | Dart     |         26 |         15 |          7 |         48 |
+| g:\SwiftProjects\multivendor_store\lib\core\text_fields\custom_text_field.dart                                               | Dart     |         77 |          0 |          5 |         82 |
+| g:\SwiftProjects\multivendor_store\lib\core\text_fields\textfields_style.dart                                                | Dart     |          0 |         12 |          3 |         15 |
+| g:\SwiftProjects\multivendor_store\lib\core\text_responsive.dart                                                             | Dart     |         66 |          1 |          9 |         76 |
+| g:\SwiftProjects\multivendor_store\lib\core\theme\my_custom_theme.dart                                                       | Dart     |         76 |          3 |          3 |         82 |
+| g:\SwiftProjects\multivendor_store\lib\core\utils\app_route.dart                                                             | Dart     |         86 |          0 |          7 |         93 |
+| g:\SwiftProjects\multivendor_store\lib\features\all-chats\presentation\views\all_chats_view.dart                             | Dart     |         93 |          1 |          5 |         99 |
+| g:\SwiftProjects\multivendor_store\lib\features\chat\presentation\views\chat_view.dart                                       | Dart     |        224 |          8 |         11 |        243 |
+| g:\SwiftProjects\multivendor_store\lib\features\forget-password\presentation\views\forget_password.dart                      | Dart     |         15 |          0 |          3 |         18 |
+| g:\SwiftProjects\multivendor_store\lib\features\forget-password\presentation\views\widgets\forget_password_body_view.dart    | Dart     |         38 |          0 |          3 |         41 |
+| g:\SwiftProjects\multivendor_store\lib\features\forget-password\presentation\views\widgets\forget_password_form.dart         | Dart     |         99 |          4 |          6 |        109 |
+| g:\SwiftProjects\multivendor_store\lib\features\forget-password\presentation\views\widgets\forget_password_text.dart         | Dart     |         30 |          0 |          4 |         34 |
+| g:\SwiftProjects\multivendor_store\lib\features\home\presentation\views\home_view.dart                                       | Dart     |        106 |         18 |         12 |        136 |
+| g:\SwiftProjects\multivendor_store\lib\features\home\presentation\views\widgets\balance_card.dart                            | Dart     |         58 |          0 |          3 |         61 |
+| g:\SwiftProjects\multivendor_store\lib\features\home\presentation\views\widgets\chat_and_welcome_text.dart                   | Dart     |         79 |          0 |          3 |         82 |
+| g:\SwiftProjects\multivendor_store\lib\features\home\presentation\views\widgets\home_view_body.dart                          | Dart     |         33 |          0 |          3 |         36 |
+| g:\SwiftProjects\multivendor_store\lib\features\home\presentation\views\widgets\label.dart                                   | Dart     |         12 |          0 |          4 |         16 |
+| g:\SwiftProjects\multivendor_store\lib\features\home\presentation\views\widgets\orders_card.dart                             | Dart     |         82 |          0 |          4 |         86 |
+| g:\SwiftProjects\multivendor_store\lib\features\login\presentation\views\login.dart                                          | Dart     |         15 |          0 |          4 |         19 |
+| g:\SwiftProjects\multivendor_store\lib\features\login\presentation\views\widgets\login_body_view.dart                        | Dart     |         38 |          0 |          3 |         41 |
+| g:\SwiftProjects\multivendor_store\lib\features\login\presentation\views\widgets\login_view_form.dart                        | Dart     |        317 |         32 |         21 |        370 |
+| g:\SwiftProjects\multivendor_store\lib\features\orders\presentation\views\orders_profile_view.dart                           | Dart     |         28 |          3 |          5 |         36 |
+| g:\SwiftProjects\multivendor_store\lib\features\orders\presentation\views\widgets\orders_categories.dart                     | Dart     |         63 |          9 |          7 |         79 |
+| g:\SwiftProjects\multivendor_store\lib\features\orders\presentation\views\widgets\orders_list.dart                           | Dart     |        129 |          1 |         11 |        141 |
+| g:\SwiftProjects\multivendor_store\lib\features\product_edit\presentation\view_models\clothing_size.dart                     | Dart     |          5 |          0 |          2 |          7 |
+| g:\SwiftProjects\multivendor_store\lib\features\product_edit\presentation\views\add_edit_product.dart                        | Dart     |         15 |         88 |          9 |        112 |
+| g:\SwiftProjects\multivendor_store\lib\features\product_edit\presentation\views\widgets\add_edit_product_body_view.dart      | Dart     |         17 |         11 |          3 |         31 |
+| g:\SwiftProjects\multivendor_store\lib\features\product_edit\presentation\views\widgets\add_edit_product_form_view.dart      | Dart     |        556 |         13 |         25 |        594 |
+| g:\SwiftProjects\multivendor_store\lib\features\product_edit\presentation\views\widgets\auto_complete_brands.dart            | Dart     |         69 |          1 |          7 |         77 |
+| g:\SwiftProjects\multivendor_store\lib\features\product_edit\presentation\views\widgets\category_drop_down.dart              | Dart     |        124 |          0 |          3 |        127 |
+| g:\SwiftProjects\multivendor_store\lib\features\product_edit\presentation\views\widgets\has_size.dart                        | Dart     |         24 |          0 |          4 |         28 |
+| g:\SwiftProjects\multivendor_store\lib\features\product_edit\presentation\views\widgets\product_image.dart                   | Dart     |         70 |          0 |          8 |         78 |
+| g:\SwiftProjects\multivendor_store\lib\features\product_edit\presentation\views\widgets\sub_category_drop_down.dart          | Dart     |          4 |         11 |          4 |         19 |
+| g:\SwiftProjects\multivendor_store\lib\features\registration\presentation\views\registration.dart                            | Dart     |         13 |         48 |          7 |         68 |
+| g:\SwiftProjects\multivendor_store\lib\features\registration\presentation\views\widgets\custom_drop_down.dart                | Dart     |         67 |          0 |          5 |         72 |
+| g:\SwiftProjects\multivendor_store\lib\features\registration\presentation\views\widgets\image_container.dart                 | Dart     |         57 |          0 |          5 |         62 |
+| g:\SwiftProjects\multivendor_store\lib\features\registration\presentation\views\widgets\registration_body_view.dart          | Dart     |         11 |          0 |          4 |         15 |
+| g:\SwiftProjects\multivendor_store\lib\features\registration\presentation\views\widgets\registration_form_view.dart          | Dart     |        377 |          7 |         15 |        399 |
+| g:\SwiftProjects\multivendor_store\lib\features\splash-screen\presentation\views\check_if_user_is_connected_to_internet.dart | Dart     |         23 |          0 |          4 |         27 |
+| g:\SwiftProjects\multivendor_store\lib\features\splash-screen\presentation\views\splash_screen_view.dart                     | Dart     |        191 |          2 |         20 |        213 |
+| g:\SwiftProjects\multivendor_store\lib\features\store-profile\data\models\product_model.dart                                 | Dart     |         76 |          0 |          3 |         79 |
+| g:\SwiftProjects\multivendor_store\lib\features\store-profile\presentation\views\store_profile_view.dart                     | Dart     |         71 |          4 |          6 |         81 |
+| g:\SwiftProjects\multivendor_store\lib\features\store-profile\presentation\views\widgets\store_categories.dart               | Dart     |         61 |          9 |          6 |         76 |
+| g:\SwiftProjects\multivendor_store\lib\features\store-profile\presentation\views\widgets\store_more_info.dart                | Dart     |        168 |          3 |          8 |        179 |
+| g:\SwiftProjects\multivendor_store\lib\features\store-profile\presentation\views\widgets\store_products_list.dart            | Dart     |        190 |          5 |          9 |        204 |
+| g:\SwiftProjects\multivendor_store\lib\features\store-profile\presentation\views\widgets\store_profile_information.dart      | Dart     |        108 |          0 |          4 |        112 |
+| g:\SwiftProjects\multivendor_store\lib\features\user-profile\data\models\user_model.dart                                     | Dart     |         63 |          0 |          4 |         67 |
+| g:\SwiftProjects\multivendor_store\lib\features\user-profile\presentation\views\user_profile_view.dart                       | Dart     |        333 |         11 |         15 |        359 |
+| g:\SwiftProjects\multivendor_store\lib\firebase_options.dart                                                                 | Dart     |         66 |         12 |          6 |         84 |
+| g:\SwiftProjects\multivendor_store\lib\localization\app_localization.dart                                                    | Dart     |         43 |          0 |         15 |         58 |
+| g:\SwiftProjects\multivendor_store\lib\main.dart                                                                             | Dart     |        177 |          0 |         10 |        187 |
+| g:\SwiftProjects\multivendor_store\lib\manager\authentication-bloc\authentication_bloc_bloc.dart                             | Dart     |        120 |         14 |         13 |        147 |
+| g:\SwiftProjects\multivendor_store\lib\manager\authentication-bloc\authentication_bloc_event.dart                            | Dart     |         31 |          0 |         11 |         42 |
+| g:\SwiftProjects\multivendor_store\lib\manager\authentication-bloc\authentication_bloc_state.dart                            | Dart     |         27 |          0 |         14 |         41 |
+| g:\SwiftProjects\multivendor_store\lib\manager\brand-cubit\brand_cubit.dart                                                  | Dart     |          9 |          0 |          4 |         13 |
+| g:\SwiftProjects\multivendor_store\lib\manager\category-dropdown-bloc\category_drop_down_cubit.dart                          | Dart     |          8 |          0 |          3 |         11 |
+| g:\SwiftProjects\multivendor_store\lib\manager\category-dropdown-bloc\category_drop_down_state.dart                          | Dart     |          0 |          4 |          3 |          7 |
+| g:\SwiftProjects\multivendor_store\lib\manager\connection-bloc\connection_bloc.dart                                          | Dart     |         25 |          0 |          4 |         29 |
+| g:\SwiftProjects\multivendor_store\lib\manager\connection-bloc\connection_event.dart                                         | Dart     |          4 |          0 |          3 |          7 |
+| g:\SwiftProjects\multivendor_store\lib\manager\connection-bloc\connection_state.dart                                         | Dart     |         20 |          0 |          9 |         29 |
+| g:\SwiftProjects\multivendor_store\lib\manager\get-all-products\get_all_categories_from_firebase.dart                        | Dart     |         33 |          7 |          7 |         47 |
+| g:\SwiftProjects\multivendor_store\lib\manager\get-all-products\get_all_products_bloc.dart                                   | Dart     |         35 |          0 |          3 |         38 |
+| g:\SwiftProjects\multivendor_store\lib\manager\get-all-products\get_all_products_event.dart                                  | Dart     |          4 |          0 |          3 |          7 |
+| g:\SwiftProjects\multivendor_store\lib\manager\get-all-products\get_all_products_state.dart                                  | Dart     |         13 |          0 |          8 |         21 |
+| g:\SwiftProjects\multivendor_store\lib\manager\has-size-cubit\has_size_cubit.dart                                            | Dart     |          8 |          0 |          3 |         11 |
+| g:\SwiftProjects\multivendor_store\lib\manager\language_bloc\language_localization_bloc.dart                                 | Dart     |         45 |          0 |          2 |         47 |
+| g:\SwiftProjects\multivendor_store\lib\manager\language_bloc\language_localization_event.dart                                | Dart     |          6 |          0 |          6 |         12 |
+| g:\SwiftProjects\multivendor_store\lib\manager\language_bloc\language_localization_state.dart                                | Dart     |          7 |          0 |          5 |         12 |
+| g:\SwiftProjects\multivendor_store\lib\manager\register-store\register_store_bloc.dart                                       | Dart     |         85 |          3 |         14 |        102 |
+| g:\SwiftProjects\multivendor_store\lib\manager\register-store\register_store_event.dart                                      | Dart     |         19 |          0 |          4 |         23 |
+| g:\SwiftProjects\multivendor_store\lib\manager\register-store\register_store_state.dart                                      | Dart     |         15 |          0 |          8 |         23 |
+| g:\SwiftProjects\multivendor_store\lib\manager\route-cubit\route_cubit.dart                                                  | Dart     |         15 |          0 |          5 |         20 |
+| g:\SwiftProjects\multivendor_store\lib\manager\store-product\store_product_bloc.dart                                         | Dart     |        176 |         19 |         21 |        216 |
+| g:\SwiftProjects\multivendor_store\lib\manager\store-product\store_product_event.dart                                        | Dart     |         31 |          0 |         10 |         41 |
+| g:\SwiftProjects\multivendor_store\lib\manager\store-product\store_product_state.dart                                        | Dart     |         14 |          0 |          9 |         23 |
+| g:\SwiftProjects\multivendor_store\lib\manager\sub-cateogory-dropdown-bloc\sub_category_drop_down_cubit.dart                 | Dart     |          8 |          0 |          3 |         11 |
+| g:\SwiftProjects\multivendor_store\lib\manager\theme-bloc\theme_state.dart                                                   | Dart     |         15 |          0 |          5 |         20 |
+| Total                                                                                                                        |          |      6,244 |        410 |        633 |      7,287 |
++------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

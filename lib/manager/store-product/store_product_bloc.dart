@@ -61,8 +61,6 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
             // When category is stored into database, it should return to main screen of category table
             BlocProvider.of<GetAllProductsBloc>(event.context)
                 .add(GetProducts());
-
-            notification('Success', 'It is working', event.context);
           });
           emit(StoreProductSuccess());
         } on PlatformException catch (e) {
@@ -91,7 +89,6 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
 
           if (event.file != null) {
             imagesLink = await uploadAllImages(event.file ?? [], fileName);
-            debugPrint('INSIDE IF : ${imagesLink.toString()}');
           }
 
           Map<String, dynamic> product = Product(
@@ -122,10 +119,9 @@ class StoreProductBloc extends Bloc<StoreProductEvent, StoreProductState> {
               .doc(event.productID)
               .update(product)
               .whenComplete(() {
-            notification('Success', 'It is working', event.context);
             // When category is stored into database, it should return to main screen of category table
+            emit(StoreProductSuccess());
           });
-          emit(StoreProductSuccess());
         } on PlatformException catch (e) {
           emit(
             StoreProductFailure(

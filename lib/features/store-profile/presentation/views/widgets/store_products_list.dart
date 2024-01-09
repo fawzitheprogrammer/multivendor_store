@@ -57,68 +57,72 @@ class StoreProductsList extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: PaddingOrFont.size12.spMin - 6,
-                    vertical: PaddingOrFont.size18.spMin,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product[index].productName!['ku'] ?? '',
-                        style: context.bold!.copyWith(
-                          fontSize: context.isWidthLessThan500
-                              ? PaddingOrFont.size18.spMin
-                              : PaddingOrFont.size14.h,
-                        ),
-                      ),
-                      SizedBox(
-                        height: PaddingOrFont.size10.h - 2,
-                      ),
-                      Text(
-                        '\$${product[index].productPrice}',
-                        style: context.semiBold!.copyWith(
-                          fontSize: PaddingOrFont.size16.spMax,
-                          color: context.colorScheme!.error,
-                        ),
-                      ),
-                      SizedBox(
-                        height: PaddingOrFont.size8.h - 2,
-                      ),
-                      Row(
-                        children: [
-                          ActionButton(
-                            onPressed: () {
-                              //
-                              BlocProvider.of<StoreProductBloc>(context).add(
-                                GetSingleProduct(product: product[index]),
-                              );
-                              GoRouter.of(context).push(
-                                AppRoute.kAddOrEditProduct,
-                              );
-                            },
-                            label: 'Edit',
-                            color: context.colorScheme!.inversePrimary
-                                .withAlpha(30),
+                Flexible(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: PaddingOrFont.size12.spMin - 6,
+                      vertical: PaddingOrFont.size18.spMin,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product[index].productName![context.languageCode] ??
+                              '',
+                          style: context.bold!.copyWith(
+                            fontSize: context.isWidthLessThan500
+                                ? PaddingOrFont.size18.spMin
+                                : PaddingOrFont.size14.h,
                           ),
-                          SizedBox(
-                            width: PaddingOrFont.size10.w - 6,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(
+                          height: PaddingOrFont.size10.h - 2,
+                        ),
+                        Text(
+                          '\$${product[index].productPrice}',
+                          style: context.semiBold!.copyWith(
+                            fontSize: PaddingOrFont.size16.spMax,
+                            color: context.colorScheme!.error,
                           ),
-                          ActionButton(
-                            onPressed: () {
-                              BlocProvider.of<StoreProductBloc>(context).add(
-                                DeleteProduct(context,
-                                    productID: product[index].productId),
-                              );
-                            },
-                            label: 'Delete',
-                            color: context.colorScheme!.error.withAlpha(30),
-                          )
-                        ],
-                      )
-                    ],
+                        ),
+                        SizedBox(
+                          height: PaddingOrFont.size8.h - 2,
+                        ),
+                        Row(
+                          children: [
+                            ActionButton(
+                              onPressed: () {
+                                //
+                                BlocProvider.of<StoreProductBloc>(context).add(
+                                  GetSingleProduct(product: product[index]),
+                                );
+                                GoRouter.of(context).push(
+                                  AppRoute.kAddOrEditProduct,
+                                );
+                              },
+                              label: 'Edit',
+                              color: context.colorScheme!.inversePrimary
+                                  .withAlpha(30),
+                            ),
+                            SizedBox(
+                              width: PaddingOrFont.size10.w - 6,
+                            ),
+                            ActionButton(
+                              onPressed: () {
+                                BlocProvider.of<StoreProductBloc>(context).add(
+                                  DeleteProduct(context,
+                                      productID: product[index].productId),
+                                );
+                              },
+                              label: 'Delete',
+                              color: context.colorScheme!.error.withAlpha(30),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],
