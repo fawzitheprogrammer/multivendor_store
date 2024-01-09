@@ -9,6 +9,7 @@ class AppAssets {
   static const String storeVectors = '$vectors/store.svg';
   static const String otpVerify = '$vectors/otp_verify.svg';
   static const String cart_vector = '$vectors/cart.svg';
+  static const String appLogo = 'assets/icons/app_logo.svg';
 
   /// Images
   static const String user = '$vectors/user.png';
@@ -55,7 +56,7 @@ class AppAssets {
   static const String delete = 'assets/icons/delete.svg';
   static const String totalProfit = 'assets/icons/total_profit.svg';
   static const String messenger = 'assets/icons/messenger.svg';
-  static const String appLogo = 'assets/icons/messenger.svg';
+  static const String message = 'assets/icons/messenger.svg';
   static const String businessLicense = 'assets/icons/business.svg';
   static const String id = 'assets/icons/id.svg';
   static const String shelf = 'assets/icons/shelf.png';

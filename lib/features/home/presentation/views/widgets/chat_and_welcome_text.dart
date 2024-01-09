@@ -4,7 +4,9 @@ import 'package:multivendor_store/core/utils/app_route.dart';
 import 'package:multivendor_store/localization/app_localization.dart';
 
 class ChatAndWelcomeText extends StatelessWidget {
-  const ChatAndWelcomeText({super.key});
+  const ChatAndWelcomeText({super.key, required this.userName});
+
+  final String userName;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class ChatAndWelcomeText extends StatelessWidget {
               ),
             ),
             Text(
-              'Fawzi Gharib',
+              userName,
               style: context.semiBold!.copyWith(
                 fontSize: context.isWidthLessThan500
                     ? PaddingOrFont.size20.spMin

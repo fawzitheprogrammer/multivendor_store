@@ -94,9 +94,9 @@ class _AppLogoState extends State<AppLogo> with SingleTickerProviderStateMixin {
         children: [
           ScaleTransition(
             scale: sizeAnimation,
-            child: const Icon(
-              Ionicons.cafe,
-              size: 100,
+            child: SvgPicture.asset(
+              AppAssets.appLogo,
+              width: context.isWidthLessThan500 ? 100.spMin : 200.spMin,
             ),
           )
         ],
