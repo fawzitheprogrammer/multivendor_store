@@ -12,38 +12,44 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<AuthenticationBlocBloc>(context).add(
+      TriggerGetUserEvent(),
+    );
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: PaddingOrFont.size22.w, vertical: PaddingOrFont.size20.h),
       child: Align(
         alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child:
-                BlocConsumer<AuthenticationBlocBloc, AuthenticationBlocState>(
-              listener: (context, state) {},
-              builder: (context, state) {
-                if (state is GetLoggedInUser) {
-                  return Column(
-                    children: [
-                      ChatAndWelcomeText(
-                        userName: state.storeModel.fullNameOnId ?? '',
-                      ),
-                      SizedBox(
-                        height: PaddingOrFont.size12.h,
-                      ),
-                      const BalanceCard(),
-                      SizedBox(
-                        height: PaddingOrFont.size12.h,
-                      ),
-                      const OrdersCard(),
-                    ],
-                  );
-                } else {
-                  return const Loading();
-                }
-              },
-            )),
+        child: Center(
+          child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child:
+                  BlocConsumer<AuthenticationBlocBloc, AuthenticationBlocState>(
+                listener: (context, state) {},
+                builder: (context, state) {
+                  if (state is GetLoggedInUser) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ChatAndWelcomeText(
+                          userName: state.storeModel.fullNameOnId ?? '',
+                        ),
+                        SizedBox(
+                          height: PaddingOrFont.size12.h,
+                        ),
+                        const BalanceCard(),
+                        SizedBox(
+                          height: PaddingOrFont.size12.h,
+                        ),
+                        const OrdersCard(),
+                      ],
+                    );
+                  } else {
+                    return const Center(child: Loading());
+                  }
+                },
+              )),
+        ),
       ),
     );
   }
