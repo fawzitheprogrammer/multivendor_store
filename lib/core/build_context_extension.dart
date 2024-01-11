@@ -43,6 +43,8 @@ extension BuildContextExtensions<T> on BuildContext {
   // screen width
   bool get isWidthLessThan500 => MediaQuery.of(this).size.width <= 500;
 
+
+  // get the language code
   String get languageCode => sharedPreferences!.getString('lang')!;
 
   Future<bool> get hasInternet async =>
