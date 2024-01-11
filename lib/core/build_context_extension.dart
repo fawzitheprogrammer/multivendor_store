@@ -47,6 +47,8 @@ extension BuildContextExtensions<T> on BuildContext {
   // get the language code
   String get languageCode => sharedPreferences!.getString('lang')!;
 
+
+  // If device network has acccess to interter this value return true
   Future<bool> get hasInternet async =>
       await checkInternetAccess().then((value) => value);
 }
